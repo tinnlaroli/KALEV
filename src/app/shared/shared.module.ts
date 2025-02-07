@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-<<<<<<< HEAD
 import { LayoutComponent } from './layout/layout.component';
 
 //ng add @angular/material
@@ -38,15 +37,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
-=======
-
-
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    SharedRoutingModule
->>>>>>> 6f569052aa44dc041ac329549c8ee57fec813394
   ]
 })
 export class SharedModule { }

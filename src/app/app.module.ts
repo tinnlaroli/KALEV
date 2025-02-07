@@ -3,15 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 
-=======
->>>>>>> 6f569052aa44dc041ac329549c8ee57fec813394
 
 @NgModule({
   declarations: [
@@ -19,7 +16,6 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-<<<<<<< HEAD
     AppRoutingModule,
     BrowserAnimationsModule,
     //donde estan los modulos externos
@@ -28,11 +24,9 @@ import { SharedModule } from './shared/shared.module';
   providers: [
     provideAnimationsAsync()
   ],
-=======
+  exports: [
     AppRoutingModule
   ],
-  providers: [],
->>>>>>> 6f569052aa44dc041ac329549c8ee57fec813394
   bootstrap: [AppComponent]
 })
 export class AppModule { }
