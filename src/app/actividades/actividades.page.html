@@ -19,11 +19,19 @@
           <p><strong>Fecha de inicio:</strong> {{ actividad.fechaInicio | date:'shortDate' }}</p>
           <p><strong>Fecha de fin:</strong> {{ actividad.fechaFin | date:'shortDate' }}</p>
           <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
-          <p><strong>Tipo de aprendizaje:</strong> {{ actividad.tipoAprendizaje }}</p>
 
-          <!-- Botón asignar a grupo -->
-          <ion-button color="primary" (click)="asignarAGrupo(actividad)">Asignar a grupo</ion-button>
+          <!-- Tipo de aprendizaje en un chip -->
+          <p><strong>Tipo de aprendizaje:</strong> 
+            <ion-chip color="primary">
+              {{ actividad.tipoAprendizaje }}
+            </ion-chip>
+          </p>
         </ion-label>
+
+        <!-- Botón asignar a grupo -->
+        <ion-button fill="clear" class="assign-button" (click)="asignarAGrupo(actividad)">
+          <ion-icon name="add-circle"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
 
@@ -31,9 +39,9 @@
     <ion-button expand="full" color="primary" (click)="agregarActividad()">Agregar Actividad</ion-button>
   </div>
 
-  <!-- Menu de navegacion inferior -->
+  <!-- Menu de navegación inferior -->
   <ion-footer>
-    <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-bar slot="bottom" color="light">
       <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
         <ion-icon name="people"></ion-icon>
         <ion-label>Grupos</ion-label>
