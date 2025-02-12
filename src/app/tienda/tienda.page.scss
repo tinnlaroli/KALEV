@@ -95,13 +95,4 @@ ion-content {
   font-size: 18px;
 }
 
-ion-toolbar {
-  display: flex;
-  justify-content: space-between; /* Espacia los elementos */
-  align-items: center;
-}
 
-ion-title {
-  text-align: center;
-  flex-grow: 1; /* Permite que el título ocupe el espacio central */
-}
