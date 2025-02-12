@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GruposDetallePage } from './grupos-detalle/grupos-detalle.page';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -35,5 +36,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}

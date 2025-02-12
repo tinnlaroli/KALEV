@@ -10,14 +10,14 @@
 
     <!-- Aquí vamos a iterar sobre los grupos -->
     <ion-list>
-      <ion-item *ngFor="let grupo of grupos">
+      <ion-item *ngFor="let grupo of grupos" (click)="mostrarDetalles(grupo)">
         <ion-label>
           <h2>{{ grupo.grado }} - {{ grupo.nombre }}</h2>
           <p>Maestro: {{ grupo.maestro }}</p>
           <p>Número de Alumnos: {{ grupo.numeroAlumnos }}</p>
         </ion-label>
       </ion-item>
-    </ion-list>
+    </ion-list>    
   </div>
 </ion-content>
 
