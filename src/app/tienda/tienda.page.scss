@@ -73,11 +73,35 @@ ion-content {
   background: var(--ion-color-darkGray);
 }
 
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Ajusta el espacio entre los botones */
+  width: 100%;
+}
+
 .footer-buttons ion-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 12px;
   color: white;
+  flex: 1; /* Hace que todos los botones tengan el mismo tamaño */
+  max-width: 80px; /* Evita que se expandan demasiado */
 }
 
 .footer-buttons ion-icon {
   font-size: 18px;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: space-between; /* Espacia los elementos */
+  align-items: center;
+}
+
+ion-title {
+  text-align: center;
+  flex-grow: 1; /* Permite que el título ocupe el espacio central */
 }
