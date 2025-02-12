@@ -9,6 +9,8 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './features/users/users.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    FormsModule,
+    RouterModule,
     SharedModule,
     UsersModule,
     HttpClientModule

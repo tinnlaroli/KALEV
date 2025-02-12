@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
+  template: '<app-side-nav> <router-outlet></router-outlet> </app-side-nav>',
   standalone: false,
   styleUrl: './app.component.css'
 })

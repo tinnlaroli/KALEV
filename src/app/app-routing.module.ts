@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes , Router , NavigationEnd} from '@angular/router';
 
 import { GroupListComponent } from './features/groups/group-list/group-list.component';
 import { GroupCreateComponent } from './features/groups/group-create/group-create.component';
@@ -35,4 +35,16 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+  constructor(private router: Router) {
+    // Suscríbete a los eventos de navegación
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Muestra la ruta activa en la consola
+        console.log('Navegación exitosa a la ruta: ', event.urlAfterRedirects);
+      }
+    });
+  }
+  
+}
