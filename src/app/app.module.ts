@@ -11,11 +11,19 @@ import { UsersModule } from './features/users/users.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './landing/header/header.component';
+import { ContentComponent } from './landing/content/content.component';
+import { FooterComponent } from './landing/footer/footer.component';
+import { LandingComponent } from './landing/landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    HeaderComponent,
+    ContentComponent,
+    FooterComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

@@ -52,6 +52,7 @@ body {
   color: var(--color-texto-oscuro);
   margin: 0;
   padding: 0;
+  background-repeat: repeat;
 }
 
 /* Aplicar la fuente Nunito para los títulos */

@@ -1,56 +1,179 @@
-
-.dashboard-header h1 {
-  margin: 1em;
-  font-family: 'Nunito', sans-serif;
-  color: var(--color-primario);
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 5px var(--color-azul-tint); /* Sombra para el título */
+/* Estilo para el logo - aumenta su tamaño */
+.logo {
+  width: 300px;  /* Aumenta el tamaño del logo */
+  height: auto;
+  margin: 0 auto 30px;
+  display: block;
+  animation: logoAnimation 2s ease-in-out;
 }
 
-.dashboard-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+@keyframes logoAnimation {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.dashboard-card {
-  margin: 1em;
-  background-color: var(--color-fondo-suave);
+/* Estilos del contenedor principal */
+.main-content {
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(0, 0, 0, 0.1); /* Sombra más suave */
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de hover */
 }
 
-.dashboard-card:hover {
-  transform: scale(1.05); /* Agrandar ligeramente al pasar el ratón */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.1); /* Efecto de sombra en hover */
-}
-
-.dashboard-card h2 {
-  font-family: 'Nunito', sans-serif;
-  color: var(--color-secundario);
-  font-size: 22px;
-}
-
-.dashboard-card button {
-  background-color: var(--color-naranja);
+/* Estilo del header */
+.dashboard-header {
+  background-color: var(--color-primario);
   color: var(--color-texto-claro);
-  padding: 12px 25px;
-  border: none;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+/* Estilo para los cards */
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* Animación para los cards */
+.dashboard-card {
+  background-color: var(--color-primario-tint);
   border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: cardAnimation 0.5s forwards;
+  width: 250px;  /* Ajusta el tamaño de los cards */
+}
+
+@keyframes cardAnimation {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Configuración de animación escalonada para los cards */
+.dashboard-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.dashboard-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dashboard-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.dashboard-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Estilos para los botones */
+button {
+  background-color: var(--color-amarillo);
+  color: var(--color-fondo-dark);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra al botón */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.dashboard-card button:hover {
-  background-color: var(--color-naranja-tint);
-  transform: scale(1.1); /* Aumentar tamaño del botón al pasar el ratón */
+button:hover {
+  background-color: var(--color-naranja);
+  transform: scale(1.1);
 }
 
-.dashboard-card button:active {
-  background-color: var(--color-naranja-shade);
-  transform: scale(1); /* Mantener el tamaño original al hacer clic */
+/* Estilo para títulos */
+h1, h2, h3 {
+  color: var(--color-secundario);
+}
+
+/* Estilo de los gráficos y widgets */
+.dashboard-widget {
+  background-color: var(--color-coral);
+  border-radius: 8px;
+  padding: 20px;
+  width: 350px;
+  text-align: center;
+  margin-top: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  animation: widgetAnimation 0.6s ease-in-out;
+}
+
+@keyframes widgetAnimation {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dashboard-widget h3 {
+  color: var(--color-texto-claro);
+  font-size: 20px;
+}
+
+.dashboard-widget p {
+  color: var(--color-texto-claro);
+  font-size: 16px;
+}
+
+.dashboard-widget button {
+  background-color: var(--color-secundario);
+  color: var(--color-fondo-dark);
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Estilo de los íconos */
+.icon {
+  font-size: 40px;
+  color: var(--color-texto-claro);
+  margin-bottom: 10px;
+}
+
+/* Responder a pantallas pequeñas */
+@media (max-width: 768px) {
+  .dashboard-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .dashboard-widget {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .logo {
+    width: 250px;
+  }
 }
