@@ -8,7 +8,7 @@ import { AlertController } from '@ionic/angular';
   standalone: false
 })
 export class TiendaPage implements OnInit {
-  monedas: number = 300; // Monedas iniciales
+  monedas: number = 600; // Monedas iniciales
   compras: any[] = []; // Lista de artículos comprados
 
   mascotaActual = { imagen: 'assets/icon/pierre.png' }; // Mascota por defecto
@@ -48,12 +48,25 @@ export class TiendaPage implements OnInit {
     }
 
     if (this.monedas >= item.precio) {
+      let saldoAnterior = this.monedas;
       this.monedas -= item.precio;
-      this.compras.push(item); // Guardar la compra
+      let saldoActual = this.monedas;
+      this.compras.push({
+        ...item,
+        fecha: new Date().toLocaleString(), // Guardar la fecha y hora de compra
+        saldoAnterior,
+        saldoActual
+      });
 
       const alert = await this.alertCtrl.create({
         header: '¡Compra exitosa!',
-        message: `Has comprado <strong>${item.nombre}</strong>.`,
+        message: `
+          <p>Has comprado: <strong>${item.nombre}</strong></p>
+          <p><strong>Fecha:</strong> ${new Date().toLocaleString()}</p>
+          <p><strong>Saldo anterior:</strong> ${saldoAnterior} monedas</p>
+          <p><strong>Costo del producto:</strong> ${item.precio} monedas</p>
+          <p><strong>Saldo actual:</strong> ${saldoActual} monedas</p>
+        `,
         buttons: ['OK']
       });
       await alert.present();
