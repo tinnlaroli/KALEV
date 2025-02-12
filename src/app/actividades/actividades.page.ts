@@ -23,24 +23,24 @@ export class ActividadesPage implements OnInit {
       fechaInicio: new Date('2025-02-10'),
       fechaFin: new Date('2025-02-12'),
       descripcion: 'Actividad enfocada en la resolución de problemas matemáticos.',
-      tipoAprendizaje: 'Activo',
-      imagen: 'assets/mascotas/gato1.jpg', // Imagen de una mascota
+      tipoAprendizaje: 'Kinestésico',
+      imagen: 'assets/icon/pierre.png', // Imagen de una mascota
     },
     {
       titulo: 'Lectura Comprensiva',
       fechaInicio: new Date('2025-02-15'),
       fechaFin: new Date('2025-02-16'),
       descripcion: 'Actividad de lectura y comprensión de textos literarios.',
-      tipoAprendizaje: 'Teórico',
-      imagen: 'assets/mascotas/gato2.jpg', // Imagen de una mascota
+      tipoAprendizaje: 'Lecto-escritura',
+      imagen: 'assets/icon/muricia.png', // Imagen de una mascota
     },
     {
       titulo: 'Ciencia Experimental',
       fechaInicio: new Date('2025-02-20'),
       fechaFin: new Date('2025-02-22'),
       descripcion: 'Exploración práctica de conceptos científicos mediante experimentos.',
-      tipoAprendizaje: 'Activo',
-      imagen: 'assets/mascotas/gato3.jpg', // Imagen de una mascota
+      tipoAprendizaje: 'Kinestésico',
+      imagen: 'assets/icon/quetzal.png', // Imagen de una mascota
     }
   ];
 
