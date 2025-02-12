@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>KALEV</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-wrapper">
+    <h1 class="title">🌟 Mis Aprendizajes 🌟</h1>
+
+    <ion-list class="activity-list">
+      <ion-item *ngFor="let activity of activities" class="activity-card" (mouseover)="highlightCard($event)" (mouseleave)="removeHighlight($event)">
+        <ion-thumbnail slot="start" class="rounded-thumbnail">
+          <img [src]="activity.icon" alt="Icono de actividad" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ activity.name }}</h2>
+          <p><strong>Tipo:</strong> {{ activity.type }}</p>
+          <p><strong>Inicio:</strong> {{ activity.startDate }}</p>
+          <p><strong>Fin:</strong> {{ activity.endDate }}</p>
+          <p><strong>Aprendizaje:</strong> {{ activity.learningType }}</p>
+          <p><strong>Maestro:</strong> {{ activity.teacher }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+
+
+
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons class="footer-buttons">
+      <ion-button class="footer-button" [routerLink]="['/courses']">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Cursos</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/profile']">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/tienda']">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/settings-alumno']">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

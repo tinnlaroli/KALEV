@@ -1,0 +1,165 @@
+:root {
+  --color-darkGray: #3c3c3b;
+  --color-darkTeal: #005f6b;
+  --color-teal: #0081a7;
+  --color-green: #4ebc97;
+  --color-gray: #8a8a89;
+  --color-lightGray: #ededee;
+  --color-peach: #ffefe6;
+  --color-red: #ff5147;
+  --color-darkRed: #c53030;
+  --color-coral: #ff7f50;
+  --color-yellow: #f59f00;
+  --color-gold: #ffd333;
+}
+
+ion-content {
+  --background: var(--color-lightGray);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content-wrapper {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilo de los ítems */
+.custom-item {
+  --min-height: 70px;
+  border-radius: 12px;
+  background-color: var(--color-peach);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.custom-item:hover {
+  transform: scale(1.02);
+}
+
+/* Contenedor de iconos */
+.icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-darkGray);
+}
+
+/* Radio Buttons */
+.radio-item {
+  --min-height: 50px;
+  border-radius: 8px;
+  background-color: var(--color-gray);
+  color: white;
+  padding: 10px;
+}
+
+/* Botón de guardar */
+.custom-button {
+  border-radius: 10px;
+  font-size: 18px;
+  background: var(--color-coral);
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-button:hover {
+  background: var(--color-darkTeal);
+}
+
+/* Footer */
+ion-footer {
+  height: 60px;
+  background: var(--color-darkGray);
+}
+
+/* Barra de navegación inferior */
+.footer-toolbar {
+  --background: var(--color-darkGray);
+  border-radius: 15px 15px 0 0;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-transform: none;
+  color: var(--color-lightGray);
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+  color: var(--color-lightGray);
+}
+
+.footer-button.active {
+  color: var(--color-gold);
+}
+
+.footer-button:hover {
+  transform: translateY(-3px);
+  color: var(--color-yellow);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Barra de navegación inferior */
+/*.footer-toolbar {
+  --background: #161414a0;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.footer-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+ */

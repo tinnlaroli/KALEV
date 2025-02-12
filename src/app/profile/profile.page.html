@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>PERFIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Contenedor de información del estudiante -->
+  <div class="content-wrapper">
+    <ion-card class="profile-card">
+      <ion-card-content class="center-content">
+        <ion-avatar>
+          <img src="assets/alumno.png" alt="Foto del estudiante">
+        </ion-avatar>
+        <h2 class="student-name">Nombre del Estudiante</h2>
+        <p class="student-info">Grado: 5</p>
+        <p class="student-info">Clase: Matemáticas</p>
+        <p class="no-data">Datos no disponibles</p>
+        <p class="status-update">¡Sigue aprendiendo!</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Gráfico de Araña -->
+    <div class="chart-container">
+      <canvas id="spiderChart"></canvas>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Barra de navegación inferior -->
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons class="footer-buttons">
+      <ion-button class="footer-button" [routerLink]="['/courses']">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Cursos</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/profile']">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/tienda']">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/settings-alumno']">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

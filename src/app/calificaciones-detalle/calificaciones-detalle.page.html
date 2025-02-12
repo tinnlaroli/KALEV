@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de Calificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="alumno">
+    <ion-card-header>
+      <ion-card-title>{{ alumno.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ alumno.grado }} - Grupo {{ alumno.grupo }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Tipo de Aprendizaje: {{ alumno.tipoAprendizaje }}</p>
+      <ion-list>
+        <ion-item *ngFor="let calificacion of calificaciones">
+          <ion-label>
+            <h2>{{ calificacion.actividad }}</h2>
+            <p>Calificación: {{ calificacion.calificacion }}</p>
+            <p>Fecha: {{ calificacion.fecha | date: 'dd/MM/yyyy' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- Menu de navegacion inferior -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Grupos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Actividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
+      <ion-icon name="school"></ion-icon>
+      <ion-label>Calificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Configuración</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
+

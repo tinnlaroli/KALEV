@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "Inglés",
+    "notifications": "Notificaciones",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "save": "Guardar cambios"
+  }
+}

@@ -1,0 +1,65 @@
+/* splash.page.scss */
+
+.splash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Usa el 100% de la altura visible de la pantalla */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.content-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+}
+
+.welcome-text h1 {
+  color: #ffffff; /* Título en blanco para destacar */
+  font-size: 2rem;
+  font-size: xx-large;
+  margin-bottom: 20px;
+  font-weight: 700; /* Aumenta el grosor de la letra */
+}
+
+.logo {
+  width: 250px; 
+  height: auto;
+  margin-bottom: 30px;
+}
+
+/* Estilos para la barra de progreso */
+.custom-progress {
+  width: 80%; /* Ajusta el tamaño de la barra */
+  margin-top: 20px;
+  --progress-bar-background: transparent; /* Fondo transparente */
+  --background: transparent;
+  --bar-background: transparent;
+  --progress-bar-background: transparent;
+}
+
+/* Colores personalizados para la barra de progreso */
+.custom-progress::part(bar) {
+  background: linear-gradient(90deg, 
+    var(--color-tomato), 
+    var(--color-gamboge), 
+    var(--color-jonquil), 
+    var(--color-mint), 
+    var(--color-cerulean)
+  );
+  height: 10px; /* Ajusta el grosor de la barra */
+}
+
+/* Asegurarse que todo el contenido esté centrado */
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Usar 100vh asegura que la pantalla completa se utilice */
+}

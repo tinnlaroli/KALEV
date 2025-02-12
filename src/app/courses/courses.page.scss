@@ -1,0 +1,135 @@
+:root {
+  --color-tomato: #FF5147;
+  --color-gamboge: #F69F00;
+  --color-jonquil: #ffd333;
+  --color-mint: #4EBC97;
+  --color-cerulean: #0081A7;
+  --color-eerie: #1d1d1b;
+  --color-jet: #333;
+  --color-anti: #ededee;
+}
+
+html, body, ion-app {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ion-content {
+  --background: var(--color-eerie);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.content-wrapper {
+  padding: 16px;
+  --background: var(--color-eerie);
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(45deg, var(--color-gamboge), var(--color-jonquil));
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.activity-list {
+  width: 100%;
+}
+
+.activity-card {
+  --min-height: 110px;
+  border: 3px solid var(--color-gamboge);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(193, 21, 179, 0.837);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.activity-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--color-mint);
+}
+
+.rounded-thumbnail img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 3px solid var(--color-cerulean);
+  padding: 4px;
+}
+
+.activity-card ion-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.activity-card h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: var(--color-gamboge);
+}
+
+.activity-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-jet);
+}
+
+.course-button {
+  width: 100%;
+  height: 100px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, var(--color-gamboge), var(--color-tomato));
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-footer {
+  height: 60px;
+  background: var(--color-jet);
+}
+
+.footer-toolbar {
+  --background: #161414a0;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.footer-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}

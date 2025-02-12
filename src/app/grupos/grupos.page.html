@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Grupos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-wrapper">
+    <h1>Tus Grupos</h1>
+
+    <!-- Aquí vamos a iterar sobre los grupos -->
+    <ion-list>
+      <ion-item *ngFor="let grupo of grupos">
+        <ion-label>
+          <h2>{{ grupo.grado }} - {{ grupo.nombre }}</h2>
+          <p>Maestro: {{ grupo.maestro }}</p>
+          <p>Número de Alumnos: {{ grupo.numeroAlumnos }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<!-- Menu de navegacion inferior -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Grupos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Actividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
+      <ion-icon name="school"></ion-icon>
+      <ion-label>Calificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Configuración</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>

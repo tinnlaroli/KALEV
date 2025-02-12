@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido</ion-card-title>
+      <ion-card-subtitle>Ingresa tus datos para acceder</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>  
+    <form (submit)="iniciarSesion()">
+    <ion-item>
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="key-outline"></ion-icon>
+      <ion-label position="floating">Código de Clase</ion-label>
+      <ion-input [(ngModel)]="codigoClase" name="classCode" required></ion-input>
+    </ion-item>
+
+
+    <!-- Botón con estado de carga -->
+    <ion-button expand="full" type="submit" color="success">
+      <ion-icon slot="start" name="log-in-outline"></ion-icon>
+      <ion-spinner *ngIf="cargando"></ion-spinner>
+      <span *ngIf="!cargando">Iniciar Sesión</span>
+    </ion-button>
+  </form>
+</ion-card-content>

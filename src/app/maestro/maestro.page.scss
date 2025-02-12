@@ -1,0 +1,63 @@
+:root {
+    --ion-color-teal: #0081a7;
+    --ion-color-lightGray: #ededee;
+    --ion-color-darkGray: #3c3c3b;
+    --ion-color-yellow: #f59f00;
+    --ion-color-red: #ff5147;
+    --ion-color-coral: #ff7f50;
+    --ion-color-green: #4ebc97;
+    --ion-color-darkRed: #c53030;
+    --ion-color-darkGray-rgb: 60, 60, 59;
+    --ion-color-darkGray-contrast: #ffffff;
+    --ion-color-darkGray-shade: #353534;
+  }
+  
+  ion-header {
+    background-color: var(--ion-color-darkRed);
+    color: var(--ion-color-lightGray);
+  
+    ion-toolbar {
+      ion-title {
+        color: var(--ion-color-lightGray);
+      }
+    }
+  }
+  
+  ion-content {
+    background-color: var(--ion-color-lightGray);
+  }
+  
+  ion-footer {
+    background-color: var(--ion-color-darkGray);
+    color: var(--ion-color-lightGray);
+  
+    ion-tab-bar {
+      background-color: var(--ion-color-darkGray);  /* Fondo oscuro */
+      color: var(--ion-color-lightGray);  /* Color de los iconos y texto */
+  
+      ion-tab-button {
+        ion-icon {
+          color: var(--ion-color-lightGray);  /* Iconos en gris claro */
+        }
+  
+        ion-label {
+          color: var(--ion-color-lightGray);  /* Texto en gris claro */
+        }
+  
+        &:hover {
+          background-color: var(--ion-color-yellow);  /* Color de fondo al hacer hover */
+        }
+  
+        &.tab-selected {
+          background-color: var(--ion-color-darkGray-shade);  /* Color de fondo cuando está seleccionado */
+          ion-icon {
+            color: var(--ion-color-yellow);  /* Icono en amarillo cuando está seleccionado */
+          }
+          ion-label {
+            color: var(--ion-color-yellow);  /* Texto en amarillo cuando está seleccionado */
+          }
+        }
+      }
+    }
+  }
+  

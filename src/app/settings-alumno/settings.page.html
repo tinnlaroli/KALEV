@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-wrapper">
+    <!-- Sección: Idioma -->
+    <ion-item class="custom-item">
+      <ion-thumbnail slot="start" class="icon-container">
+        <img src="assets/icon/idioma.png" alt="Icono idioma" />
+      </ion-thumbnail>
+      <ion-label>Idioma</ion-label>
+      <ion-select [(ngModel)]="selectedLanguage">
+        <ion-select-option value="es">Español</ion-select-option>
+        <ion-select-option value="en">Inglés</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Sección: Notificaciones -->
+    <ion-item class="custom-item">
+      <ion-thumbnail slot="start" class="icon-container">
+        <img src="assets/icon/notificacion.png" alt="Icono notificaciones" />
+      </ion-thumbnail>
+      <ion-label>Notificaciones</ion-label>
+      <ion-toggle [(ngModel)]="notificationsEnabled"></ion-toggle>
+    </ion-item>
+
+    <!-- Sección: Tema -->
+    <ion-item class="custom-item">
+      <ion-thumbnail slot="start" class="icon-container">
+        <img src="assets/icon/tema.png" alt="Icono tema" />
+      </ion-thumbnail>
+      <ion-label>Tema</ion-label>
+    </ion-item>
+    <ion-radio-group [(ngModel)]="theme">
+      <ion-item class="radio-item">
+        <ion-radio value="light"></ion-radio>
+        <ion-label>Claro</ion-label>
+      </ion-item>
+      <ion-item class="radio-item">
+        <ion-radio value="dark"></ion-radio>
+        <ion-label>Oscuro</ion-label>
+      </ion-item>
+    </ion-radio-group>
+
+    <!-- Botón: Guardar cambios -->
+    <ion-button expand="full" color="primary" class="custom-button" (click)="saveSettings()">
+      Guardar cambios
+    </ion-button>
+  </div>
+</ion-content>
+
+<!-- Barra de navegación inferior -->
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons class="footer-buttons">
+      <ion-button class="footer-button" [routerLink]="['/courses']">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Cursos</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/profile']">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button" [routerLink]="['/tienda']">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </ion-button>
+
+      <ion-button class="footer-button active" [routerLink]="['/settings-alumno']">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

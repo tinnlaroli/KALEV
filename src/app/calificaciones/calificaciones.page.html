@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Calificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-wrapper">
+    <h1>Alumnos y Calificaciones</h1>
+
+    <!-- Lista de tarjetas (cards) con la información de los alumnos -->
+    <ion-card *ngFor="let alumno of alumnos">
+      <ion-card-header>
+        <ion-card-title>{{ alumno.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ alumno.grado }} - {{ alumno.grupo }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Tipo de aprendizaje:</strong> {{ alumno.tipoAprendizaje }}</p>
+        <ion-button fill="outline" color="success" (click)="verCalificaciones(alumno)">Ver Calificaciones</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <!-- Menu de navegacion inferior -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Grupos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Actividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
+      <ion-icon name="school"></ion-icon>
+      <ion-label>Calificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Configuración</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
+</ion-content>

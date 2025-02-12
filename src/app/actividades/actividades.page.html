@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Actividades</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-wrapper">
+    <h1>Tus Actividades</h1>
+
+    <!-- Lista de actividades -->
+    <ion-list>
+      <ion-item *ngFor="let actividad of actividades">
+        <ion-thumbnail slot="start">
+          <img [src]="actividad.imagen" alt="Imagen de mascota">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ actividad.titulo }}</h2>
+          <p><strong>Fecha de inicio:</strong> {{ actividad.fechaInicio | date:'shortDate' }}</p>
+          <p><strong>Fecha de fin:</strong> {{ actividad.fechaFin | date:'shortDate' }}</p>
+          <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
+          <p><strong>Tipo de aprendizaje:</strong> {{ actividad.tipoAprendizaje }}</p>
+          <p><strong>Grupo asignado:</strong> {{ actividad.grupo }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Botón para crear una nueva actividad -->
+    <ion-button expand="full" color="primary" (click)="crearActividad()">Crear Actividad</ion-button>
+  </div>
+
+  <!-- Menu de navegacion inferior -->
+<ion-footer>
+  <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Grupos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Actividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
+      <ion-icon name="school"></ion-icon>
+      <ion-label>Calificaciones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Configuración</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-footer>
+</ion-content>

@@ -1,0 +1,111 @@
+:root {
+  --color-primary: #FF6347; /* Tomate */
+  --color-secondary: #FFD700; /* Amarillo brillante */
+  --color-background: #E5E5E5; /* Gris claro */
+  --color-card: #F9F9F9; /* Blanco suculento */
+  --color-text: #2F4F4F; /* Gris oscuro */
+  --color-button: #FF4500; /* Naranja brillante */
+  --color-footer: #1E1E1E; /* Fondo oscuro para el pie de página */
+}
+
+/* General */
+html, body, ion-app {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ion-content {
+  --background: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Card del perfil */
+.profile-card {
+  background-color: var(--color-card);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.student-name {
+  font-size: 24px;
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.student-info {
+  font-size: 16px;
+  color: var(--color-text);
+  margin: 5px 0;
+}
+
+.no-data {
+  color: var(--color-secondary);
+  font-size: 14px;
+}
+
+.status-update {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-button);
+  margin-top: 15px;
+}
+
+/* Gráfico de araña */
+.chart-container {
+  width: 90%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+/* Footer */
+ion-footer {
+  height: 70px;
+  background: var(--color-footer);
+}
+
+.footer-toolbar {
+  --background: #161414a0;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.footer-button ion-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.footer-button:hover {
+  background-color: var(--color-primary);
+}
