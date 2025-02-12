@@ -11,15 +11,6 @@ export class TiendaPage implements OnInit {
   monedas: number = 300; // Monedas iniciales
   compras: any[] = []; // Lista de artículos comprados
 
-  mascotaActual = { imagen: 'assets/icon/pierre.png' }; // Mascota por defecto
-  mascotas = [
-    { id: 1, imagen: 'assets/icon/pierre.png' },
-    { id: 2, imagen: 'assets/icon/quetzal.png' },
-    { id: 3, imagen: 'assets/icon/muricia.png' },
-    { id: 4, imagen: 'assets/icon/gero.png' },
-    { id: 5, imagen: 'assets/icon/tortuga.png' },
-  ];
-
   tienda = [
     { id: 1, nombre: 'Gorro Rojo', precio: 50, imagen: 'assets/ropa/gorro-rojo.png' },
     { id: 2, nombre: 'Gafas Cool', precio: 75, imagen: 'assets/ropa/gafas.png' },
@@ -38,10 +29,10 @@ export class TiendaPage implements OnInit {
   constructor(private alertCtrl: AlertController, private toastCtrl: ToastController) {}
 
   async comprar(item: any) {
-    if (this.compras.find(c => c.id === item.id)) {
+    if (this.compras.some(c => c.id === item.id)) {
       const alert = await this.alertCtrl.create({
-        header: 'Ya comprado',
-        message: `Ya tienes ${item.nombre}. No puedes comprarlo de nuevo.`,
+        header: 'Ya compraste este artículo',
+        message: 'No puedes comprar el mismo artículo dos veces.',
         buttons: ['OK']
       });
       await alert.present();
@@ -50,7 +41,7 @@ export class TiendaPage implements OnInit {
 
     if (this.monedas >= item.precio) {
       this.monedas -= item.precio;
-      this.compras.push(item);
+      this.compras.push(item); // Guardar la compra
 
       const toast = await this.toastCtrl.create({
         message: `¡Compraste ${item.nombre}!`,
@@ -60,7 +51,7 @@ export class TiendaPage implements OnInit {
       await toast.present();
     } else {
       const alert = await this.alertCtrl.create({
-        header: 'Monedas Insuficientes',
+        header: 'Monedas insuficientes',
         message: 'No tienes suficientes monedas para esta compra.',
         buttons: ['OK']
       });
@@ -68,9 +59,9 @@ export class TiendaPage implements OnInit {
     }
   }
 
-  cambiarMascota() {
-    const indiceActual = this.mascotas.findIndex(m => m.imagen === this.mascotaActual.imagen);
-    this.mascotaActual = this.mascotas[(indiceActual + 1) % this.mascotas.length];
+  // Función para verificar si un artículo ya fue comprado
+  fueComprado(item: any): boolean {
+    return this.compras.some(c => c.id === item.id);
   }
 
   ngOnInit() {}
