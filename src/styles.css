@@ -1,1 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Definición de colores */
+:root {
+  /* Colores principales */
+  --color-primario: #005f6b;
+  --color-secundario: #4ebc97;
+  --color-amarillo: #ffd333;
+  --color-naranja: #f59f00;
+  --color-tomate: #ff5147;
+  --color-coral: #ff7f50;
+  --color-azul: #0081a7;
+  --color-cian: #00b5db;
+
+  /* Tints (colores más claros) */
+  --color-primario-tint: #66a7b3;
+  --color-secundario-tint: #76d1a6;
+  --color-amarillo-tint: #fff45d;
+  --color-naranja-tint: #f7a733;
+  --color-tomate-tint: #ff7d6b;
+  --color-coral-tint: #ff9f7b;
+  --color-azul-tint: #33aad1;
+  --color-cian-tint: #66c8e0;
+
+  /* Shades (colores más oscuros) */
+  --color-primario-shade: #004c54;
+  --color-secundario-shade: #3c9d7f;
+  --color-amarillo-shade: #cca700;
+  --color-naranja-shade: #d47a00;
+  --color-tomate-shade: #e63e34;
+  --color-coral-shade: #e96a3f;
+  --color-azul-shade: #006a83;
+  --color-cian-shade: #0091b7;
+
+  /* Colores para texto y fondo */
+  --color-texto-oscuro: #3c3c3b;
+  --color-fondo-claro: #ededee;
+  --color-fondo-suave: #ffefe6;
+  
+  /* Colores adicionales para texto, etc. */
+  --color-texto-claro: #ffffff;
+  --color-fondo-dark: #3c3c3b;
+  --color-acento: #ffd333;
+}
+
+
+/* Aplicar las fuentes */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-fondo-claro);
+  color: var(--color-texto-oscuro);
+  margin: 0;
+  padding: 0;
+}
+
+/* Aplicar la fuente Nunito para los títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Ejemplo de botones con colores personalizados */
+button {
+  background-color: var(--color-primario);
+  color: #fff;
+}
+
+/* Ejemplo de color para títulos */
+h1, h2, h3 {
+  color: var(--color-secundario);
+}
+

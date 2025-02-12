@@ -15,7 +15,7 @@ import { UserEditComponent } from './features/users/user-edit/user-edit.componen
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/dashboard' , pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard' , pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'groups', component: GroupListComponent },
     { path: 'groups/create', component: GroupCreateComponent },
@@ -28,6 +28,7 @@ const routes: Routes = [
     { path: 'users', component: UserListComponent },
     { path: 'users/create', component: UserCreateComponent },
     { path: 'users/edit/:id', component: UserEditComponent },
+    { path: '**', redirectTo: '/dashboard' },
 ];
 
 @NgModule({

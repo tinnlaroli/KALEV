@@ -5,14 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 
+
+import { SharedModule } from './shared/shared.module';
+import { UsersModule } from './features/users/users.module';
+
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    SharedModule,
+    UsersModule
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

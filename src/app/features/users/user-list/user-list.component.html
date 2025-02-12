@@ -1,1 +1,65 @@
-<p>user-list works!</p>
+<app-side-nav>
+
+<!-- Main Content -->
+<div class="main-content">
+  <div class="catalogo-usuarios">
+    <h2>Catálogo de Usuarios</h2>
+
+    <!-- Tabla de Usuarios -->
+    <table class="usuarios-list">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-usuarios">
+        <!-- Aquí se irán agregando dinámicamente los usuarios -->
+      </tbody>
+    </table>
+
+    <!-- Botón para agregar un nuevo usuario -->
+    <button class="btn-agregar" id="btn-agregar-usuario">
+      Agregar Usuario
+    </button>
+  </div>
+</div>
+
+<!-- Modal de Crear Usuario -->
+<div id="modal-crear-usuario" class="modal">
+  <div class="modal-content">
+    <h3>Crear Usuario</h3>
+    <form id="form-crear-usuario">
+      <input type="text" id="nombre-usuario" placeholder="Nombre" required />
+      <input type="email" id="correo-usuario" placeholder="Correo" required />
+      <button type="submit">Crear Usuario</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de Editar Usuario -->
+<div id="modal-editar-usuario" class="modal">
+  <div class="modal-content">
+    <h3>Editar Usuario</h3>
+    <form id="form-editar-usuario">
+      <input type="hidden" id="editar-id-usuario" />
+      <input
+        type="text"
+        id="editar-nombre-usuario"
+        placeholder="Nombre"
+        required
+      />
+      <input
+        type="email"
+        id="editar-correo-usuario"
+        placeholder="Correo"
+        required
+      />
+      <button type="submit">Actualizar Usuario</button>
+    </form>
+  </div>
+</div>
+
+</app-side-nav>

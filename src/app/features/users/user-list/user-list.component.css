@@ -1,0 +1,94 @@
+/* Estilo general para la tabla de usuarios */
+.main-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.usuarios-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.usuarios-list th,
+.usuarios-list td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-primario-tint);
+}
+
+.usuarios-list th {
+  background-color: var(--color-primario);
+  color: var(--color-texto-claro);
+}
+
+.usuarios-list tr:hover {
+  background-color: var(--color-secundario-tint);
+}
+
+/* Botón de agregar usuario */
+.btn-agregar {
+  background-color: var(--color-secundario);
+  color: var(--color-texto-claro);
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.btn-agregar:hover {
+  background-color: var(--color-secundario-shade);
+}
+
+/* Modal de Crear Usuario */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: var(--color-fondo-claro);
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid var(--color-primario-shade);
+  width: 80%;
+  max-width: 400px;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-naranja);
+  color: var(--color-texto-claro);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--color-naranja-shade);
+}
