@@ -60,16 +60,16 @@ export class TiendaPage implements OnInit {
 
       const alert = await this.alertCtrl.create({
         header: '¡Compra exitosa!',
-        message: `
-          Has comprado: ${item.nombre}
-          Fecha: ${new Date().toLocaleString()}
-          Saldo anterior: ${saldoAnterior} 
-          Costo del producto: ${item.precio} 
-          Saldo actual: ${saldoActual} 
-        `,
+        message: 
+          `Has comprado: ${item.nombre}\n` +
+          `Fecha: ${new Date().toLocaleString()}\n` +
+          `Saldo anterior: ${saldoAnterior} monedas\n` +
+          `Costo del producto: ${item.precio} monedas\n` +
+          `Saldo actual: ${saldoActual} monedas`,
         buttons: ['OK']
       });
       await alert.present();
+      
     } else {
       const alert = await this.alertCtrl.create({
         header: 'Monedas insuficientes',

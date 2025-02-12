@@ -57,7 +57,11 @@ const routes: Routes = [
   {
     path: 'settings-maestro',
     loadChildren: () => import('./settings-maestro/settings-maestro.module').then( m => m.SettingsMaestroPageModule)
+  },  {
+    path: 'grupos-detalle',
+    loadChildren: () => import('./grupos-detalle/grupos-detalle.module').then( m => m.GruposDetallePageModule)
   }
+
 ];
 
 @NgModule({
