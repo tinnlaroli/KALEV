@@ -61,11 +61,11 @@ export class TiendaPage implements OnInit {
       const alert = await this.alertCtrl.create({
         header: '¡Compra exitosa!',
         message: `
-          <p>Has comprado: <strong>${item.nombre}</strong></p>
-          <p><strong>Fecha:</strong> ${new Date().toLocaleString()}</p>
-          <p><strong>Saldo anterior:</strong> ${saldoAnterior} monedas</p>
-          <p><strong>Costo del producto:</strong> ${item.precio} monedas</p>
-          <p><strong>Saldo actual:</strong> ${saldoActual} monedas</p>
+          Has comprado: ${item.nombre}
+          Fecha: ${new Date().toLocaleString()}
+          Saldo anterior: ${saldoAnterior} 
+          Costo del producto: ${item.precio} 
+          Saldo actual: ${saldoActual} 
         `,
         buttons: ['OK']
       });
