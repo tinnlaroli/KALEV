@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tienda',
@@ -11,7 +11,7 @@ export class TiendaPage implements OnInit {
   monedas: number = 300; // Monedas iniciales
   compras: any[] = []; // Lista de artículos comprados
 
-  mascotaActual = { imagen: 'assets/icon/gato.png' }; // Mascota por defecto
+  mascotaActual = { imagen: 'assets/icon/pierre.png' }; // Mascota por defecto
   mascotas = [
     { id: 1, imagen: 'assets/icon/pierre.png' },
     { id: 2, imagen: 'assets/icon/muricia.png' },
@@ -34,7 +34,7 @@ export class TiendaPage implements OnInit {
     { id: 12, nombre: 'Manchas moradas', precio: 120, imagen: 'assets/manchas/manchas-moradas.png' }
   ];
 
-  constructor(private alertCtrl: AlertController, private toastCtrl: ToastController) {}
+  constructor(private alertCtrl: AlertController) {}
 
   async comprar(item: any) {
     if (this.compras.some(c => c.id === item.id)) {
@@ -51,12 +51,12 @@ export class TiendaPage implements OnInit {
       this.monedas -= item.precio;
       this.compras.push(item); // Guardar la compra
 
-      const toast = await this.toastCtrl.create({
-        message: `¡Compraste ${item.nombre}!`,
-        duration: 2000,
-        color: 'success'
+      const alert = await this.alertCtrl.create({
+        header: '¡Compra exitosa!',
+        message: `Has comprado <strong>${item.nombre}</strong>.`,
+        buttons: ['OK']
       });
-      await toast.present();
+      await alert.present();
     } else {
       const alert = await this.alertCtrl.create({
         header: 'Monedas insuficientes',
