@@ -5,11 +5,10 @@
 </ion-header>
 
 <ion-content>
-  <!-- Contenedor de configuraciones -->
   <div class="content-wrapper">
     <!-- Sección: Idioma -->
     <ion-item class="custom-item">
-      <ion-thumbnail slot="start">
+      <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/idioma.png" alt="Icono idioma" />
       </ion-thumbnail>
       <ion-label>Idioma</ion-label>
@@ -21,7 +20,7 @@
 
     <!-- Sección: Notificaciones -->
     <ion-item class="custom-item">
-      <ion-thumbnail slot="start">
+      <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/notificacion.png" alt="Icono notificaciones" />
       </ion-thumbnail>
       <ion-label>Notificaciones</ion-label>
@@ -30,7 +29,7 @@
 
     <!-- Sección: Tema -->
     <ion-item class="custom-item">
-      <ion-thumbnail slot="start">
+      <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/tema.png" alt="Icono tema" />
       </ion-thumbnail>
       <ion-label>Tema</ion-label>
@@ -47,35 +46,35 @@
     </ion-radio-group>
 
     <!-- Botón: Guardar cambios -->
-    <ion-button expand="full" color="primary" (click)="saveSettings()">
+    <ion-button expand="full" color="primary" class="custom-button" (click)="saveSettings()">
       Guardar cambios
     </ion-button>
   </div>
 </ion-content>
 
-
-<!-- Menu de navegacion inferior -->
+<!-- Barra de navegación inferior -->
 <ion-footer>
-  <ion-tab-bar slot="bottom" color="ligth">
-    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
-      <ion-icon name="people"></ion-icon>
-      <ion-label>Grupos</ion-label>
-    </ion-tab-button>
+  <ion-toolbar class="footer-toolbar">
+    <ion-buttons class="footer-buttons">
+      <ion-button class="footer-button" [routerLink]="['/courses']">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Cursos</ion-label>
+      </ion-button>
 
-    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
-      <ion-icon name="clipboard"></ion-icon>
-      <ion-label>Actividades</ion-label>
-    </ion-tab-button>
+      <ion-button class="footer-button" [routerLink]="['/profile']">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-button>
 
-    <!-- <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
-      <ion-icon name="school"></ion-icon>
-      <ion-label>Calificaciones</ion-label>
-    </ion-tab-button> -->
+      <ion-button class="footer-button" [routerLink]="['/tienda']">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </ion-button>
 
-    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
-      <ion-icon name="settings"></ion-icon>
-      <ion-label>Configuración</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
+      <ion-button class="footer-button active" [routerLink]="['/settings-alumno']">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-footer>
-
