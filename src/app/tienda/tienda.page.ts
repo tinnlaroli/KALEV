@@ -15,7 +15,8 @@ export class TiendaPage implements OnInit {
     { id: 1, imagen: 'assets/icon/pierre.png' },
     { id: 2, imagen: 'assets/icon/quetzal.png' },
     { id: 3, imagen: 'assets/icon/muricia.png' },
-    { id: 4, imagen: 'assets/icon/gero.png' }
+    { id: 4, imagen: 'assets/icon/gero.png' },
+    { id: 5, imagen: 'assets/icon/tortuga.png' },
   ];
 
   tienda = [
@@ -27,6 +28,10 @@ export class TiendaPage implements OnInit {
     { id: 6, nombre: 'Traje', precio: 150, imagen: 'assets/ropa/traje.png' },
     { id: 7, nombre: 'Vestido Jarocho', precio: 300, imagen: 'assets/ropa/vestido-jarocho.png' },
     { id: 8, nombre: 'Poncho', precio: 350, imagen: 'assets/ropa/poncho.png' },
+    { id: 9, nombre: 'Manchas azules', precio: 100, imagen: 'assets/manchas/manchas-azules.png' },
+    { id: 10, nombre: 'Manchas rosas', precio: 60, imagen: 'assets/manchas/manchas-rosas.png' },
+    { id: 11, nombre: 'Manchas cafés', precio: 90, imagen: 'assets/manchas/manchas-cafe.png' },
+    { id: 12, nombre: 'Manchas moradas', precio: 120, imagen: 'assets/ropa/manchas-moradas.png' },
   ];
 
   constructor(private alertCtrl: AlertController, private toastCtrl: ToastController) {}
