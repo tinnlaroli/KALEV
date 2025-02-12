@@ -1,18 +1,27 @@
-/* Estilo general para la tabla de usuarios */
-.main-content{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Contenedor principal */
+.main-content {
+  padding: 20px;
+  background-color: var(--color-fondo-claro);
+  color: var(--color-texto-oscuro);
 }
+
+/* Título del catálogo */
+.catalogo-usuarios h2 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-primario);
+  margin-bottom: 20px;
+}
+
+/* Tabla de usuarios */
 .usuarios-list {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .usuarios-list th,
 .usuarios-list td {
-  padding: 12px 15px;
+  padding: 12px;
   text-align: left;
   border-bottom: 1px solid var(--color-primario-tint);
 }
@@ -20,10 +29,35 @@
 .usuarios-list th {
   background-color: var(--color-primario);
   color: var(--color-texto-claro);
+  font-family: 'Nunito', sans-serif;
 }
 
-.usuarios-list tr:hover {
-  background-color: var(--color-secundario-tint);
+.usuarios-list tbody tr:hover {
+  background-color: var(--color-fondo-suave);
+}
+
+/* Botones de acciones */
+.usuarios-list button {
+  background-color: var(--color-azul);
+  color: var(--color-texto-claro);
+  border: none;
+  padding: 8px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.usuarios-list button:hover {
+  background-color: var(--color-azul-shade);
+}
+
+.usuarios-list button:last-child {
+  background-color: var(--color-tomate);
+}
+
+.usuarios-list button:last-child:hover {
+  background-color: var(--color-tomate-shade);
 }
 
 /* Botón de agregar usuario */
@@ -31,80 +65,97 @@
   background-color: var(--color-secundario);
   color: var(--color-texto-claro);
   border: none;
-  padding: 10px 15px;
-  font-size: 16px;
+  padding: 10px 20px;
   cursor: pointer;
-  margin-top: 20px;
-  border-radius: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .btn-agregar:hover {
   background-color: var(--color-secundario-shade);
 }
 
-/* Modal de Crear Usuario */
+/* Modales */
 .modal {
-  display: flex; /* Cambia de none a flex */
-  position: fixed; /* Para que esté siempre visible */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegurar que esté encima */
+  z-index: 1000;
 }
 
 .modal-content {
   background-color: var(--color-fondo-claro);
-  margin: 5% auto;
   padding: 20px;
-  border-radius: 10px;
-  border: 1px solid var(--color-primario-shade);
-  width: 80%;
+  border-radius: 8px;
+  width: 100%;
   max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content h3 {
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-primario);
   margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content input {
   padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border: 1px solid var(--color-primario-tint);
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
 }
 
-button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-naranja);
-  color: var(--color-texto-claro);
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-button[type="submit"]:hover {
-  background-color: var(--color-naranja-shade);
-}
-
-
-
-/* validaciones */
-
-input.invalid {
+.modal-content input.invalid {
   border-color: var(--color-tomate);
 }
 
-.error-message {
+.modal-content .error-message {
   color: var(--color-tomate);
-  font-size: 1.2em;
-  margin-top: 0.5em;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.modal-content button[type="submit"] {
+  background-color: var(--color-secundario);
+  color: var(--color-texto-claro);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: var(--color-secundario-shade);
+}
+
+.modal-content button[type="submit"]:disabled {
+  background-color: var(--color-primario-tint);
+  cursor: not-allowed;
+}
+
+.modal-content button:not([type="submit"]) {
+  background-color: var(--color-tomate);
+  color: var(--color-texto-claro);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:not([type="submit"]):hover {
+  background-color: var(--color-tomate-shade);
 }

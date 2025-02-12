@@ -1,7 +1,6 @@
 <div class="main-content">
   <div class="dashboard-header">
     <img src="/assets/kalev.png" alt="Logo" class="logo" />
-    <h1>Bienvenido al Dashboard</h1>
   </div>
 
   <!-- Sección del Dashboard -->
@@ -32,10 +31,11 @@
   </div>
 
   <div class="dashboard-widget">
-    <div class="icon">📊</div>
     <h3>Estadísticas de Grupos</h3>
     <p>Gráfica de rendimiento de los grupos asignados</p>
-    <button>Ver Gráfica</button>
+    
+    <!-- Canvas para la gráfica de radar -->
+    <canvas id="radarChart" width="400" height="400"></canvas>
+    
   </div>
-  
 </div>

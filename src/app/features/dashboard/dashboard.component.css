@@ -1,8 +1,8 @@
 /* Estilo para el logo - aumenta su tamaño */
 .logo {
-  width: 300px;  /* Aumenta el tamaño del logo */
+  width: 500px;
   height: auto;
-  margin: 0 auto 30px;
+  margin: auto;
   display: block;
   animation: logoAnimation 2s ease-in-out;
 }
@@ -26,12 +26,12 @@
 
 /* Estilo del header */
 .dashboard-header {
-  background-color: var(--color-primario);
+  background-color: var(--color-texto-oscuro);
   color: var(--color-texto-claro);
-  padding: 30px;
+  padding: 20px;
+  margin: auto 15%;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
 }
 
 /* Estilo para los cards */
@@ -112,11 +112,12 @@ h1, h2, h3 {
   background-color: var(--color-coral);
   border-radius: 8px;
   padding: 20px;
-  width: 350px;
+  margin: 250px;
   text-align: center;
   margin-top: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   animation: widgetAnimation 0.6s ease-in-out;
+
 }
 
 @keyframes widgetAnimation {
