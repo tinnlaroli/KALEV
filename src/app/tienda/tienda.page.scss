@@ -7,52 +7,41 @@
 }
 
 .mascota-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mascota-col {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .mascota-img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.boton-cambiar {
-  margin-top: 10px;
+.scroll-container {
+  max-height: 400px; /* Ajusta según la pantalla */
+  overflow-y: auto;
+  padding: 10px;
 }
 
 .item-card {
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.item-img {
-  width: 100px;
-  height: 100px;
-  margin: auto;
-  display: block;
-}
-
-.item-title {
-  font-weight: bold;
-}
-
-.item-precio {
-  color: var(--ion-color-green);
-}
-
-.boton-comprar {
-  border-radius: 20px;
-}
-
-.comprados-titulo {
-  font-size: 20px;
-  text-align: center;
-  font-weight: bold;
+.compras-container {
   margin-top: 20px;
-  color: var(--ion-color-primary);
+}
+
+.compra-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 5px;
 }
 
 ion-list {

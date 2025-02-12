@@ -11,6 +11,14 @@ export class TiendaPage implements OnInit {
   monedas: number = 300; // Monedas iniciales
   compras: any[] = []; // Lista de artículos comprados
 
+  mascotaActual = { imagen: 'assets/icon/gato.png' }; // Mascota por defecto
+  mascotas = [
+    { id: 1, imagen: 'assets/icon/pierre.png' },
+    { id: 2, imagen: 'assets/icon/muricia.png' },
+    { id: 3, imagen: 'assets/icon/quetzal.png' },
+    { id: 4, imagen: 'assets/icon/gero.png' }
+  ];
+
   tienda = [
     { id: 1, nombre: 'Gorro Rojo', precio: 50, imagen: 'assets/ropa/gorro-rojo.png' },
     { id: 2, nombre: 'Gafas Cool', precio: 75, imagen: 'assets/ropa/gafas.png' },
@@ -62,6 +70,11 @@ export class TiendaPage implements OnInit {
   // Función para verificar si un artículo ya fue comprado
   fueComprado(item: any): boolean {
     return this.compras.some(c => c.id === item.id);
+  }
+
+  cambiarMascota() {
+    const indiceActual = this.mascotas.findIndex(m => m.imagen === this.mascotaActual.imagen);
+    this.mascotaActual = this.mascotas[(indiceActual + 1) % this.mascotas.length];
   }
 
   ngOnInit() {}
