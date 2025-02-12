@@ -31,7 +31,7 @@ export class TiendaPage implements OnInit {
     { id: 9, nombre: 'Manchas azules', precio: 100, imagen: 'assets/manchas/manchas-azules.png' },
     { id: 10, nombre: 'Manchas rosas', precio: 60, imagen: 'assets/manchas/manchas-rosas.png' },
     { id: 11, nombre: 'Manchas cafés', precio: 90, imagen: 'assets/manchas/manchas-cafe.png' },
-    { id: 12, nombre: 'Manchas moradas', precio: 120, imagen: 'assets/ropa/manchas-moradas.png' },
+    { id: 12, nombre: 'Manchas moradas', precio: 120, imagen: 'assets/manchas/manchas-moradas.png' },
   ];
 
   constructor(private alertCtrl: AlertController, private toastCtrl: ToastController) {}
