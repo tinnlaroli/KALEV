@@ -1,1 +1,40 @@
-<p>group-list works!</p>
+<!-- <app-side-nav> -->
+  <div class="container">
+    <h1>Gestión de Grupos</h1>
+
+    <!-- Formulario para agregar grupo -->
+    <section class="form-section">
+      <h2>Crear Nuevo Grupo</h2>
+      <form id="group-form">
+        <label for="group-name">Nombre del Grupo:</label>
+        <input type="text" id="group-name" name="group-name" required />
+
+        <label for="teacher">Docente a Cargo:</label>
+        <input type="text" id="teacher" name="teacher" required />
+
+        <label for="director">Director Asignado:</label>
+        <input type="text" id="director" name="director" required />
+
+        <button type="submit">Agregar Grupo</button>
+      </form>
+    </section>
+
+    <!-- Listado de grupos -->
+    <section class="list-section">
+      <h2>Listado de Grupos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Docente</th>
+            <th>Director</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody id="group-list">
+          <!-- Aquí se generarán dinámicamente los grupos -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+<!-- </app-side-nav> -->

@@ -1,1 +1,60 @@
-<p>activity-list works!</p>
+<!-- <app-side-nav> -->
+<div class="activities-container">
+  <h2>Actividades Académicas</h2>
+  
+  <div class="activity-form">
+    <h3>Crear Nueva Actividad</h3>
+    <form>
+      <label for="activity-name">Nombre de la Actividad:</label>
+      <input type="text" id="activity-name" placeholder="Ingrese el nombre" required>
+      
+      <label for="subject">Materia:</label>
+      <select id="subject">
+        <option value="matematicas">Matemáticas</option>
+        <option value="ciencias">Ciencias</option>
+        <option value="historia">Historia</option>
+      </select>
+      
+      <label for="learning-style">Estilo de Aprendizaje:</label>
+      <select id="learning-style">
+        <option value="visual">Visual</option>
+        <option value="auditivo">Auditivo</option>
+        <option value="kinestesico">Kinestésico</option>
+      </select>
+      
+      <button type="submit">Agregar Actividad</button>
+    </form>
+  </div>
+
+  <div class="activity-list">
+    <h3>Listado de Actividades</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Materia</th>
+          <th>Estilo de Aprendizaje</th>
+          <th>Estado</th>
+          <th>Calificación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Resolución de ecuaciones</td>
+          <td>Matemáticas</td>
+          <td>Visual</td>
+          <td>Completada</td>
+          <td>9.5</td>
+        </tr>
+        <tr>
+          <td>Experimento de química</td>
+          <td>Ciencias</td>
+          <td>Kinestésico</td>
+          <td>Pendiente</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- </app-side-nav> -->

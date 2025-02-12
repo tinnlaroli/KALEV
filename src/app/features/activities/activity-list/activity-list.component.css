@@ -1,0 +1,51 @@
+.activities-container {
+  max-width: 800px;
+  margin: auto;
+  background: var(--color-fondo-suave);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2, h3 {
+  color: var(--color-secundario);
+}
+
+.activity-form label {
+  display: block;
+  margin-top: 10px;
+}
+
+.activity-form input, .activity-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid var(--color-primario-shade);
+  border-radius: 4px;
+}
+
+button {
+  background-color: var(--color-primario);
+  color: var(--color-texto-claro);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover {
+  background-color: var(--color-primario-shade);
+}
+
+.activity-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.activity-list th, .activity-list td {
+  border: 1px solid var(--color-primario);
+  padding: 10px;
+  text-align: left;
+}

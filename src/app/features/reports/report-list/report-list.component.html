@@ -1,1 +1,48 @@
-<p>report-list works!</p>
+  <div class="container">
+    <h1>Generación de Reportes</h1>
+
+    <!-- Reporte de Docente y Grupo -->
+    <section class="reporte-section">
+      <h2>Generar Reporte</h2>
+
+      <form id="reporte-form">
+        <label for="docente">Nombre del Docente:</label>
+        <input type="text" id="docente" name="docente" required />
+
+        <label for="grupo">Nombre del Grupo:</label>
+        <input type="text" id="grupo" name="grupo" required />
+
+        <label for="estudiantes">Lista de Estudiantes:</label>
+        <textarea id="estudiantes" name="estudiantes" rows="5" required></textarea>
+
+        <label for="estilos-aprendizaje">Estilos de Aprendizaje Predominantes:</label>
+        <textarea id="estilos-aprendizaje" name="estilos-aprendizaje" rows="5" required></textarea>
+
+        <label for="desempeno-academico">Desempeño Académico (Actividades y Juegos):</label>
+        <textarea id="desempeno-academico" name="desempeno-academico" rows="5" required></textarea>
+
+        <button type="submit">Generar Reporte</button>
+      </form>
+    </section>
+
+    <!-- Reporte generado -->
+    <section class="reporte-generado">
+      <h2>Reporte Generado</h2>
+      <div id="reporte">
+        <h3>Reporte de Grupo</h3>
+        <p><strong>Docente:</strong> <span id="reporte-docente"></span></p>
+        <p><strong>Grupo:</strong> <span id="reporte-grupo"></span></p>
+
+        <h4>Estudiantes:</h4>
+        <ul id="reporte-estudiantes">
+          <!-- Los estudiantes se listarán aquí -->
+        </ul>
+
+        <h4>Estilos de Aprendizaje Predominantes:</h4>
+        <p id="reporte-estilos"></p>
+
+        <h4>Desempeño Académico:</h4>
+        <p id="reporte-desempeno"></p>
+      </div>
+    </section>
+  </div>

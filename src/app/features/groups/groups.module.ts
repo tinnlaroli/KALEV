@@ -13,7 +13,7 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
     GroupDetailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class GroupsModule { }

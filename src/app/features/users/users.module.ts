@@ -20,6 +20,6 @@ import { SharedModule } from '../../shared/shared.module';
     UserListComponent,
     UserCreateComponent
   ],
-  providers: [UserService],  // Si el servicio solo lo usas en este módulo
+  providers: [UserService], 
 })
 export class UsersModule { }
