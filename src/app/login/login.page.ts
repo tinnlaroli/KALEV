@@ -10,8 +10,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   email: string = '';
-  password: string = '';
-  codigoClase: string = '';
+  codigo: string = '';
   cargando: boolean = false; // Aseguramos que esta propiedad exista
 
   constructor(
@@ -34,10 +33,10 @@ export class LoginPage implements OnInit {
     await loading.present();
 
     let ruta = '';
-    if (this.codigoClase.startsWith('TCH-')) {
+    if (this.codigo.startsWith('TCH-')) {
       ruta = '/grupos';
       console.log('Usuario identificado como maestro');
-    } else if (this.codigoClase.startsWith('STD-')) {
+    } else if (this.codigo.startsWith('STD-')) {
       ruta = '/courses';
       console.log('Usuario identificado como alumno');
     } else {
@@ -55,7 +54,7 @@ export class LoginPage implements OnInit {
   }
 
   validarCampos(): boolean {
-    if (!this.email.trim() || !this.password.trim() || !this.codigoClase.trim()) {
+    if (!this.email.trim() || !this.codigo.trim()) {
       this.mostrarAlerta('Error', 'Todos los campos son obligatorios.');
       return false;
     }
