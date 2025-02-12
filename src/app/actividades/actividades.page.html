@@ -20,37 +20,34 @@
           <p><strong>Fecha de fin:</strong> {{ actividad.fechaFin | date:'shortDate' }}</p>
           <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
           <p><strong>Tipo de aprendizaje:</strong> {{ actividad.tipoAprendizaje }}</p>
-          <p><strong>Grupo asignado:</strong> {{ actividad.grupo }}</p>
+
+          <!-- Botón asignar a grupo -->
+          <ion-button color="primary" (click)="asignarAGrupo(actividad)">Asignar a grupo</ion-button>
         </ion-label>
       </ion-item>
     </ion-list>
 
     <!-- Botón para crear una nueva actividad -->
-    <ion-button expand="full" color="primary" (click)="crearActividad()">Crear Actividad</ion-button>
+    <ion-button expand="full" color="primary" (click)="agregarActividad()">Agregar Actividad</ion-button>
   </div>
 
   <!-- Menu de navegacion inferior -->
-<ion-footer>
-  <ion-tab-bar slot="bottom" color="ligth">
-    <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
-      <ion-icon name="people"></ion-icon>
-      <ion-label>Grupos</ion-label>
-    </ion-tab-button>
+  <ion-footer>
+    <ion-tab-bar slot="bottom" color="ligth">
+      <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Grupos</ion-label>
+      </ion-tab-button>
 
-    <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
-      <ion-icon name="clipboard"></ion-icon>
-      <ion-label>Actividades</ion-label>
-    </ion-tab-button>
+      <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
+        <ion-icon name="clipboard"></ion-icon>
+        <ion-label>Actividades</ion-label>
+      </ion-tab-button>
 
-    <!-- <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
-      <ion-icon name="school"></ion-icon>
-      <ion-label>Calificaciones</ion-label>
-    </ion-tab-button> -->
-
-    <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
-      <ion-icon name="settings"></ion-icon>
-      <ion-label>Configuración</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-footer>
+      <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-footer>
 </ion-content>
