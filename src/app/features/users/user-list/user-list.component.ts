@@ -59,6 +59,16 @@ export class UserListComponent implements OnInit {
       event.preventDefault();  // Esto evita que el carácter sea ingresado
     }
   }
+
+  filterInvalidCharactersEmail(event: any) {
+    // Expresión regular que permite solo letras y espacios y numeros
+    const regex = /[^a-zA-Z0-9@._%+-]/;
+  
+    // Si el valor del carácter ingresado no es válido, evitamos la entrada
+    if (regex.test(event.key)) {
+      event.preventDefault();  // Esto evita que el carácter sea ingresado
+    }
+  }
   
 
   // Método para crear usuario

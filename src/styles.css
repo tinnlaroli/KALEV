@@ -71,3 +71,38 @@ h1, h2, h3 {
   color: var(--color-secundario);
 }
 
+
+
+
+
+
+#nav-inicio:hover {
+  color: var(--color-tomate) !important;
+  transition: color 0.5s ease;
+  font-size: 1.6rem;
+}
+
+#nav-aprendizaje:hover {
+  color: var(--color-acento) !important;
+  transition: color 0.5s ease;
+  font-size: 1.6rem;
+}
+
+#nav-vark:hover {
+  color: var(--color-secundario) !important;
+  transition: color 0.5s ease;
+  font-size: 1.6rem;
+}
+
+#nav-contactanos:hover {
+  color: var(--color-naranja) !important;
+  transition: color 0.5s ease;
+  font-size: 1.6rem;
+}
+
+#nav-nosotros:hover {
+  color: var(--color-azul) !important;
+  transition: color 0.5s ease;
+  font-size: 1.6rem;
+}
+

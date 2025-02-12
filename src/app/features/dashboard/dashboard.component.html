@@ -1,41 +1,42 @@
-<div class="main-content">
-  <div class="dashboard-header">
-    <img src="/assets/kalev.png" alt="Logo" class="logo" />
+<app-side-nav>
+  <div class="main-content">
+    <div class="dashboard-header">
+      <img src="/assets/kalev.png" alt="Logo" class="logo" />
+    </div>
+
+    <!-- Sección del Dashboard -->
+    <div class="dashboard-cards">
+      <div class="dashboard-card">
+        <h2>Grupos</h2>
+        <p>Vista general de los grupos asignados</p>
+        <button routerLink="/groups">Ver Grupos</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Alumnos</h2>
+        <p>Resumen del rendimiento y actividades</p>
+        <button routerLink="/students">Ver Alumnos</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Actividades</h2>
+        <p>Planeación personalizada y análisis</p>
+        <button routerLink="/activities">Ver Actividades</button>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Reportes</h2>
+        <p>Acceso rápido a documentos generados</p>
+        <button routerLink="/reports">Ver Reportes</button>
+      </div>
+    </div>
+
+    <div class="dashboard-widget">
+      <h3>Estadísticas de Grupos</h3>
+      <p>Gráfica de rendimiento de los grupos asignados</p>
+
+      <!-- Canvas para la gráfica de radar -->
+      <canvas id="radarChart" width="400" height="400"></canvas>
+    </div>
   </div>
-
-  <!-- Sección del Dashboard -->
-  <div class="dashboard-cards">
-    <div class="dashboard-card">
-      <h2>Grupos</h2>
-      <p>Vista general de los grupos asignados</p>
-      <button routerLink="/groups">Ver Grupos</button>
-    </div>
-
-    <div class="dashboard-card">
-      <h2>Alumnos</h2>
-      <p>Resumen del rendimiento y actividades</p>
-      <button routerLink="/students">Ver Alumnos</button>
-    </div>
-
-    <div class="dashboard-card">
-      <h2>Actividades</h2>
-      <p>Planeación personalizada y análisis</p>
-      <button routerLink="/activities">Ver Actividades</button>
-    </div>
-
-    <div class="dashboard-card">
-      <h2>Reportes</h2>
-      <p>Acceso rápido a documentos generados</p>
-      <button routerLink="/reports">Ver Reportes</button>
-    </div>
-  </div>
-
-  <div class="dashboard-widget">
-    <h3>Estadísticas de Grupos</h3>
-    <p>Gráfica de rendimiento de los grupos asignados</p>
-    
-    <!-- Canvas para la gráfica de radar -->
-    <canvas id="radarChart" width="400" height="400"></canvas>
-    
-  </div>
-</div>
+</app-side-nav>

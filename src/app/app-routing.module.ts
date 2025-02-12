@@ -13,9 +13,10 @@ import { UserListComponent } from './features/users/user-list/user-list.componen
 import { UserCreateComponent } from './features/users/user-create/user-create.component';
 import { UserEditComponent } from './features/users/user-edit/user-edit.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { LandingComponent } from './landing/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'groups', component: GroupListComponent },
   { path: 'groups/create', component: GroupCreateComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'reports/create', component: ReportCreateComponent },
   { path: 'users', component: UserListComponent },
   { path: 'users/create', component: UserCreateComponent },
-  { path: 'users/edit/:id', component: UserEditComponent },  // Asegúrate de tener este componente implementado
+  { path: 'users/edit/:id', component: UserEditComponent },
+  { path: 'landing', component: LandingComponent },
   { path: '**', redirectTo: '/dashboard' },  // Redirección por defecto
 ];
 
