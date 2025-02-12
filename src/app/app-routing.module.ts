@@ -15,20 +15,20 @@ import { UserEditComponent } from './features/users/user-edit/user-edit.componen
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'dashboard' , pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'groups', component: GroupListComponent },
-    { path: 'groups/create', component: GroupCreateComponent },
-    { path: 'students', component: StudentListComponent },
-    { path: 'students/:id', component: StudentProfileComponent },
-    { path: 'activities', component: ActivityListComponent },
-    { path: 'activities/create', component: ActivityCreateComponent },
-    { path: 'reports', component: ReportListComponent },
-    { path: 'reports/create', component: ReportCreateComponent },
-    { path: 'users', component: UserListComponent },
-    { path: 'users/create', component: UserCreateComponent },
-    { path: 'users/edit/:id', component: UserEditComponent },
-    { path: '**', redirectTo: '/dashboard' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'groups', component: GroupListComponent },
+  { path: 'groups/create', component: GroupCreateComponent },
+  { path: 'students', component: StudentListComponent },
+  { path: 'students/:id', component: StudentProfileComponent },
+  { path: 'activities', component: ActivityListComponent },
+  { path: 'activities/create', component: ActivityCreateComponent },
+  { path: 'reports', component: ReportListComponent },
+  { path: 'reports/create', component: ReportCreateComponent },
+  { path: 'users', component: UserListComponent },
+  { path: 'users/create', component: UserCreateComponent },
+  { path: 'users/edit/:id', component: UserEditComponent },  // Asegúrate de tener este componente implementado
+  { path: '**', redirectTo: '/dashboard' },  // Redirección por defecto
 ];
 
 @NgModule({

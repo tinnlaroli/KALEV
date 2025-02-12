@@ -1,1 +1,13 @@
-<p>user-create works!</p>
+<!-- Modal de Crear Usuario -->
+<div id="modal-crear-usuario" class="modal">
+  <div class="modal-content">
+    <h3>Crear Usuario</h3>
+    <form id="form-crear-usuario" (ngSubmit)="createUser()">
+      <input type="text" id="nombre-usuario" [(ngModel)]="newUser.nombre" placeholder="Nombre" name="nombre" required />
+      <input type="email" id="correo-usuario" [(ngModel)]="newUser.correo" placeholder="Correo" name="correo" required />
+      <input type="password" id="password-usuario" [(ngModel)]="newUser.password" placeholder="Contraseña" name="password" required />
+      <button type="submit">Crear Usuario</button>
+    </form>
+    <button (click)="goBack()">Cerrar</button>
+  </div>
+</div>

@@ -1,5 +1,3 @@
-<app-side-nav>
-
 <!-- Main Content -->
 <div class="main-content">
   <div class="catalogo-usuarios">
@@ -15,51 +13,149 @@
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody id="tabla-usuarios">
-        <!-- Aquí se irán agregando dinámicamente los usuarios -->
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button (click)="editUser(user.id)">Editar</button>
+            <button (click)="deleteUser(user.id)">Eliminar</button>
+          </td>
+        </tr>
       </tbody>
     </table>
 
     <!-- Botón para agregar un nuevo usuario -->
-    <button class="btn-agregar" id="btn-agregar-usuario">
+    <button class="btn-agregar" (click)="openCreateModal()">
       Agregar Usuario
     </button>
   </div>
 </div>
 
 <!-- Modal de Crear Usuario -->
-<div id="modal-crear-usuario" class="modal">
+<div id="modal-crear-usuario" class="modal" *ngIf="isCreateModalOpen">
   <div class="modal-content">
     <h3>Crear Usuario</h3>
-    <form id="form-crear-usuario">
-      <input type="text" id="nombre-usuario" placeholder="Nombre" required />
-      <input type="email" id="correo-usuario" placeholder="Correo" required />
-      <button type="submit">Crear Usuario</button>
+    <form
+      id="form-crear-usuario"
+      (ngSubmit)="createUser()"
+      #createUserForm="ngForm"
+    >
+      <!-- Nombre del usuario -->
+      <input
+        type="text"
+        id="nombre-usuario"
+        [(ngModel)]="newUser.name"
+        placeholder="Nombre"
+        name="nombre"
+        required
+        #name="ngModel"
+        (keydown)="filterInvalidCharacters($event)"
+        [class.invalid]="name.invalid && name.touched"
+      />
+      <div *ngIf="name.invalid && name.touched" class="error-message">
+        El nombre es obligatorio y no puede contener caracteres especiales ni números.
+      </div>
+
+      <!-- Correo del usuario -->
+      <input
+        type="email"
+        id="correo-usuario"
+        [(ngModel)]="newUser.email"
+        placeholder="Correo"
+        name="correo"
+        required
+        email
+        #email="ngModel"
+        [class.invalid]="email.invalid && email.touched"
+      />
+      <div *ngIf="email.invalid && email.touched" class="error-message">
+        El correo electrónico es obligatorio y debe tener un formato válido.
+      </div>
+
+      <!-- Contraseña del usuario -->
+      <input
+        type="password"
+        id="password-usuario"
+        [(ngModel)]="newUser.password"
+        placeholder="Contraseña"
+        name="password"
+        required
+        minlength="6"
+        #password="ngModel"
+        [class.invalid]="password.invalid && password.touched"
+      />
+      <div *ngIf="password.invalid && password.touched" class="error-message">
+        La contraseña debe tener al menos 6 caracteres.
+      </div>
+
+      <!-- Botón de envío -->
+      <button type="submit" [disabled]="createUserForm.invalid">
+        Crear Usuario
+      </button>
     </form>
+    <button (click)="closeCreateModal()">Cerrar</button>
   </div>
 </div>
 
 <!-- Modal de Editar Usuario -->
-<div id="modal-editar-usuario" class="modal">
+<div id="modal-editar-usuario" class="modal" *ngIf="isEditModalOpen">
   <div class="modal-content">
     <h3>Editar Usuario</h3>
-    <form id="form-editar-usuario">
-      <input type="hidden" id="editar-id-usuario" />
+    <form id="form-editar-usuario" (ngSubmit)="updateUser()">
+      <input type="hidden" [(ngModel)]="selectedUser.id" name="id" />
+
+      <!-- Nombre del usuario -->
+    
       <input
-        type="text"
-        id="editar-nombre-usuario"
-        placeholder="Nombre"
-        required
-      />
+      type="text"
+      id="nombre-usuario"
+      [(ngModel)]="selectedUser.name"
+      placeholder="Nombre"
+      name="nombre"
+      required
+      #editName="ngModel"
+      (keydown)="filterInvalidCharacters($event)"
+      [class.invalid]="editName.invalid && editName.touched"
+    />
+
+      <div *ngIf="editName.invalid && editName.touched" class="error-message">
+        El nombre es obligatorio y no puede contener caracteres especiales ni números.
+      </div>
+
+      <!-- Correo del usuario -->
       <input
         type="email"
-        id="editar-correo-usuario"
+        [(ngModel)]="selectedUser.email"
         placeholder="Correo"
+        name="correo"
         required
+        email
+        #editEmail="ngModel"
+        [class.invalid]="editEmail.invalid && editEmail.touched"
       />
-      <button type="submit">Actualizar Usuario</button>
+      <div *ngIf="editEmail.invalid && editEmail.touched" class="error-message">
+        El correo electrónico es obligatorio y debe tener un formato válido.
+      </div>
+
+      <!-- Botón de envío -->
+      <button type="submit" [disabled]="editName.invalid || editEmail.invalid">
+        Actualizar Usuario
+      </button>
     </form>
+    <button (click)="closeEditModal()">Cerrar</button>
   </div>
 </div>
 
-</app-side-nav>
+<!-- Estilos para los campos inválidos -->
+<style>
+  input.invalid {
+    border: 1px solid red;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+  }
+</style>

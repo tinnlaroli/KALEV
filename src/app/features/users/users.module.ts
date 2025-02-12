@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { SharedModule } from '../../shared/shared.module';
-
-
+import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
   declarations: [
     UserListComponent,
-    UserCreateComponent,
-    UserEditComponent,
+    UserCreateComponent
   ],
   imports: [
     CommonModule,
-    SharedModule
-  ]
+    FormsModule,  // Si usas formularios en tus componentes
+  ],
+  exports: [
+    UserListComponent,
+    UserCreateComponent
+  ],
+  providers: [UserService],  // Si el servicio solo lo usas en este módulo
 })
 export class UsersModule { }
