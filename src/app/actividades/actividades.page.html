@@ -1,4 +1,5 @@
 <ion-header>
+  <!-- Barra de herramientas con el título de la página -->
   <ion-toolbar color="secondary">
     <ion-title>Actividades</ion-title>
   </ion-toolbar>
@@ -8,52 +9,64 @@
   <div class="content-wrapper">
     <h1>Tus Actividades</h1>
 
-    <!-- Lista de actividades -->
+    <!-- Lista de actividades disponibles -->
     <ion-list>
+      <!-- Itera sobre la lista de actividades y las muestra en la interfaz -->
       <ion-item *ngFor="let actividad of actividades">
+        
+        <!-- Imagen de la actividad (usualmente una mascota) -->
         <ion-thumbnail slot="start">
           <img [src]="actividad.imagen" alt="Imagen de mascota">
         </ion-thumbnail>
+
+        <!-- Información de la actividad -->
         <ion-label>
           <h2>{{ actividad.titulo }}</h2>
           <p><strong>Fecha de inicio:</strong> {{ actividad.fechaInicio | date:'shortDate' }}</p>
           <p><strong>Fecha de fin:</strong> {{ actividad.fechaFin | date:'shortDate' }}</p>
           <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
 
-          <!-- Tipo de aprendizaje en un chip -->
-            <ion-chip color="primary">
-              {{ actividad.tipoAprendizaje }}
-            </ion-chip>
+          <!-- Muestra el tipo de aprendizaje de la actividad dentro de un chip -->
+          <ion-chip color="primary">
+            {{ actividad.tipoAprendizaje }}
+          </ion-chip>
         </ion-label>
 
-        <!-- Botón asignar a grupo -->
+        <!-- Botón para asignar la actividad a un grupo -->
         <ion-button fill="clear" class="assign-button" (click)="asignarAGrupo(actividad)">
           <ion-icon name="add-circle"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
 
-    <!-- Botón para crear una nueva actividad -->
-    <ion-button expand="full" color="primary" (click)="agregarActividad()">Agregar Actividad</ion-button>
+    <!-- Botón para agregar una nueva actividad -->
+    <ion-button expand="full" color="primary" (click)="agregarActividad()">
+      Agregar Actividad
+    </ion-button>
   </div>
 
-  <!-- Menu de navegación inferior -->
+  <!-- Menú de navegación inferior -->
   <ion-footer>
-    <ion-tab-bar slot="bottom" color="ligth">
+    <ion-tab-bar slot="bottom" color="light">
+      
+      <!-- Botón de navegación a la página de grupos -->
       <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
         <ion-icon name="people"></ion-icon>
         <ion-label>Grupos</ion-label>
       </ion-tab-button>
 
+      <!-- Botón de navegación a la página de actividades -->
       <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
         <ion-icon name="clipboard"></ion-icon>
         <ion-label>Actividades</ion-label>
       </ion-tab-button>
 
+      <!-- Botón de navegación a la página de configuración -->
       <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
         <ion-icon name="settings"></ion-icon>
         <ion-label>Configuración</ion-label>
       </ion-tab-button>
+
     </ion-tab-bar>
   </ion-footer>
 </ion-content>
