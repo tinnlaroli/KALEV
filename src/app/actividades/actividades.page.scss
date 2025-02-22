@@ -1,16 +1,19 @@
+/* Definición de variables de color personalizadas */
 :root {
-  --ion-color-primary: #0081a7;
-  --ion-color-lightGray: #ededee;
-  --ion-color-darkGray: #3c3c3b;
-  --ion-color-yellow: #f59f00;
-  --ion-color-green: #4ebc97;
-  --ion-color-darkTeal-shade: #004f59;
+  --ion-color-primary: #0081a7; /* Azul oscuro, color principal */
+  --ion-color-lightGray: #ededee; /* Gris claro */
+  --ion-color-darkGray: #3c3c3b; /* Gris oscuro */
+  --ion-color-yellow: #f59f00; /* Amarillo */
+  --ion-color-green: #4ebc97; /* Verde */
+  --ion-color-darkTeal-shade: #004f59; /* Azul verdoso oscuro */
 }
 
+/* Contenedor principal de la página */
 .content-wrapper {
   padding: 16px;
-  text-align: center;
+  text-align: center; /* Centra el contenido */
 
+  /* Estilos para el título principal */
   h1 {
     margin-bottom: 24px;
     color: var(--ion-color-lightGray);
@@ -18,33 +21,38 @@
     font-weight: bold;
   }
 
+  /* Lista de actividades */
   ion-list {
     padding: 0;
   }
 
+  /* Estilos para cada actividad en la lista */
   ion-item {
-    background-color: var(--ion-color-darkTeal);
+    background-color: var(--ion-color-darkTeal); /* Fondo azul verdoso */
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 8px; /* Bordes redondeados */
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: background-color 0.3s; /* Suaviza el cambio de color */
 
+    /* Efecto al pasar el mouse sobre el item */
     &:hover {
       background-color: var(--ion-color-red-tint);
     }
 
+    /* Imagen de la actividad */
     ion-thumbnail {
       margin-right: 12px;
 
       img {
         width: 50px;
         height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
+        object-fit: cover; /* Mantiene la relación de aspecto */
+        border-radius: 50%; /* Hace la imagen circular */
       }
     }
 
+    /* Información de la actividad */
     ion-label {
       display: block;
 
@@ -60,12 +68,14 @@
       }
     }
 
+    /* Estilos para los chips que muestran el tipo de aprendizaje */
     ion-chip {
       font-size: 0.9rem;
       padding: 5px;
     }
   }
 
+  /* Botón para asignar una actividad a un grupo */
   .assign-button {
     margin-left: auto;
     color: var(--ion-color-primary);
@@ -75,6 +85,7 @@
     }
   }
 
+  /* Botón para agregar una nueva actividad */
   ion-button {
     margin-top: 20px;
   }
