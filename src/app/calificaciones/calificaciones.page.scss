@@ -1,51 +1,50 @@
-    .content-wrapper {
-    padding: 16px;
-    text-align: center;
-  
-    h1 {
-      margin-bottom: 24px;
-      color: var(--ion-color-darkGray-contrast);
-      font-size: 2em;
-      font-weight: bold;
+.content-wrapper {
+  padding: 16px;  /* Aplica un relleno interno de 16px alrededor del contenido */
+  text-align: center;  /* Centra el texto dentro del contenedor */
+
+  h1 {
+    margin-bottom: 24px;  /* Aplica un margen inferior de 24px debajo del título */
+    color: var(--ion-color-darkGray-contrast);  /* Aplica un color de texto de la variable de color personalizada */
+    font-size: 2em;  /* Establece el tamaño de la fuente en 2 veces el tamaño base */
+    font-weight: bold;  /* Establece el peso de la fuente en negrita */
+  }
+
+  ion-card {
+    margin-bottom: 16px;  /* Aplica un margen inferior de 16px entre las tarjetas */
+    background-color: var(--ion-color-darkGray);  /* Establece el color de fondo de la tarjeta */
+    border-radius: 12px;  /* Redondea las esquinas de la tarjeta con un radio de 12px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Aplica una sombra sutil a la tarjeta */
+
+    &:hover {
+      background-color: var(--ion-color-darkTeal-tint);  /* Cambia el color de fondo al pasar el ratón */
     }
+
+    ion-card-header {
+      background-color: var(--ion-color-coral);  /* Establece un color de fondo para el encabezado de la tarjeta */
+      color: white;  /* Cambia el color del texto a blanco */
+      padding: 10px;  /* Aplica un relleno de 10px en todas las direcciones */
+      border-radius: 10px 10px 0 0;  /* Redondea las esquinas superiores de la tarjeta */
   
-    ion-card {
-      margin-bottom: 16px;
-      background-color: var(--ion-color-darkGray);
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
-      &:hover {
-        background-color: var(--ion-color-darkTeal-tint);
+      ion-card-title {
+        font-weight: bold;  /* Aplica un peso de fuente negrita al título de la tarjeta */
+        font-size: 1.4em;  /* Establece el tamaño de la fuente del título */
       }
-  
-      ion-card-header {
-        background-color: var(--ion-color-coral);
-        color: white;
-        padding: 10px;
-        border-radius: 10px 10px 0 0;
-  
-        ion-card-title {
-          font-weight: bold;
-          font-size: 1.4em;
-        }
-  
-        ion-card-subtitle {
-          font-size: 1em;
-          font-weight: normal;
-          color: white;
-        }
+
+      ion-card-subtitle {
+        font-size: 1em;  /* Establece el tamaño de la fuente del subtítulo */
+        font-weight: normal;  /* Aplica un peso normal a la fuente del subtítulo */
+        color: white;  /* Establece el color del subtítulo como blanco */
       }
+    }
+
+    ion-card-content {
+      padding: 16px;  /* Aplica un relleno de 16px en el contenido de la tarjeta */
+      color: var(--ion-color-darkPurple);  /* Establece el color del texto en el contenido */
   
-      ion-card-content {
-        padding: 16px;
-        color: var(--ion-color-darkPurple);
-  
-        ion-button {
-          margin-top: 10px;
-          border-radius: 8px;
-        }
+      ion-button {
+        margin-top: 10px;  /* Aplica un margen superior de 10px al botón */
+        border-radius: 8px;  /* Redondea las esquinas del botón con un radio de 8px */
       }
     }
   }
-  
+}
