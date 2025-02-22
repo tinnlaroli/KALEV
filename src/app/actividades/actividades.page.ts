@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 
-// Definir la interfaz para la estructura de la actividad
+/**
+ * Interfaz que define la estructura de una actividad.
+ */
 interface Actividad {
-  titulo: string;
-  fechaInicio: Date;
-  fechaFin: Date;
-  descripcion: string;
-  tipoAprendizaje: string;
-  imagen: string;
+  titulo: string;        // Nombre de la actividad
+  fechaInicio: Date;     // Fecha de inicio de la actividad
+  fechaFin: Date;        // Fecha de finalización de la actividad
+  descripcion: string;   // Descripción breve de la actividad
+  tipoAprendizaje: string; // Tipo de aprendizaje asociado a la actividad
+  imagen: string;        // Ruta de la imagen representativa de la actividad
 }
 
 @Component({
-  selector: 'app-actividades',
-  templateUrl: './actividades.page.html',
-  styleUrls: ['./actividades.page.scss'],
-  standalone: false
+  selector: 'app-actividades', // Selector del componente
+  templateUrl: './actividades.page.html', // Ruta del archivo de la vista HTML
+  styleUrls: ['./actividades.page.scss'], // Ruta de los estilos del componente
+  standalone: false // Indica que este componente depende de otros módulos
 })
 export class ActividadesPage implements OnInit {
-  actividades: Actividad[] = [  // Usar la interfaz aquí
+
+  /**
+   * Lista de actividades disponibles en la aplicación.
+   * Cada actividad tiene un título, fechas de inicio y fin, descripción,
+   * tipo de aprendizaje y una imagen representativa.
+   */
+  actividades: Actividad[] = [
     {
       titulo: 'Actividad de Matemáticas',
       fechaInicio: new Date('2025-02-10'),
@@ -46,17 +54,28 @@ export class ActividadesPage implements OnInit {
 
   constructor() { }
 
+  /**
+   * Método para agregar una nueva actividad.
+   * Actualmente solo muestra un mensaje en la consola,
+   * pero podría abrir un formulario o ejecutar una lógica específica.
+   */
   agregarActividad() {
     console.log('Crear nueva actividad');
-    // Aquí se podría abrir un formulario o alguna acción para crear una actividad
   }
 
-  // Función para asignar la actividad a un grupo
-  asignarAGrupo(actividad: Actividad) {  // Usar el tipo Actividad para el parámetro
+  /**
+   * Método para asignar una actividad a un grupo.
+   * @param actividad Actividad seleccionada para asignar a un grupo.
+   * En una implementación real, podría abrir un modal o ejecutar una lógica específica.
+   */
+  asignarAGrupo(actividad: Actividad) {
     console.log('Asignando actividad:', actividad.titulo);
-    // Lógica para asignar la actividad a un grupo, por ejemplo, abrir un modal para elegir un grupo
   }
 
+  /**
+   * Método de ciclo de vida de Angular que se ejecuta al inicializar el componente.
+   * Puede usarse para cargar datos o inicializar variables.
+   */
   ngOnInit() {
   }
 }
