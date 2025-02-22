@@ -1,22 +1,35 @@
+<!-- Encabezado de la página -->
 <ion-header>
   <ion-toolbar>
+    <!-- Título de la página que aparece en la barra superior -->
     <ion-title>Detalles de Calificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal de la página -->
 <ion-content>
+  <!-- Tarjeta que se muestra solo si la variable 'alumno' está definida -->
   <ion-card *ngIf="alumno">
     <ion-card-header>
+      <!-- Título de la tarjeta con el nombre del alumno -->
       <ion-card-title>{{ alumno.nombre }}</ion-card-title>
+      <!-- Subtítulo de la tarjeta con el grado y grupo del alumno -->
       <ion-card-subtitle>{{ alumno.grado }} - Grupo {{ alumno.grupo }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
+      <!-- Muestra el tipo de aprendizaje del alumno -->
       <p>Tipo de Aprendizaje: {{ alumno.tipoAprendizaje }}</p>
+      
+      <!-- Lista de calificaciones -->
       <ion-list>
+        <!-- Itera sobre el array de calificaciones y muestra una tarjeta para cada calificación -->
         <ion-item *ngFor="let calificacion of calificaciones">
           <ion-label>
+            <!-- Muestra el nombre de la actividad -->
             <h2>{{ calificacion.actividad }}</h2>
+            <!-- Muestra la calificación obtenida por el alumno -->
             <p>Calificación: {{ calificacion.calificacion }}</p>
+            <!-- Muestra la fecha de la calificación con formato 'dd/MM/yyyy' -->
             <p>Fecha: {{ calificacion.fecha | date: 'dd/MM/yyyy' }}</p>
           </ion-label>
         </ion-item>
@@ -25,28 +38,31 @@
   </ion-card>
 </ion-content>
 
-<!-- Menu de navegacion inferior -->
+<!-- Pie de página con barra de navegación inferior -->
 <ion-footer>
   <ion-tab-bar slot="bottom" color="ligth">
+    <!-- Botón para ir a la página de 'grupos' -->
     <ion-tab-button tab="grupos" [routerLink]="['/grupos']">
-      <ion-icon name="people"></ion-icon>
-      <ion-label>Grupos</ion-label>
+      <ion-icon name="people"></ion-icon>  <!-- Icono de personas -->
+      <ion-label>Grupos</ion-label>  <!-- Etiqueta del botón -->
     </ion-tab-button>
 
+    <!-- Botón para ir a la página de 'actividades' -->
     <ion-tab-button tab="actividades" [routerLink]="['/actividades']">
-      <ion-icon name="clipboard"></ion-icon>
-      <ion-label>Actividades</ion-label>
+      <ion-icon name="clipboard"></ion-icon>  <!-- Icono de clipboard -->
+      <ion-label>Actividades</ion-label>  <!-- Etiqueta del botón -->
     </ion-tab-button>
 
+    <!-- Botón comentado para ir a la página de 'calificaciones', se ha desactivado por ahora -->
     <!-- <ion-tab-button tab="calificaciones" [routerLink]="['/calificaciones']">
       <ion-icon name="school"></ion-icon>
       <ion-label>Calificaciones</ion-label>
     </ion-tab-button> -->
 
+    <!-- Botón para ir a la configuración, redirige a 'settings-maestro' -->
     <ion-tab-button tab="settings" [routerLink]="['/settings-maestro']">
-      <ion-icon name="settings"></ion-icon>
-      <ion-label>Configuración</ion-label>
+      <ion-icon name="settings"></ion-icon>  <!-- Icono de configuración -->
+      <ion-label>Configuración</ion-label>  <!-- Etiqueta del botón -->
     </ion-tab-button>
   </ion-tab-bar>
 </ion-footer>
-
