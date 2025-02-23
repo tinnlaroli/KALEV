@@ -1,63 +1,77 @@
+/* Definición de variables de color personalizadas para la aplicación */
 :root {
-    --ion-color-teal: #0081a7;
-    --ion-color-lightGray: #ededee;
-    --ion-color-darkGray: #3c3c3b;
-    --ion-color-yellow: #f59f00;
-    --ion-color-red: #ff5147;
-    --ion-color-coral: #ff7f50;
-    --ion-color-green: #4ebc97;
-    --ion-color-darkRed: #c53030;
-    --ion-color-darkGray-rgb: 60, 60, 59;
-    --ion-color-darkGray-contrast: #ffffff;
-    --ion-color-darkGray-shade: #353534;
-  }
+  --ion-color-teal: #0081a7;  /* Teal (un tono de verde azulado) */
+  --ion-color-lightGray: #ededee;  /* Gris claro */
+  --ion-color-darkGray: #3c3c3b;  /* Gris oscuro */
+  --ion-color-yellow: #f59f00;  /* Amarillo */
+  --ion-color-red: #ff5147;  /* Rojo */
+  --ion-color-coral: #ff7f50;  /* Coral */
+  --ion-color-green: #4ebc97;  /* Verde */
+  --ion-color-darkRed: #c53030;  /* Rojo oscuro */
+  --ion-color-darkGray-rgb: 60, 60, 59;  /* Valores RGB para gris oscuro */
+  --ion-color-darkGray-contrast: #ffffff;  /* Blanco para contrastar con gris oscuro */
+  --ion-color-darkGray-shade: #353534;  /* Sombra de gris oscuro */
+}
+
+/* Estilos para el encabezado de la página (ion-header) */
+ion-header {
+  background-color: var(--ion-color-darkRed);  /* Fondo rojo oscuro para el encabezado */
+  color: var(--ion-color-lightGray);  /* Color de texto gris claro */
   
-  ion-header {
-    background-color: var(--ion-color-darkRed);
-    color: var(--ion-color-lightGray);
-  
-    ion-toolbar {
-      ion-title {
-        color: var(--ion-color-lightGray);
-      }
+  /* Estilos específicos para el ion-toolbar dentro del ion-header */
+  ion-toolbar {
+    ion-title {
+      color: var(--ion-color-lightGray);  /* Título en gris claro */
     }
   }
+}
+
+/* Estilos para el contenido de la página (ion-content) */
+ion-content {
+  background-color: var(--ion-color-lightGray);  /* Fondo gris claro para el contenido */
+}
+
+/* Estilos para el pie de página (ion-footer) */
+ion-footer {
+  background-color: var(--ion-color-darkGray);  /* Fondo gris oscuro */
+  color: var(--ion-color-lightGray);  /* Color de texto gris claro */
   
-  ion-content {
-    background-color: var(--ion-color-lightGray);
-  }
-  
-  ion-footer {
-    background-color: var(--ion-color-darkGray);
-    color: var(--ion-color-lightGray);
-  
-    ion-tab-bar {
-      background-color: var(--ion-color-darkGray);  /* Fondo oscuro */
-      color: var(--ion-color-lightGray);  /* Color de los iconos y texto */
-  
-      ion-tab-button {
+  /* Estilos para el ion-tab-bar dentro del ion-footer */
+  ion-tab-bar {
+    background-color: var(--ion-color-darkGray);  /* Fondo gris oscuro para la barra de pestañas */
+    color: var(--ion-color-lightGray);  /* Color de iconos y texto en gris claro */
+    
+    /* Estilos para cada ion-tab-button dentro de la barra de pestañas */
+    ion-tab-button {
+      /* Estilos para los iconos dentro de ion-tab-button */
+      ion-icon {
+        color: var(--ion-color-lightGray);  /* Iconos en gris claro */
+      }
+
+      /* Estilos para las etiquetas de los botones dentro de ion-tab-button */
+      ion-label {
+        color: var(--ion-color-lightGray);  /* Texto de las etiquetas en gris claro */
+      }
+      
+      /* Estilo para el efecto hover sobre los botones de las pestañas */
+      &:hover {
+        background-color: var(--ion-color-yellow);  /* Fondo amarillo al pasar el ratón sobre un botón */
+      }
+
+      /* Estilo cuando la pestaña está seleccionada */
+      &.tab-selected {
+        background-color: var(--ion-color-darkGray-shade);  /* Fondo sombreado de gris oscuro cuando está seleccionada */
+        
+        /* Estilos para el icono dentro del botón seleccionado */
         ion-icon {
-          color: var(--ion-color-lightGray);  /* Iconos en gris claro */
+          color: var(--ion-color-yellow);  /* Icono amarillo cuando la pestaña está seleccionada */
         }
-  
+        
+        /* Estilos para la etiqueta dentro del botón seleccionado */
         ion-label {
-          color: var(--ion-color-lightGray);  /* Texto en gris claro */
-        }
-  
-        &:hover {
-          background-color: var(--ion-color-yellow);  /* Color de fondo al hacer hover */
-        }
-  
-        &.tab-selected {
-          background-color: var(--ion-color-darkGray-shade);  /* Color de fondo cuando está seleccionado */
-          ion-icon {
-            color: var(--ion-color-yellow);  /* Icono en amarillo cuando está seleccionado */
-          }
-          ion-label {
-            color: var(--ion-color-yellow);  /* Texto en amarillo cuando está seleccionado */
-          }
+          color: var(--ion-color-yellow);  /* Texto amarillo cuando la pestaña está seleccionada */
         }
       }
     }
   }
-  
+}
