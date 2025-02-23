@@ -1,50 +1,54 @@
 /* splash.page.scss */
 
+/* Estilos para el contenedor principal de la página */
 .splash-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; /* Utiliza Flexbox para alinear los elementos dentro del contenedor */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos verticalmente */
   height: 100vh; /* Usa el 100% de la altura visible de la pantalla */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover; /* Asegura que la imagen de fondo cubra toda el área sin distorsión */
+  background-position: center; /* Centra la imagen de fondo */
+  background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
 }
 
+/* Estilos para el contenedor de los elementos dentro de la splash page */
 .content-wrapper {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+  text-align: center; /* Centra el texto dentro del contenedor */
+  display: flex; /* Usa Flexbox para alinear los elementos de manera flexible */
+  flex-direction: column; /* Organiza los elementos en columna */
+  justify-content: center; /* Centra los elementos en el eje vertical */
+  align-items: center; /* Centra los elementos en el eje horizontal */
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+  height: 100%; /* Asegura que el contenedor ocupe el 100% de la altura */
 }
 
+/* Estilos para el título de bienvenida */
 .welcome-text h1 {
-  color: #ffffff; /* Título en blanco para destacar */
-  font-size: 2rem;
-  font-size: xx-large;
-  margin-bottom: 20px;
-  font-weight: 700; /* Aumenta el grosor de la letra */
+  color: #ffffff; /* Hace que el texto sea blanco para resaltar sobre el fondo */
+  font-size: 2rem; /* Establece el tamaño del texto (se puede ajustar si es necesario) */
+  font-size: xx-large; /* Tamaño de fuente aún mayor, puedes ajustar según preferencia */
+  margin-bottom: 20px; /* Añade un margen en la parte inferior para separar de otros elementos */
+  font-weight: 700; /* Hace el texto más grueso para mayor énfasis */
 }
 
+/* Estilos para el logo */
 .logo {
-  width: 250px; 
-  height: auto;
-  margin-bottom: 30px;
+  width: 250px; /* Define un tamaño fijo para el logo (250px de ancho) */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin-bottom: 30px; /* Añade un margen debajo del logo para separarlo de otros elementos */
 }
 
-/* Estilos para la barra de progreso */
+/* Estilos para la barra de progreso personalizada */
 .custom-progress {
-  width: 80%; /* Ajusta el tamaño de la barra */
-  margin-top: 20px;
-  --progress-bar-background: transparent; /* Fondo transparente */
-  --background: transparent;
-  --bar-background: transparent;
-  --progress-bar-background: transparent;
+  width: 80%; /* Ajusta el tamaño de la barra de progreso al 80% del contenedor */
+  margin-top: 20px; /* Añade un margen en la parte superior para separarla del contenido superior */
+  --progress-bar-background: transparent; /* Hace que el fondo de la barra sea transparente */
+  --background: transparent; /* Asegura que no haya un fondo visible en la barra */
+  --bar-background: transparent; /* También hace transparente el fondo de la barra */
+  --progress-bar-background: transparent; /* Repite el fondo transparente para asegurar consistencia */
 }
 
-/* Colores personalizados para la barra de progreso */
+/* Estilos personalizados para la barra de progreso */
 .custom-progress::part(bar) {
   background: linear-gradient(90deg, 
     var(--color-tomato), 
@@ -52,14 +56,14 @@
     var(--color-jonquil), 
     var(--color-mint), 
     var(--color-cerulean)
-  );
-  height: 10px; /* Ajusta el grosor de la barra */
+  ); /* Aplica un degradado de colores personalizados a la barra de progreso */
+  height: 10px; /* Define el grosor de la barra de progreso */
 }
 
-/* Asegurarse que todo el contenido esté centrado */
+/* Asegura que el contenido de la página esté completamente centrado */
 ion-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Usar 100vh asegura que la pantalla completa se utilice */
+  display: flex; /* Usa Flexbox para organizar los elementos */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  height: 100vh; /* Asegura que la página ocupe toda la altura visible de la pantalla */
 }
