@@ -1,80 +1,90 @@
+/* Definición de colores personalizados para la aplicación */
 :root {
-  --ion-color-primary: #0081a7;
-  --ion-color-lightGray: #ededee;
-  --ion-color-darkGray: #3c3c3b;
-  --ion-color-yellow: #f59f00;
-  --ion-color-green: #4ebc97;
+  --ion-color-primary: #0081a7; /* Color principal */
+  --ion-color-lightGray: #ededee; /* Gris claro */
+  --ion-color-darkGray: #3c3c3b; /* Gris oscuro */
+  --ion-color-yellow: #f59f00; /* Amarillo */
+  --ion-color-green: #4ebc97; /* Verde */
 }
 
+/* Estilo para el contenedor de la mascota */
 .mascota-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
+  display: flex; /* Usamos flexbox para organizar los elementos */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos verticalmente */
+  margin-bottom: 10px; /* Espacio en la parte inferior del contenedor */
 }
 
+/* Estilo para las columnas dentro del contenedor de la mascota */
 .mascota-col {
-  text-align: center;
+  text-align: center; /* Centra el texto dentro de la columna */
 }
 
+/* Estilo para las imágenes de las mascotas */
 .mascota-img {
-  width: 90px; /* Tamaño más pequeño */
-  height: 90px;
-  border-radius: 50%;
+  width: 90px; /* Define el ancho de la imagen */
+  height: 90px; /* Define la altura de la imagen */
+  border-radius: 50%; /* Hace que la imagen sea redonda */
 }
 
+/* Estilo para las tarjetas de los artículos */
 .item-card {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 230px; /* Misma altura para todos */
+  text-align: center; /* Centra el contenido de la tarjeta */
+  display: flex; /* Usa flexbox para la disposición interna */
+  flex-direction: column; /* Organiza los elementos en columna */
+  justify-content: space-between; /* Espacia los elementos uniformemente */
+  height: 230px; /* Establece una altura fija para las tarjetas */
 }
 
+/* Estilo para las imágenes dentro de las tarjetas de los artículos */
 .item-img {
-  width: 100%;
-  height: 120px; /* Tamaño fijo */
-  object-fit: contain;
+  width: 100%; /* La imagen ocupa todo el ancho disponible */
+  height: 120px; /* Establece una altura fija para las imágenes */
+  object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
 }
 
+/* Contenedor de las compras realizadas */
 .compras-container {
-  margin-top: 20px;
+  margin-top: 20px; /* Espacio en la parte superior */
 }
 
+/* Estilo para las imágenes dentro del contenedor de compras */
 .compra-img {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  border-radius: 5px;
+  width: 40px; /* Define el ancho de la imagen */
+  height: 40px; /* Define la altura de la imagen */
+  margin-right: 10px; /* Espacio a la derecha de la imagen */
+  border-radius: 5px; /* Bordes redondeados para la imagen */
 }
 
-
+/* Estilo para las listas dentro de la aplicación */
 ion-list {
-  background: var(--ion-color-lightGray);
-  border-radius: 10px;
-  padding: 10px;
+  background: var(--ion-color-lightGray); /* Fondo gris claro */
+  border-radius: 10px; /* Bordes redondeados en la lista */
+  padding: 10px; /* Espaciado interno en la lista */
 }
 
+/* Estilo para la barra de herramientas del pie de página */
 .footer-toolbar {
-  background: var(--ion-color-darkGray);
+  background: var(--ion-color-darkGray); /* Fondo gris oscuro */
 }
 
+/* Estilo para los botones dentro del pie de página */
 .footer-buttons {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+  display: flex; /* Usamos flexbox para los botones */
+  justify-content: space-around; /* Distribuye los botones de forma equitativa */
+  width: 100%; /* Los botones ocupan todo el ancho disponible */
 }
 
+/* Estilo para los botones en el pie de página */
 .footer-buttons ion-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 14px;
-  text-transform: none;
+  display: flex; /* Usamos flexbox para organizar los elementos dentro de los botones */
+  flex-direction: column; /* Organiza los íconos y texto en columna */
+  align-items: center; /* Centra los elementos dentro de los botones */
+  font-size: 14px; /* Tamaño de la fuente del texto */
+  text-transform: none; /* Evita que el texto se transforme (ej. en mayúsculas) */
 }
 
+/* Estilo para los íconos dentro de los botones del pie de página */
 .footer-buttons ion-icon {
-  font-size: 18px;
+  font-size: 18px; /* Tamaño de los íconos */
 }
-
-
