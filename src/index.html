@@ -1,26 +1,45 @@
+<!-- Declaración del tipo de documento (HTML5) -->
 <!DOCTYPE html>
+<!-- Definición del idioma del contenido del documento como inglés -->
 <html lang="en">
 
 <head>
+  <!-- Especifica el conjunto de caracteres utilizado en el documento (UTF-8) -->
   <meta charset="utf-8" />
+  
+  <!-- Título de la aplicación que se mostrará en la pestaña del navegador -->
   <title>Ionic App</title>
 
+  <!-- Establece la base para las URLs dentro de la aplicación, configurada para que empiece desde la raíz del sitio -->
   <base href="/" />
 
+  <!-- Especifica que la aplicación soporta los modos claro y oscuro -->
   <meta name="color-scheme" content="light dark" />
+  
+  <!-- Configura el viewport para asegurar una correcta visualización en dispositivos móviles y limitar el zoom -->
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+  <!-- Evita la detección automática de números de teléfono en dispositivos móviles -->
   <meta name="format-detection" content="telephone=no" />
+  
+  <!-- Desactiva el resaltado de los elementos al tocarlos en dispositivos de Microsoft -->
   <meta name="msapplication-tap-highlight" content="no" />
 
+  <!-- Define el ícono de la aplicación que aparecerá en la pestaña del navegador -->
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
-  <!-- add to homescreen for ios -->
+  <!-- Meta para agregar la aplicación a la pantalla de inicio en dispositivos iOS -->
   <meta name="mobile-web-app-capable" content="yes" />
+  
+  <!-- Estilo de la barra de estado de la aplicación en iOS, configurada en color negro -->
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <!-- Importa una fuente de Google Fonts para utilizarla en la aplicación -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <!-- El componente raíz de la aplicación Angular/Ionic, donde se renderizará toda la aplicación -->
   <app-root></app-root>
 </body>
 
