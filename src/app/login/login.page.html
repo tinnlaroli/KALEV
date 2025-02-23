@@ -1,36 +1,38 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Iniciar Sesión</ion-title>
+  <ion-toolbar color="primary"> <!-- Barra superior con color 'primary' -->
+    <ion-title class="ion-text-center">Iniciar Sesión</ion-title> <!-- Título centrado de la página -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding ion-text-center">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenido</ion-card-title>
-      <ion-card-subtitle>Ingresa tus datos para acceder</ion-card-subtitle>
+<ion-content class="ion-padding ion-text-center"> <!-- Contenido principal con padding y texto centrado -->
+  <ion-card> <!-- Tarjeta que contiene el formulario -->
+    <ion-card-header> <!-- Cabecera de la tarjeta -->
+      <ion-card-title>Bienvenido</ion-card-title> <!-- Título principal dentro de la tarjeta -->
+      <ion-card-subtitle>Ingresa tus datos para acceder</ion-card-subtitle> <!-- Subtítulo en la cabecera -->
     </ion-card-header>
 
-    <ion-card-content>  
-    <form (submit)="iniciarSesion()">
+    <ion-card-content> <!-- Contenido principal de la tarjeta donde estará el formulario -->
+    <form (submit)="iniciarSesion()"> <!-- Formulario con evento de submit que llama a la función iniciarSesion() -->
+    
+    <!-- Campo para ingresar correo electrónico -->
     <ion-item>
-      <ion-icon slot="start" name="mail-outline"></ion-icon>
-      <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+      <ion-icon slot="start" name="mail-outline"></ion-icon> <!-- Icono de correo al inicio del campo -->
+      <ion-label position="floating">Correo Electrónico</ion-label> <!-- Etiqueta del campo -->
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input> <!-- Campo de entrada para el correo, usa ngModel para enlazar el valor a la propiedad 'email' -->
     </ion-item>
 
+    <!-- Campo para ingresar código -->
     <ion-item>
-      <ion-icon slot="start" name="key-outline"></ion-icon>
-      <ion-label position="floating">Código</ion-label>
-      <ion-input [(ngModel)]="codigo" name="code" required></ion-input>
+      <ion-icon slot="start" name="key-outline"></ion-icon> <!-- Icono de clave al inicio del campo -->
+      <ion-label position="floating">Código</ion-label> <!-- Etiqueta del campo -->
+      <ion-input [(ngModel)]="codigo" name="code" required></ion-input> <!-- Campo de entrada para el código, usa ngModel para enlazar el valor a la propiedad 'codigo' -->
     </ion-item>
 
-
-    <!-- Botón con estado de carga -->
-    <ion-button expand="full" type="submit" color="success">
-      <ion-icon slot="start" name="log-in-outline"></ion-icon>
-      <ion-spinner *ngIf="cargando"></ion-spinner>
-      <span *ngIf="!cargando">Iniciar Sesión</span>
+    <!-- Botón para enviar el formulario -->
+    <ion-button expand="full" type="submit" color="success"> <!-- Botón expandido que llama a submit al hacer clic -->
+      <ion-icon slot="start" name="log-in-outline"></ion-icon> <!-- Icono de inicio de sesión antes del texto -->
+      <ion-spinner *ngIf="cargando"></ion-spinner> <!-- Spinner que aparece cuando la propiedad 'cargando' es verdadera -->
+      <span *ngIf="!cargando">Iniciar Sesión</span> <!-- Texto que se muestra cuando no se está cargando -->
     </ion-button>
   </form>
 </ion-card-content>
