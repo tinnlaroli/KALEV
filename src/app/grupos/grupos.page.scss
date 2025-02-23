@@ -1,51 +1,50 @@
 :root {
-    --ion-color-primary: #0081a7;
-    --ion-color-lightGray: #ededee;
-    --ion-color-darkGray: #3c3c3b;
-    --ion-color-yellow: #f59f00;
-    --ion-color-green: #4ebc97;
+  --ion-color-primary: #0081a7;  /* Define el color principal de la aplicación (un tono de azul) */
+  --ion-color-lightGray: #ededee;  /* Define un color gris claro para usar en fondos y elementos secundarios */
+  --ion-color-darkGray: #3c3c3b;  /* Define un color gris oscuro que podría usarse para texto o detalles */
+  --ion-color-yellow: #f59f00;  /* Define un color amarillo que podría utilizarse en elementos llamativos */
+  --ion-color-green: #4ebc97;  /* Define un color verde que puede ser utilizado en botones o elementos destacados */
+}
+
+.content-wrapper {
+  padding: 16px;  /* Añade un espaciado interno de 16px en todos los lados */
+  text-align: center;  /* Centra el contenido de texto dentro del wrapper */
+
+  h1 {
+      margin-bottom: 24px;  /* Añade un margen inferior de 24px */
+      color: var(--ion-color-coral-shade);  /* Define el color del texto con un tono coral */
+      font-weight: bolder;  /* Hace que el texto sea más grueso */
   }
-  
-  .content-wrapper {
-    padding: 16px;
-    text-align: center;
-  
-    h1 {
-      margin-bottom: 24px;
-      color: var(--ion-color-coral-shade);
-      font-weight: bolder;
-    }
-  
-    ion-list {
-      padding: 0;
-    }
-  
-    ion-item {
-      background-color: var(--ion-color-lightGray);
-      margin-bottom: 20px;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 2px 4px rgba(97, 54, 147, 0.1);
-      transition: background-color 0.3s;
-  
+
+  ion-list {
+      padding: 0;  /* Elimina el padding por defecto en el ion-list */
+  }
+
+  ion-item {
+      background-color: var(--ion-color-lightGray);  /* Define el fondo del elemento como gris claro */
+      margin-bottom: 20px;  /* Añade un margen inferior de 20px entre cada elemento */
+      border-radius: 8px;  /* Aplica bordes redondeados con un radio de 8px */
+      padding: 10px;  /* Añade un espaciado interno de 10px */
+      box-shadow: 0 2px 4px rgba(97, 54, 147, 0.1);  /* Aplica una sombra ligera al elemento */
+      transition: background-color 0.3s;  /* Hace una transición suave al cambiar el color de fondo */
+
       &:hover {
-        background-color: var(--ion-color-green);
+          background-color: var(--ion-color-green);  /* Cambia el fondo a verde cuando el usuario pasa el ratón sobre el elemento */
       }
-  
+
       ion-label {
-        display: block;
-  
-        h2 {
-          color: var(--ion-color-lightGray);
-          font-weight: bold;
-          font-size: 1.2em;
-        }
-  
-        p {
-          color: var(--ion-color-lightGray);
-          margin: 4px 0;
-        }
+          display: block;  /* Hace que el ion-label ocupe todo el ancho disponible */
+
+          h2 {
+              color: var(--ion-color-lightGray);  /* Define el color del texto del título como gris claro */
+              font-weight: bold;  /* Hace el texto del título más grueso */
+              font-size: 1.2em;  /* Aumenta el tamaño de la fuente del título */
+          }
+
+          p {
+              color: var(--ion-color-lightGray);  /* Define el color del texto del párrafo como gris claro */
+              margin: 4px 0;  /* Añade un margen superior e inferior de 4px */
+          }
       }
-    }
   }
-  
+}
