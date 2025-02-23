@@ -1,51 +1,69 @@
+<!-- Encabezado de la página -->
 <ion-header>
+  <!-- Barra de herramientas con color primario -->
   <ion-toolbar color="primary">
+    <!-- Título de la página: Configuración -->
     <ion-title>Configuración</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido de la página -->
 <ion-content>
   <div class="content-wrapper">
+    
     <!-- Sección: Idioma -->
     <ion-item class="custom-item">
+      <!-- Icono de idioma -->
       <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/idioma.png" alt="Icono idioma" />
       </ion-thumbnail>
+      <!-- Etiqueta de selección de idioma -->
       <ion-label>Idioma</ion-label>
+      <!-- Selector de idioma con binding bidireccional a selectedLanguage -->
       <ion-select [(ngModel)]="selectedLanguage">
+        <!-- Opción de idioma español -->
         <ion-select-option value="es">Español</ion-select-option>
+        <!-- Opción de idioma inglés -->
         <ion-select-option value="en">Inglés</ion-select-option>
       </ion-select>
     </ion-item>
 
     <!-- Sección: Notificaciones -->
     <ion-item class="custom-item">
+      <!-- Icono de notificaciones -->
       <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/notificacion.png" alt="Icono notificaciones" />
       </ion-thumbnail>
+      <!-- Etiqueta de notificaciones -->
       <ion-label>Notificaciones</ion-label>
+      <!-- Interruptor para habilitar/deshabilitar notificaciones, con binding bidireccional a notificationsEnabled -->
       <ion-toggle [(ngModel)]="notificationsEnabled"></ion-toggle>
     </ion-item>
 
     <!-- Sección: Tema -->
     <ion-item class="custom-item">
+      <!-- Icono de tema -->
       <ion-thumbnail slot="start" class="icon-container">
         <img src="assets/icon/tema.png" alt="Icono tema" />
       </ion-thumbnail>
+      <!-- Etiqueta de tema -->
       <ion-label>Tema</ion-label>
     </ion-item>
+    <!-- Selector de tema, con binding bidireccional a theme -->
     <ion-radio-group [(ngModel)]="theme">
+      <!-- Opción de tema claro -->
       <ion-item class="radio-item">
         <ion-radio value="light"></ion-radio>
         <ion-label>Claro</ion-label>
       </ion-item>
+      <!-- Opción de tema oscuro -->
       <ion-item class="radio-item">
         <ion-radio value="dark"></ion-radio>
         <ion-label>Oscuro</ion-label>
       </ion-item>
     </ion-radio-group>
 
-    <!-- Botón: Guardar cambios -->
+    <!-- Botón para guardar los cambios -->
     <ion-button expand="full" color="primary" class="custom-button" (click)="saveSettings()">
       Guardar cambios
     </ion-button>
@@ -56,21 +74,25 @@
 <ion-footer>
   <ion-toolbar class="footer-toolbar">
     <ion-buttons class="footer-buttons">
+      <!-- Botón de navegación a Cursos -->
       <ion-button class="footer-button" [routerLink]="['/courses']">
         <ion-icon name="book-outline"></ion-icon>
         <ion-label>Cursos</ion-label>
       </ion-button>
 
+      <!-- Botón de navegación a Perfil -->
       <ion-button class="footer-button" [routerLink]="['/profile']">
         <ion-icon name="person-outline"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-button>
 
+      <!-- Botón de navegación a Tienda -->
       <ion-button class="footer-button" [routerLink]="['/tienda']">
         <ion-icon name="cart"></ion-icon>
         <ion-label>Tienda</ion-label>
       </ion-button>
 
+      <!-- Botón de navegación a Configuración (activo) -->
       <ion-button class="footer-button active" [routerLink]="['/settings-alumno']">
         <ion-icon name="settings-outline"></ion-icon>
         <ion-label>Configuración</ion-label>
