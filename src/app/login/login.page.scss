@@ -6,10 +6,50 @@
   text-align: center; /* Centra el texto dentro de los elementos */
   height: 100%; /* Establece que el contenedor tenga el 100% de la altura de su elemento padre */
   background-size: cover; /* Asegura que la imagen de fondo cubra completamente el área del contenedor */
+
 }
 
-.title {
-  font-size: 30px; /* Establece el tamaño de la fuente para el título */
-  font-weight: bold; /* Hace que el título tenga un peso de fuente en negrita */
-  margin-bottom: 20px; /* Añade un margen de 20px en la parte inferior del título */
+-custom-card{
+  --background: #333;
+}
+
+.custom-title{
+  text-align: center;
+  display: block; /* Asegura que el título ocupe toda la línea */
+  font-size: 32px; /* Tamaño de la fuente */
+  font-weight: bold; /* Texto en negrita */
+  margin-bottom: 8px; /* Espacio entre el título y el input */
+  color: #333; /* Color del texto */
+}
+
+.custom-item {
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 96, 125, 0.903);
+  width: 100%; /* Asegura que el ion-item ocupe todo el ancho disponible */
+  --background: #00b5d9; /* Establece el color de fondo para todo el ion-item */
+  padding: 0; /* Elimina los márgenes internos */
+
+}
+
+.custom-item ion-input {
+  width: 100%;  /* Asegura que el ion-input ocupe todo el ancho disponible */
+  margin: 0;
+  padding: 0; /* Elimina el padding del input */
+  --background: transparent; /* Haz que el fondo del ion-input sea transparente */
+  --color: #000000; /* Texto negro */
+}
+
+
+.input-title {
+  text-align: start;
+  display: block; /* Asegura que el título ocupe toda la línea */
+  font-size: 14px; /* Tamaño de la fuente */
+  font-weight: bold; /* Texto en negrita */
+  margin-bottom: 8px; /* Espacio entre el título y el input */
+  color: #333; /* Color del texto */
+}
+
+.custom-card {
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(60, 60, 59, 0.7);
 }
