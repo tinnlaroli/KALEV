@@ -20,7 +20,7 @@
     <ion-col size="12" class="mascota-col">
       <!-- Imagen de la mascota actual -->
       <img [src]="mascotaActual.imagen" class="mascota-img" />
-      
+
       <!-- Botón para cambiar la mascota -->
       <ion-button expand="full" color="secondary" (click)="cambiarMascota()" class="boton-cambiar">
         Cambiar Mascota
@@ -44,8 +44,8 @@
 
         <!-- Botón para comprar el artículo -->
         <ion-card-content>
-          <ion-button expand="full" color="primary" (click)="comprar(item)" class="boton-comprar" 
-                      [disabled]="fueComprado(item)">
+          <ion-button expand="full" color="primary" (click)="comprar(item)" class="boton-comprar"
+            [disabled]="fueComprado(item)">
             {{ fueComprado(item) ? 'Comprado' : 'Comprar' }}
           </ion-button>
         </ion-card-content>
