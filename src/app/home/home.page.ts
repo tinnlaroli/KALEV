@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';  // Importa el decorador Component y el ciclo de vida OnInit de Angular.
-import { NavController } from '@ionic/angular';  // Importa NavController de Ionic para la navegación entre páginas (no se está usando en este código).
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-courses',  // Define el selector del componente, es el nombre de la etiqueta HTML que representará este componente.
-  templateUrl: './courses.page.html',  // Define la ruta al archivo de plantilla (HTML) de este componente.
-  styleUrls: ['./courses.page.scss'],  // Define la ruta al archivo de estilo (CSS/SCSS) para este componente.
-  standalone: false  // Indica que el componente no es autónomo y depende de otros módulos.
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
+  standalone: false
 })
-export class CoursesPage implements OnInit {
+export class HomePage implements OnInit {
   // Arreglo que contiene las actividades del curso, con información sobre cada una.
   activities = [
     {

@@ -35,25 +35,10 @@ export class LoginPage implements OnInit {
     // Muestra el loading en pantalla.
     await loading.present();
 
-    let ruta = ''; // Variable para almacenar la ruta de redirección.
-    if (this.codigo.startsWith('TCH-')) { // Si el código empieza con "TCH-", es un maestro.
-      ruta = '/grupos'; // Redirige a la página de grupos.
-      console.log('Usuario identificado como maestro');
-    } else if (this.codigo.startsWith('STD-')) { // Si el código empieza con "STD-", es un alumno.
-      ruta = '/courses'; // Redirige a la página de cursos.
-      console.log('Usuario identificado como alumno');
-    } else {
-      // Si el código es inválido, cierra el loading antes de mostrar la alerta.
-      await loading.dismiss();
-      this.cargando = false;
-      this.mostrarAlerta('Error', 'El código de clase es inválido. Use un código con prefijo TCH- o STD-.');
-      return;
-    }
-
-    // Cierra el loading antes de redirigir.
+    // Redirige al usuario directamente a la página "home".
     await loading.dismiss();
     this.cargando = false;
-    this.router.navigate([ruta]); // Redirige a la ruta correspondiente.
+    this.router.navigate(['/home']); // Redirige a la página de inicio.
   }
 
   // Función que valida si los campos de correo y código están completos y son válidos.

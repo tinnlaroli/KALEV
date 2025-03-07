@@ -1,90 +1,161 @@
 /* Definición de colores personalizados para la aplicación */
 :root {
-  --ion-color-primary: #0081a7; /* Color principal */
-  --ion-color-lightGray: #ededee; /* Gris claro */
-  --ion-color-darkGray: #3c3c3b; /* Gris oscuro */
-  --ion-color-yellow: #f59f00; /* Amarillo */
-  --ion-color-green: #4ebc97; /* Verde */
-}
-
-/* Estilo para el contenedor de la mascota */
-.mascota-container {
-  display: flex; /* Usamos flexbox para organizar los elementos */
-  justify-content: center; /* Centra los elementos horizontalmente */
-  align-items: center; /* Centra los elementos verticalmente */
-  margin-bottom: 10px; /* Espacio en la parte inferior del contenedor */
-}
-
-/* Estilo para las columnas dentro del contenedor de la mascota */
-.mascota-col {
-  text-align: center; /* Centra el texto dentro de la columna */
-}
-
-/* Estilo para las imágenes de las mascotas */
+    --ion-color-primary: #0081a7; /* Azul principal */
+    --ion-color-secondary: #00afb9; /* Azul claro */
+    --ion-color-lightGray: #ededee; /* Gris claro */
+    --ion-color-darkGray: #3c3c3b; /* Gris oscuro */
+    --ion-color-yellow: #f59f00; /* Amarillo */
+    --ion-color-green: #4ebc97; /* Verde */
+  }
+  
+  /* Header con fondo azul y texto blanco */
+  ion-header {
+    --background: var(--ion-color-primary); /* Fondo azul */
+    --color: #ffffff; /* Texto blanco */
+    --border-color: transparent; /* Elimina el borde inferior */
+  }
+  
+  /* Ajuste para que el contenido no se corte detrás del header */
+  ion-content {
+    --background: #ffffff; /* Fondo blanco para el contenido */
+    padding: 10px; /* Espaciado interno general */
+    margin-top: 0; /* Elimina márgenes indeseados */
+  }
+  
+  /* Contenedor de la mascota */
+  .mascota-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo de las columnas */
+  .mascota-col {
+    text-align: center;
+  }
+  
+  /* Imagen redonda para la mascota */
+  .mascota-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+  }
+  
+  /* Botón para cambiar la mascota */
+  .boton-cambiar {
+    margin-top: 10px;
+  }
+  
+  /* Tarjetas de los artículos */
+  .item-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 250px; /* Ajustado para evitar cortes */
+    background: var(--ion-color-lightGray);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px; /* Espaciado interno en la tarjeta */
+  }
+  
+  /* Imágenes de los artículos */
+  .item-img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    border-bottom: 2px solid var(--ion-color-secondary);
+  }
+  
+  /* Títulos de los artículos */
+  .item-title {
+    font-weight: bold;
+    color: var(--ion-color-darkGray);
+  }
+  
+  /* Precio de los artículos */
+  .item-precio {
+    color: var(--ion-color-yellow);
+  }
+  
+  /* Botón para comprar */
+  .boton-comprar {
+    margin-top: 10px;
+  }
+  
+  /* Contenedor de las compras */
+  .compras-container {
+    margin-top: 20px;
+  }
+  
+  /* Imágenes de las compras */
+  .compra-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Lista de compras */
+  ion-list {
+    background: var(--ion-color-lightGray);
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  /* Barra de herramientas del pie de página */
+  .footer-toolbar {
+    background: var(--ion-color-darkGray);
+  }
+  
+  /* Botones del pie de página */
+  .footer-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  /* Botones en el pie de página */
+  .footer-buttons ion-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    text-transform: none;
+  }
+  
+  /* Iconos en los botones del pie de página */
+  .footer-buttons ion-icon {
+    font-size: 18px;
+  }
+  
+  /* Estilo para las imágenes de las mascotas */
 .mascota-img {
-  width: 90px; /* Define el ancho de la imagen */
-  height: 90px; /* Define la altura de la imagen */
-  border-radius: 50%; /* Hace que la imagen sea redonda */
-}
-
-/* Estilo para las tarjetas de los artículos */
-.item-card {
-  text-align: center; /* Centra el contenido de la tarjeta */
-  display: flex; /* Usa flexbox para la disposición interna */
-  flex-direction: column; /* Organiza los elementos en columna */
-  justify-content: space-between; /* Espacia los elementos uniformemente */
-  height: 230px; /* Establece una altura fija para las tarjetas */
-}
-
-/* Estilo para las imágenes dentro de las tarjetas de los artículos */
-.item-img {
-  width: 100%; /* La imagen ocupa todo el ancho disponible */
-  height: 120px; /* Establece una altura fija para las imágenes */
-  object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
-}
-
-/* Contenedor de las compras realizadas */
-.compras-container {
-  margin-top: 20px; /* Espacio en la parte superior */
-}
-
-/* Estilo para las imágenes dentro del contenedor de compras */
-.compra-img {
-  width: 40px; /* Define el ancho de la imagen */
-  height: 40px; /* Define la altura de la imagen */
-  margin-right: 10px; /* Espacio a la derecha de la imagen */
-  border-radius: 5px; /* Bordes redondeados para la imagen */
-}
-
-/* Estilo para las listas dentro de la aplicación */
-ion-list {
-  background: var(--ion-color-lightGray); /* Fondo gris claro */
-  border-radius: 10px; /* Bordes redondeados en la lista */
-  padding: 10px; /* Espaciado interno en la lista */
-}
-
-/* Estilo para la barra de herramientas del pie de página */
-.footer-toolbar {
-  background: var(--ion-color-darkGray); /* Fondo gris oscuro */
-}
-
-/* Estilo para los botones dentro del pie de página */
-.footer-buttons {
-  display: flex; /* Usamos flexbox para los botones */
-  justify-content: space-around; /* Distribuye los botones de forma equitativa */
-  width: 100%; /* Los botones ocupan todo el ancho disponible */
-}
-
-/* Estilo para los botones en el pie de página */
-.footer-buttons ion-button {
-  display: flex; /* Usamos flexbox para organizar los elementos dentro de los botones */
-  flex-direction: column; /* Organiza los íconos y texto en columna */
-  align-items: center; /* Centra los elementos dentro de los botones */
-  font-size: 14px; /* Tamaño de la fuente del texto */
-  text-transform: none; /* Evita que el texto se transforme (ej. en mayúsculas) */
-}
-
-/* Estilo para los íconos dentro de los botones del pie de página */
-.footer-buttons ion-icon {
-  font-size: 18px; /* Tamaño de los íconos */
-}
+    width: 100px; /* Aumenta el tamaño si es necesario */
+    height: 100px; /* Aumenta el tamaño si es necesario */
+    max-width: 100%; /* Garantiza que la imagen no exceda su contenedor */
+    max-height: 100%; /* Garantiza que la imagen no exceda su contenedor */
+    object-fit: cover; /* Asegura que las imágenes mantengan su proporción */
+    border-radius: 50%; /* Hace la imagen redonda */
+  }
+  
+  /* Estilo para las imágenes dentro de las tarjetas de los artículos */
+  .item-img {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 120px; /* Limita la altura máxima */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin distorsionarse */
+    margin-bottom: 10px; /* Espaciado debajo de la imagen */
+  }
+  
+  /* Estilo para las imágenes dentro del contenedor de compras */
+  .compra-img {
+    width: 40px; /* Tamaño fijo */
+    height: 40px; /* Tamaño fijo */
+    max-width: 100%; /* Evita desbordes */
+    max-height: 100%; /* Evita desbordes */
+    object-fit: cover; /* Ajusta la imagen a su contenedor */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  

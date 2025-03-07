@@ -3,7 +3,7 @@
   <!-- Barra de herramientas con color primario -->
   <ion-toolbar color="primary">
     <!-- Título que aparece en la barra de herramientas -->
-    <ion-title>KALEV</ion-title>
+    <ion-title>INICIO</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +11,6 @@
 <ion-content>
   <!-- Contenedor para organizar el contenido -->
   <div class="content-wrapper">
-    <!-- Título principal de la página -->
-    <h1 class="title">🌟 Mis Aprendizajes 🌟</h1>
 
     <!-- Lista de actividades -->
     <ion-list class="activity-list">
@@ -44,44 +42,3 @@
     </ion-list>
   </div>
 </ion-content>
-
-<!-- Pie de página con barra de herramientas -->
-<ion-footer>
-  <!-- Barra de herramientas con clase personalizada para el pie de página -->
-  <ion-toolbar class="footer-toolbar">
-    <!-- Contenedor para los botones de navegación en el pie de página -->
-    <ion-buttons class="footer-buttons">
-      <!-- Botón para navegar a la página de cursos -->
-      <ion-button class="footer-button" [routerLink]="['/courses']">
-        <!-- Icono de libro que representa la sección de cursos -->
-        <ion-icon name="book-outline"></ion-icon>
-        <!-- Etiqueta del botón -->
-        <ion-label>Cursos</ion-label>
-      </ion-button>
-
-      <!-- Botón para navegar al perfil del usuario -->
-      <ion-button class="footer-button" [routerLink]="['/profile']">
-        <!-- Icono de persona que representa la sección de perfil -->
-        <ion-icon name="person-outline"></ion-icon>
-        <!-- Etiqueta del botón -->
-        <ion-label>Perfil</ion-label>
-      </ion-button>
-
-      <!-- Botón para navegar a la tienda -->
-      <ion-button class="footer-button" [routerLink]="['/tienda']">
-        <!-- Icono de carrito que representa la tienda -->
-        <ion-icon name="cart"></ion-icon>
-        <!-- Etiqueta del botón -->
-        <ion-label>Tienda</ion-label>
-      </ion-button>
-
-      <!-- Botón para navegar a la configuración -->
-      <ion-button class="footer-button" [routerLink]="['/settings-alumno']">
-        <!-- Icono de configuración -->
-        <ion-icon name="settings-outline"></ion-icon>
-        <!-- Etiqueta del botón -->
-        <ion-label>Configuración</ion-label>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

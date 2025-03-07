@@ -4,59 +4,37 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
-      //Interafaz de alumno
       {
-        path: 'courses',
-        loadChildren: () => import('../courses/courses.module').then(m => m.CoursesPageModule)
+        path: 'home',
+        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule),
+      },
+      {
+        path: 'tienda',
+        loadChildren: () => import('../tienda/tienda.module').then(m => m.TiendaPageModule),
       },
       {
         path: 'profile',
-        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
-      },
-      {
-        path: 'settings-alumno',
-        loadChildren: () => import('../settings-alumno/settings.module').then(m => m.SettingsPageModule)
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule),
       },
       {
         path: '',
-        redirectTo: '/tabs/courses',
-        pathMatch: 'full'
+        redirectTo: '/tabs/home',
+        pathMatch: 'full',
       },
-      
-
-      //Interafaz de maestro
-      {
-        path: 'grupos',
-        loadChildren: () => import('../grupos/grupos.module').then(m => m.GruposPageModule)
-      },
-      {
-        path: 'actividades',
-        loadChildren: () => import('../actividades/actividades.module').then(m => m.ActividadesPageModule)
-      },
-      {
-        path: 'calificaciones',
-        loadChildren: () => import('../calificaciones/calificaciones.module').then(m => m.CalificacionesPageModule)
-      },
-      
-    ]
+    ],
   },
   {
     path: '',
-    redirectTo: '/tabs/courses',
-    pathMatch: 'full'
+    redirectTo: '/tabs/home',
+    pathMatch: 'full',
   },
-  {
-    path: '',
-    redirectTo: '/tabs/grupos',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}

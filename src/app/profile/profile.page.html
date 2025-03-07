@@ -37,36 +37,3 @@
     </div>
   </div>
 </ion-content>
-
-<!-- Barra de navegación inferior -->
-<ion-footer>
-  <!-- Barra de herramientas en la parte inferior -->
-  <ion-toolbar class="footer-toolbar">
-    <!-- Contenedor de botones en la barra de navegación -->
-    <ion-buttons class="footer-buttons">
-      <!-- Botón de navegación a la página de cursos -->
-      <ion-button class="footer-button" [routerLink]="['/courses']">
-        <ion-icon name="book-outline"></ion-icon> <!-- Icono de libro -->
-        <ion-label>Cursos</ion-label> <!-- Etiqueta que dice "Cursos" -->
-      </ion-button>
-
-      <!-- Botón de navegación a la página de perfil -->
-      <ion-button class="footer-button" [routerLink]="['/profile']">
-        <ion-icon name="person-outline"></ion-icon> <!-- Icono de persona -->
-        <ion-label>Perfil</ion-label> <!-- Etiqueta que dice "Perfil" -->
-      </ion-button>
-
-      <!-- Botón de navegación a la tienda -->
-      <ion-button class="footer-button" [routerLink]="['/tienda']">
-        <ion-icon name="cart"></ion-icon> <!-- Icono de carrito de compras -->
-        <ion-label>Tienda</ion-label> <!-- Etiqueta que dice "Tienda" -->
-      </ion-button>
-
-      <!-- Botón de navegación a la configuración -->
-      <ion-button class="footer-button" [routerLink]="['/settings-alumno']">
-        <ion-icon name="settings-outline"></ion-icon> <!-- Icono de configuración -->
-        <ion-label>Configuración</ion-label> <!-- Etiqueta que dice "Configuración" -->
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

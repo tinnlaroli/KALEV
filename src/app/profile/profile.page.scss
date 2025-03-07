@@ -1,122 +1,88 @@
 :root {
-  --color-primary: #FF6347; /* Tomate: Color principal para botones y elementos destacados */
-  --color-secondary: #FFD700; /* Amarillo brillante: Color de acentos o resaltes */
-  --color-background: #E5E5E5; /* Gris claro: Color de fondo general */
-  --color-card: #F9F9F9; /* Blanco suculento: Color de fondo para las tarjetas */
-  --color-text: #2F4F4F; /* Gris oscuro: Color de texto principal */
-  --color-button: #FF4500; /* Naranja brillante: Color de botones de acción */
-  --color-footer: #1E1E1E; /* Fondo oscuro para el pie de página */
-}
-
-/* Estilos generales para toda la aplicación */
-html, body, ion-app {
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
-  width: 100%; /* Ocupa todo el ancho de la pantalla */
-  margin: 0; /* Elimina márgenes predeterminados */
-  padding: 0; /* Elimina relleno predeterminado */
-}
-
-/* Estilos para el contenido principal */
-ion-content {
-  --background: var(--color-background); /* Establece el color de fondo */
-  display: flex; /* Usamos flexbox para alinear los elementos */
-  flex-direction: column; /* Los elementos se disponen en una columna */
-  justify-content: center; /* Centra los elementos verticalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  height: 100%; /* El contenido ocupa toda la altura disponible */
-}
-
-/* Contenedor de contenido dentro de ion-content */
-.content-wrapper {
-  flex-grow: 1; /* Permite que el contenedor crezca para llenar el espacio disponible */
-  display: flex; /* Usamos flexbox para organizar los elementos */
-  flex-direction: column; /* Los elementos se organizan en una columna */
-  justify-content: center; /* Centra los elementos verticalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  width: 100%; /* Ocupa todo el ancho disponible */
-}
-
-/* Estilos para la tarjeta de perfil */
-.profile-card {
-  background-color: var(--color-card); /* Fondo blanco suculento */
-  border-radius: 16px; /* Bordes redondeados */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto de profundidad */
-  padding: 16px; /* Espaciado interno */
-  width: 80%; /* Ancho relativo al contenedor */
-  max-width: 400px; /* Ancho máximo de la tarjeta */
-  text-align: center; /* Centra el texto dentro de la tarjeta */
-}
-
-/* Estilos para el nombre del estudiante */
-.student-name {
-  font-size: 24px; /* Tamaño de fuente grande */
-  color: var(--color-primary); /* Color principal (tomate) */
-  font-weight: bold; /* Negrita */
-  margin-top: 10px; /* Espacio arriba del nombre */
-}
-
-/* Estilos para la información del estudiante */
-.student-info {
-  font-size: 16px; /* Tamaño de fuente moderado */
-  color: var(--color-text); /* Color de texto gris oscuro */
-  margin: 5px 0; /* Espaciado entre las líneas de información */
-}
-
-/* Estilos cuando los datos no están disponibles */
-.no-data {
-  color: var(--color-secondary); /* Color amarillo brillante para mostrar "Datos no disponibles" */
-  font-size: 14px; /* Tamaño de fuente pequeño */
-}
-
-/* Estilos para el mensaje de actualización de estado */
-.status-update {
-  font-size: 16px; /* Tamaño de fuente moderado */
-  font-weight: bold; /* Negrita */
-  color: var(--color-button); /* Color naranja brillante */
-  margin-top: 15px; /* Espaciado superior */
-}
-
-/* Estilos para el contenedor del gráfico de araña */
-.chart-container {
-  width: 90%; /* El gráfico ocupa el 90% del ancho del contenedor */
-  max-width: 500px; /* El gráfico no puede exceder los 500px de ancho */
-  margin-top: 20px; /* Espaciado superior */
-}
-
-/* Estilos para el pie de página (footer) */
-ion-footer {
-  height: 70px; /* Altura fija del pie de página */
-  background: var(--color-footer); /* Fondo oscuro del pie de página */
-}
-
-/* Estilos adicionales para la barra de herramientas del pie de página */
-.footer-toolbar {
-  --background: #161414a0; /* Fondo oscuro con opacidad */
-}
-
-/* Estilos para los botones en la barra del pie de página */
-.footer-buttons {
-  display: flex; /* Usamos flexbox para organizar los botones */
-  justify-content: space-around; /* Los botones se distribuyen uniformemente */
-  width: 100%; /* Ocupa todo el ancho disponible */
-}
-
-/* Estilos para cada botón del pie de página */
-.footer-button {
-  display: flex; /* Usamos flexbox para organizar el contenido del botón */
-  flex-direction: column; /* Los elementos dentro del botón están en columna */
-  align-items: center; /* Centra los elementos horizontalmente */
-  font-size: 14px; /* Tamaño de fuente pequeño */
-  text-transform: none; /* No transformamos el texto (sin mayúsculas) */
-}
-
-/* Estilos para los iconos dentro de los botones del pie de página */
-.footer-button ion-icon {
-  font-size: 22px; /* Tamaño de los iconos */
-  margin-bottom: 2px; /* Espaciado inferior entre el icono y la etiqueta */
-}
-
-/* Efecto de hover en los botones del pie de página */
-.footer-button:hover {
-  background-color: var(--color-primary); /* Cambia el fondo del botón al color primario (tomate) al pasar el ratón */
-}
+    --color-primary: #FF6347; /* Tomate */
+    --color-secondary: #FFD700; /* Amarillo brillante */
+    --color-background: #E5E5E5; /* Gris claro */
+    --color-card: #F9F9F9; /* Blanco suculento */
+    --color-text: #2F4F4F; /* Gris oscuro */
+    --color-accent: #1E90FF; /* Azul brillante */
+  }
+  
+  html, body, ion-app {
+    height: 100vh; /* Pantalla completa */
+    width: 100%; /* Ancho completo */
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  .profile-card {
+    background-color: var(--color-card);
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 16px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  ion-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+  }
+  
+  .student-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin: 4px 0;
+  }
+  
+  .student-info {
+    font-size: 14px;
+    color: var(--color-text);
+    margin: 2px 0;
+  }
+  
+  .status-update {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-secondary);
+    margin-top: 8px;
+  }
+  
+  .chart-container {
+    background-color: var(--color-card);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  canvas {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+  

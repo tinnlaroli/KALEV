@@ -1,10 +1,8 @@
-<!-- Header de la página -->
 <ion-header>
   <ion-toolbar>
     <!-- Título de la página -->
     <ion-title>Tienda</ion-title>
-
-    <!-- Sección que muestra las monedas del usuario -->
+    <!-- Sección que muestra las monedas -->
     <ion-buttons slot="end">
       <ion-chip color="warning">
         <ion-label>💰 {{ monedas }} monedas</ion-label>
@@ -13,36 +11,27 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Contenido de la página -->
-<ion-content>
-  <!-- Sección de la mascota actual -->
+<!-- Contenido -->
+<ion-content fullscreen>
+  <!-- Contenedor de la mascota -->
   <ion-row class="mascota-container">
     <ion-col size="12" class="mascota-col">
-      <!-- Imagen de la mascota actual -->
       <img [src]="mascotaActual.imagen" class="mascota-img" />
-
-      <!-- Botón para cambiar la mascota -->
       <ion-button expand="full" color="secondary" (click)="cambiarMascota()" class="boton-cambiar">
         Cambiar Mascota
       </ion-button>
     </ion-col>
   </ion-row>
 
-  <!-- Sección de la tienda -->
+  <!-- Artículos de la tienda -->
   <ion-row>
-    <!-- Itera sobre los artículos de la tienda y los muestra -->
     <ion-col size="6" *ngFor="let item of tienda">
       <ion-card class="item-card">
-        <!-- Imagen del artículo -->
         <img [src]="item.imagen" class="item-img" />
-
-        <!-- Información del artículo -->
         <ion-card-header>
           <ion-card-title class="item-title">{{ item.nombre }}</ion-card-title>
           <ion-card-subtitle class="item-precio">{{ item.precio }} Monedas</ion-card-subtitle>
         </ion-card-header>
-
-        <!-- Botón para comprar el artículo -->
         <ion-card-content>
           <ion-button expand="full" color="primary" (click)="comprar(item)" class="boton-comprar"
             [disabled]="fueComprado(item)">
@@ -53,12 +42,11 @@
     </ion-col>
   </ion-row>
 
-  <!-- Sección de compras realizadas -->
+  <!-- Lista de compras -->
   <ion-row class="compras-container">
     <ion-col size="12">
       <h2>Mis Compras</h2>
       <ion-list>
-        <!-- Itera sobre las compras realizadas y las muestra -->
         <ion-item *ngFor="let compra of compras">
           <img [src]="compra.imagen" class="compra-img" />
           <ion-label>{{ compra.nombre }}</ion-label>
@@ -67,34 +55,3 @@
     </ion-col>
   </ion-row>
 </ion-content>
-
-<!-- Menú de navegación inferior -->
-<ion-footer>
-  <ion-toolbar class="footer-toolbar">
-    <ion-buttons class="footer-buttons">
-      <!-- Botón para ir a la página de cursos -->
-      <ion-button class="footer-button" [routerLink]="['/courses']">
-        <ion-icon name="book-outline"></ion-icon>
-        <ion-label>Cursos</ion-label>
-      </ion-button>
-
-      <!-- Botón para ir al perfil del usuario -->
-      <ion-button class="footer-button" [routerLink]="['/profile']">
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-button>
-
-      <!-- Botón para ir a la tienda -->
-      <ion-button class="footer-button" [routerLink]="['/tienda']">
-        <ion-icon name="cart"></ion-icon>
-        <ion-label>Tienda</ion-label>
-      </ion-button>
-
-      <!-- Botón para ir a la configuración -->
-      <ion-button class="footer-button" [routerLink]="['/settings-alumno']">
-        <ion-icon name="settings-outline"></ion-icon>
-        <ion-label>Configuración</ion-label>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
