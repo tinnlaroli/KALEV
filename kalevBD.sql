@@ -79,6 +79,12 @@ CREATE TABLE alumno_actividad (
     calificacion FLOAT NOT NULL
 );
 
+CREATE TABLE grupo_actividad(
+    id_grupo_actividad SERIAL PRIMARY KEY,
+    id_grupo INT NOT NULL REFERENCES grupos(id_grupo),
+    id_actividad INT NOT NULL REFERENCES actividades(id_actividad)
+);
+
 CREATE TABLE temas_materia (
     id_tema SERIAL PRIMARY KEY,
     nombre_tema VARCHAR(40) NOT NULL,
@@ -106,10 +112,12 @@ CREATE TABLE juego (
     id_juego SERIAL PRIMARY KEY,
     nombre_juego VARCHAR(40) NOT NULL,
     descripcion TEXT NOT NULL,
+    nivel INT NOT NULL,
     id_materia INT NOT NULL REFERENCES materias(id_materia),
     id_estilo INT NOT NULL REFERENCES estilos_aprendizaje(id_estilo)
 );
 
+/*Tabla para referenciar alumno con juego*/
 CREATE TABLE metricas (
     id_metrica SERIAL PRIMARY KEY,
     id_juego INT NOT NULL REFERENCES juego(id_juego),
@@ -121,10 +129,10 @@ CREATE TABLE metricas (
     progreso_porcentaje FLOAT NOT NULL
 );
 
-CREATE TABLE clases_juego (
+CREATE TABLE grupo_juego (
     id_clase_juego SERIAL PRIMARY KEY,
     codigo_juego VARCHAR(40) NOT NULL,
-    id_docente INT NOT NULL REFERENCES docentes(id_docente),
+    id_grupo INT NOT NULL REFERENCES grupos(id_grupo),
     id_juego INT NOT NULL REFERENCES juego(id_juego)
 );
 
@@ -145,7 +153,7 @@ CREATE TABLE historial_recomendaciones (
 
 CREATE TABLE sesiones_juego (
     id_sesion SERIAL PRIMARY KEY,
-    id_usuario INT NOT NULL REFERENCES usuarios(id_usuario),
+    id_jugador INT NOT NULL REFERENCES jugador(id_jugador),
     id_juego INT NOT NULL REFERENCES juego(id_juego),
     fecha TIMESTAMP NOT NULL,
     duracion_juego TIME NOT NULL,
@@ -176,7 +184,7 @@ CREATE TABLE compras (
     id_item INT NOT NULL REFERENCES item(id_item),
     fecha_compra TIMESTAMP NOT NULL,
     cantidad INT NOT NULL,
-    costo_total INT NOT NULL
+    costo_total INT NOT NULL 
 );
 
 CREATE TABLE animal (
