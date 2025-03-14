@@ -58,7 +58,7 @@ CREATE TABLE estudiantes (
     correo VARCHAR(60) UNIQUE NOT NULL,
     telefono VARCHAR(20) UNIQUE NOT NULL,
     id_grupo INT NOT NULL REFERENCES grupos(id_grupo),
-    fecha_registro TIMESTAMP NOT NULL
+    fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE actividades (
@@ -184,8 +184,9 @@ CREATE TABLE compras (
     id_item INT NOT NULL REFERENCES item(id_item),
     fecha_compra TIMESTAMP NOT NULL,
     cantidad INT NOT NULL,
-    costo_total INT NOT NULL 
+    costo_total INT NOT NULL
 );
+
 
 CREATE TABLE animal (
     id_animal SERIAL PRIMARY KEY,
