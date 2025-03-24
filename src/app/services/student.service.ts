@@ -17,5 +17,11 @@ export class StudentService {
       map(response => response.data)
     );
   }
+
+  getById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map(response => response.data)
+    );
+  }
   
 }
