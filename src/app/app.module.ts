@@ -15,7 +15,7 @@ import { HeaderComponent } from './landing/header/header.component';
 import { ContentComponent } from './landing/content/content.component';
 import { FooterComponent } from './landing/footer/footer.component';
 import { LandingComponent } from './landing/landing/landing.component';
-
+import { StudentsModule } from './features/students/students.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +32,8 @@ import { LandingComponent } from './landing/landing/landing.component';
     RouterModule,
     SharedModule,
     UsersModule,
-    HttpClientModule
+    HttpClientModule,
+    StudentsModule
   ],
   exports: [
   ],
