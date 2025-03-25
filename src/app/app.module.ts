@@ -8,14 +8,17 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './features/users/users.module';
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './landing/header/header.component';
 import { ContentComponent } from './landing/content/content.component';
 import { FooterComponent } from './landing/footer/footer.component';
 import { LandingComponent } from './landing/landing/landing.component';
 import { StudentsModule } from './features/students/students.module';
+import { LoginComponent } from './auth/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,10 +27,12 @@ import { StudentsModule } from './features/students/students.module';
     ContentComponent,
     FooterComponent,
     LandingComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule,
     SharedModule,
