@@ -1,16 +1,24 @@
 <div class="student-profile-container" *ngIf="student; else loading">
-    <h1>Perfil del Estudiante</h1>
-  
-    <div class="profile-card">
-      <p><strong>Nombre:</strong> {{ student.nombre }} {{ student.apellido_paterno }} {{ student.apellido_materno }}</p>
+  <h1>👤 Perfil del Estudiante</h1>
+
+  <div class="profile-grid">
+    <div class="profile-section">
+      <h3>🧍 Datos Personales</h3>
+      <p><strong>Nombre:</strong> {{ student.nombre }} {{ student.ap_paterno }} {{ student.ap_materno }}</p>
       <p><strong>Correo:</strong> {{ student.correo }}</p>
-      <p><strong>Grupo:</strong> {{ student.grupo_nombre || 'Sin grupo asignado' }}</p>
-      <p><strong>Edad:</strong> {{ student.edad || 'No especificada' }}</p>
-      <!-- Puedes agregar más campos aquí -->
+      <p><strong>Teléfono:</strong> {{ student.telefono || 'No registrado' }}</p>
+      <p><strong>Fecha de nacimiento:</strong> {{ student.fecha_nacimiento | date }}</p>
+    </div>
+
+    <div class="profile-section">
+      <h3>🏫 Información Escolar</h3>
+      <p><strong>ID Estudiante:</strong> {{ student.id_estudiante }}</p>
+      <p><strong>Grupo:</strong> {{ student.id_grupo || 'Sin grupo asignado' }}</p>
+      <p><strong>Fecha de registro:</strong> {{ student.fecha_registro | date:'longDate' }}</p>
     </div>
   </div>
-  
-  <ng-template #loading>
-    <p>Cargando información del estudiante...</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #loading>
+  <p>Cargando información del estudiante...</p>
+</ng-template>
