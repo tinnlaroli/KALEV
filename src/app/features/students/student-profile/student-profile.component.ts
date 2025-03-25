@@ -18,11 +18,16 @@ export class StudentProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const studentId = this.route.snapshot.paramMap.get('id');
+    console.log('ID recibido en la URL:', studentId);
+  
     if (studentId) {
       this.studentService.getById(studentId).subscribe({
         next: (data) => this.student = data,
         error: (err) => console.error('Error al cargar el perfil del estudiante', err)
       });
+    } else {
+      console.warn('No se recibió el ID del estudiante en la URL');
     }
   }
-}
+  
+  }
