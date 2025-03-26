@@ -28,10 +28,16 @@ export class LoginComponent {
     if (this.loginForm.invalid) return;
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (user) => {
-        this.authService.setUser(user.data);
+      next: (res) => {
+        const token = res.token;
+        const usuario = res.usuario;
+      
+        this.authService.setToken(token);  // Guarda el token
+        this.authService.setUser(usuario); // Guarda los datos del usuario
+      
         this.router.navigate(['/dashboard']);
-      },
+      }
+      ,
       error: () => {
         this.error = 'Credenciales inválidas';
       }

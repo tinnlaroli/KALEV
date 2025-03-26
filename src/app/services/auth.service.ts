@@ -24,6 +24,14 @@ export class AuthService {
     return data ? JSON.parse(data) : null;
   }
 
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+  
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+  
   getRol(): number | null {
     const user = this.getUser();
     return user?.id_rol || null;
