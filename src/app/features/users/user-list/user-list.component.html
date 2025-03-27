@@ -1,6 +1,9 @@
 <div class="catalogo-usuarios">
   <h2>Catálogo de Usuarios</h2>
-
+  
+  <!-- ALERT BONITO -->
+  <app-toast [message]="toastMessage" [type]="toastType"></app-toast>
+  
   <button class="btn btn-primary" (click)="openCreateModal()">Agregar Usuario</button>
 
   <table *ngIf="users.length > 0" class="user-table">
@@ -37,10 +40,6 @@
   <div *ngIf="users.length === 0" class="empty-msg">No hay usuarios disponibles.</div>
 </div>
 
-<!-- ALERT BONITO -->
-<div *ngIf="toastMessage" class="toast" [ngClass]="toastType">
-  {{ toastMessage }}
-</div>
 
 <!-- MODAL CREAR USUARIO -->
 <div *ngIf="isCreateModalOpen" class="modal">
