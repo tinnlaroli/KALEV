@@ -8,6 +8,7 @@
       <tr>
         <th>Nombre</th>
         <th>Correo</th>
+        <th>Telefono</th>
         <th>Acciones</th>
         <th>rol</th>
       </tr>
@@ -16,11 +17,19 @@
       <tr *ngFor="let user of users">
         <td>{{ user.nombre_usuario }} {{ user.ap_paterno }} {{ user.ap_materno }}</td>
         <td>{{ user.correo }}</td>
+        <td>{{ user.telefono }}</td>
         <td>
           <button (click)="editUser(user.id_usuario)">Editar</button>
           <button (click)="deleteUser(user.id_usuario)">Eliminar</button>
         </td>
-        <td>{{ user.id_rol }}</td>
+        <td>
+          <ng-container [ngSwitch]="user.id_rol">
+            <span *ngSwitchCase="1">Docente</span>
+            <span *ngSwitchCase="2">Director</span>
+            <span *ngSwitchCase="3">Tutor</span>
+            <span *ngSwitchDefault>Super</span>
+          </ng-container>
+        </td>
       </tr>
       
     </tbody>
@@ -34,24 +43,49 @@
   <div class="modal-content">
     <h3>Crear Usuario</h3>
     <form (ngSubmit)="createUser()">
-      <input [(ngModel)]="newUser.name" name="name" placeholder="Nombre" required />
-      <input [(ngModel)]="newUser.email" name="email" placeholder="Correo" type="email" required />
-      <input [(ngModel)]="newUser.password" name="password" placeholder="Contraseña" type="password" required />
+      <input [(ngModel)]="newUser.nombre_usuario" name="nombre" placeholder="Nombre" required />
+      <input [(ngModel)]="newUser.ap_paterno" name="apPaterno" placeholder="Apellido Paterno" />
+      <input [(ngModel)]="newUser.ap_materno" name="apMaterno" placeholder="Apellido Materno" />
+      <input [(ngModel)]="newUser.correo" name="correo" type="email" placeholder="Correo" required />
+      <input [(ngModel)]="newUser.telefono" name="telefono" placeholder="Teléfono" />
+      <input [(ngModel)]="newUser.contrasenia" name="password" type="password" placeholder="Contraseña" required />
+      <select [(ngModel)]="newUser.id_rol" name="rol">
+        <option [value]="1">Docente</option>
+        <option [value]="2">Director</option>
+        <option [value]="3">Tutor</option>
+        <option [value]="4">Superadmin</option>
+      </select>
+
       <button type="submit">Crear</button>
       <button type="button" (click)="closeCreateModal()">Cancelar</button>
     </form>
   </div>
 </div>
 
+
 <!-- Modal Editar Usuario -->
 <div *ngIf="isEditModalOpen" class="modal">
   <div class="modal-content">
     <h3>Editar Usuario</h3>
     <form (ngSubmit)="updateUser()">
-      <input [(ngModel)]="selectedUser.name" name="editName" required />
-      <input [(ngModel)]="selectedUser.email" name="editEmail" type="email" required />
+      <input [(ngModel)]="selectedUser.nombre_usuario" name="editName" placeholder="Nombre" required />
+      <input [(ngModel)]="selectedUser.ap_paterno" name="editApPaterno" placeholder="Apellido Paterno" required />
+      <input [(ngModel)]="selectedUser.ap_materno" name="editApMaterno" placeholder="Apellido Materno" required />
+      <input [(ngModel)]="selectedUser.correo" name="editEmail" type="email" placeholder="Correo" required />
+      <input [(ngModel)]="selectedUser.telefono" name="editTelefono" placeholder="Teléfono" />
+      
+      <select [(ngModel)]="selectedUser.id_rol" name="editRol">
+        <option [value]="1">Docente</option>
+        <option [value]="2">Director</option>
+        <option [value]="3">Tutor</option>
+        <option [value]="4">Superadmin</option>
+      </select>
+      <!-- Opcional: contraseña -->
+      <!-- <input [(ngModel)]="selectedUser.contrasenia" name="editPassword" placeholder="Contraseña" type="password" /> -->
+      
       <button type="submit">Actualizar</button>
       <button type="button" (click)="closeEditModal()">Cancelar</button>
     </form>
+    
   </div>
 </div>
