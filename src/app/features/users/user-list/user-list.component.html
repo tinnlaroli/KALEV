@@ -49,12 +49,13 @@
       <input [(ngModel)]="newUser.correo" name="correo" type="email" placeholder="Correo" required />
       <input [(ngModel)]="newUser.telefono" name="telefono" placeholder="Teléfono" />
       <input [(ngModel)]="newUser.contrasenia" name="password" type="password" placeholder="Contraseña" required />
-      <select [(ngModel)]="newUser.id_rol" name="rol">
-        <option [value]="1">Docente</option>
-        <option [value]="2">Director</option>
-        <option [value]="3">Tutor</option>
-        <option [value]="4">Superadmin</option>
+      <select [(ngModel)]="newUser.id_rol" name="rol" required>
+        <option *ngIf="rol_id === 4 || rol_id === 2" [value]="1">Docente</option>
+        <option *ngIf="rol_id === 4 || rol_id === 2" [value]="3">Tutor</option>
+        <option *ngIf="rol_id === 4" [value]="2">Director</option>
+        <option *ngIf="rol_id === 4" [value]="4">Superadmin</option>
       </select>
+      
 
       <button type="submit">Crear</button>
       <button type="button" (click)="closeCreateModal()">Cancelar</button>
@@ -75,10 +76,10 @@
       <input [(ngModel)]="selectedUser.telefono" name="editTelefono" placeholder="Teléfono" />
       
       <select [(ngModel)]="selectedUser.id_rol" name="editRol">
-        <option [value]="1">Docente</option>
-        <option [value]="2">Director</option>
-        <option [value]="3">Tutor</option>
-        <option [value]="4">Superadmin</option>
+        <option *ngIf="rol_id === 4 || rol_id === 2" [value]="1">Docente</option>
+        <option *ngIf="rol_id === 4 || rol_id === 2" [value]="3">Tutor</option>
+        <option *ngIf="rol_id === 4" [value]="2">Director</option>
+        <option *ngIf="rol_id === 4" [value]="4">Superadmin</option>
       </select>
       <!-- Opcional: contraseña -->
       <!-- <input [(ngModel)]="selectedUser.contrasenia" name="editPassword" placeholder="Contraseña" type="password" /> -->

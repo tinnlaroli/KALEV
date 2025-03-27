@@ -51,11 +51,26 @@ export class UserListComponent implements OnInit {
             console.error(`Error al obtener usuarios con rol ${roleId}:`, err),
         });
       });
+    } else if (this.rol_id === 2) {
+      // Director solo ve docentes y tutores
+      const roles = [1, 3];
+      this.users = [];
+
+      roles.forEach((roleId) => {
+        this.userService.getUsersByRole(roleId).subscribe({
+          next: (res) => {
+            if (res.data) {
+              this.users = [...this.users, ...res.data];
+            }
+          },
+          error: (err) =>
+            console.error(`Error al obtener usuarios con rol ${roleId}:`, err),
+        });
+      });
     } else {
-      // Otros roles: solo los usuarios que les corresponden
+      // Docente o tutor: solo ve su propio tipo
       this.userService.getUsersByRole(this.rol_id).subscribe({
         next: (res) => {
-          console.log('Usuarios recibidos:', res.data);
           this.users = res.data;
         },
         error: (err) => console.error('Error al obtener usuarios:', err),
@@ -64,6 +79,12 @@ export class UserListComponent implements OnInit {
   }
 
   createUser() {
+    if (this.rol_id === 2 && ![1, 3].includes(this.newUser.id_rol)) {
+      alert('No tienes permiso para crear usuarios con ese rol');
+      return;
+    }
+
+    
     if (
       !this.newUser.nombre_usuario ||
       !this.newUser.correo ||
