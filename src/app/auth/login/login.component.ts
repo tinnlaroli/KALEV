@@ -26,21 +26,25 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-
+  
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => {
         const token = res.token;
         const usuario = res.usuario;
       
-        this.authService.setToken(token);  // Guarda el token
-        this.authService.setUser(usuario); // Guarda los datos del usuario
+        this.authService.setToken(token);
+        this.authService.setUser(usuario);
       
+        // 👇 Guardamos rol y usuario en localStorage
+        localStorage.setItem('rol_id', usuario.id_rol.toString());
+        localStorage.setItem('user_id', usuario.id_usuario.toString());
+  
         this.router.navigate(['/dashboard']);
-      }
-      ,
+      },
       error: () => {
         this.error = 'Credenciales inválidas';
       }
     });
   }
+  
 }

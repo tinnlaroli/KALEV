@@ -9,7 +9,9 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './features/users/users.module';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
+import { TokenInterceptor } from './services/token.interceptor';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
@@ -42,7 +44,14 @@ import { LoginComponent } from './auth/login/login.component';
   ],
   exports: [
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+      
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

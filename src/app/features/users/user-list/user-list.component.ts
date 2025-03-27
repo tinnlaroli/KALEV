@@ -1,162 +1,120 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-list',
   standalone: false,
+  selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
   users: any[] = [];
   selectedUser: any = { id: null, name: '', email: '', password: '' };
+  newUser = { name: '', email: '', password: '' };
 
-  // Para el nuevo usuario
-  newUser = { name: '', email: '', password: '' }; // Agregar el campo password
-
-  // Variable para controlar la apertura de los modales
   isCreateModalOpen = false;
   isEditModalOpen = false;
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) {}
+  rol_id = Number(localStorage.getItem('rol_id'));
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.getUsers();
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(
-      (data) => {
-        this.users = data;
-      },
-      (error) => {
-        console.error('Error al obtener los usuarios', error);
-      }
-    );
+    if (!this.rol_id) return;
+
+    if (this.rol_id === 4) {
+      // Superadmin: ver todos los usuarios de todos los roles
+      const roles = [1, 2, 3 ,4]; // Si quieres incluir otros superadmins, agrega 4
+      this.users = []; // Asegúrate de limpiar antes
+
+      roles.forEach((roleId) => {
+        this.userService.getUsersByRole(roleId).subscribe({
+          next: (res) => {
+            if (res.data) {
+              this.users = [...this.users, ...res.data];
+              console.log(`Usuarios con rol ${roleId}:`, res.data);
+            }
+          },
+          error: (err) =>
+            console.error(`Error al obtener usuarios con rol ${roleId}:`, err),
+        });
+      });
+    } else {
+      // Otros roles: solo los usuarios que les corresponden
+      this.userService.getUsersByRole(this.rol_id).subscribe({
+        next: (res) => {
+          console.log('Usuarios recibidos:', res.data);
+          this.users = res.data;
+        },
+        error: (err) => console.error('Error al obtener usuarios:', err),
+      });
+    }
   }
 
-  // Abrir modal de crear usuario
+  createUser() {
+    if (!this.newUser.name || !this.newUser.email || !this.newUser.password)
+      return;
+
+    this.userService.createUser(this.newUser).subscribe({
+      next: () => {
+        alert('Usuario creado');
+        this.getUsers();
+        this.closeCreateModal();
+        this.newUser = { name: '', email: '', password: '' };
+      },
+      error: (err) => console.error('Error al crear usuario:', err),
+    });
+  }
+
+  editUser(id: number) {
+    this.userService.getUserById(id).subscribe({
+      next: (data) => {
+        this.selectedUser = {
+          id: data.id_usuario,
+          name: data.nombre_usuario,
+          email: data.correo,
+        };
+        this.isEditModalOpen = true;
+      },
+      error: (err) =>
+        console.error('Error al obtener los datos del usuario', err),
+    });
+  }
+
+  updateUser() {
+    this.userService
+      .updateUser(this.selectedUser.id, this.selectedUser)
+      .subscribe({
+        next: () => {
+          alert('Usuario actualizado');
+          this.getUsers();
+          this.closeEditModal();
+        },
+        error: (err) => console.error('Error al actualizar usuario:', err),
+      });
+  }
+
+  deleteUser(id: number) {
+    if (!confirm('¿Eliminar este usuario?')) return;
+    this.userService.deleteUser(id).subscribe({
+      next: () => this.getUsers(),
+      error: (err) => console.error('Error al eliminar usuario:', err),
+    });
+  }
+
   openCreateModal() {
     this.isCreateModalOpen = true;
   }
 
-  // Cerrar modal de crear usuario
   closeCreateModal() {
     this.isCreateModalOpen = false;
   }
 
-  // Filtra todo lo que no sea letra ni espacio
-  filterInvalidCharacters(event: any) {
-    // Expresión regular que permite solo letras y espacios
-    const regex = /[^a-zA-Z\s]/;
-  
-    // Si el valor del carácter ingresado no es válido, evitamos la entrada
-    if (regex.test(event.key)) {
-      event.preventDefault();  // Esto evita que el carácter sea ingresado
-    }
-  }
-
-  filterInvalidCharactersEmail(event: any) {
-    // Expresión regular que permite solo letras y espacios y numeros
-    const regex = /[^a-zA-Z0-9@._%+-]/;
-  
-    // Si el valor del carácter ingresado no es válido, evitamos la entrada
-    if (regex.test(event.key)) {
-      event.preventDefault();  // Esto evita que el carácter sea ingresado
-    }
-  }
-  
-
-  // Método para crear usuario
-  createUser() {
-    console.log('Intentando crear usuario...');
-  
-    if (!this.newUser.name || !this.newUser.email || !this.newUser.password) {
-      alert('Por favor complete todos los campos.');
-      return;
-    }
-  
-    // Validación de formato de correo electrónico
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(this.newUser.email)) {
-      alert('El correo electrónico no tiene un formato válido.');
-      return;
-    }
-  
-    // Validación de la longitud de la contraseña
-    if (this.newUser.password.length < 6) {
-      alert('La contraseña debe tener al menos 6 caracteres.');
-      return;
-    }
-  
-    console.log('Datos a enviar:', this.newUser);
-  
-    this.userService.createUser(this.newUser).subscribe(
-      (response) => {
-        console.log('Respuesta del servidor:', response);
-        alert('Usuario creado exitosamente');
-        this.getUsers();
-        this.closeCreateModal(); // Cerrar el modal al crear el usuario
-      },
-      (error) => {
-        console.error('Error al crear el usuario:', error);
-        alert('Ocurrió un error al crear el usuario. Revisa la consola para más detalles.');
-      }
-    );
-  }
-  
-
-
-  // Método para eliminar usuario
-  deleteUser(id: number) {
-    this.userService.deleteUser(id).subscribe(
-      () => {
-        this.getUsers(); // Refresca la lista de usuarios
-      },
-      (error) => {
-        console.error('Error al eliminar usuario', error);
-      }
-    );
-  }
-
-  // Método para editar usuario
-  editUser(id: number) {
-    this.userService.getUserById(id).subscribe(
-      (data) => {
-        // Pre-llenamos los campos del formulario de editar
-        this.selectedUser = data;
-        this.isEditModalOpen = true; // Abrir el modal de editar
-      },
-      (error) => {
-        console.error('Error al obtener los datos del usuario', error);
-      }
-    );
-  }
-
-  // Cerrar modal de editar usuario
   closeEditModal() {
     this.isEditModalOpen = false;
   }
-
-  // Método para actualizar usuario
-  updateUser() {
-    console.log('Datos enviados para actualizar:', this.selectedUser);
-  
-    this.userService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
-      () => {
-        alert('Usuario actualizado exitosamente');
-        this.getUsers();
-        this.closeEditModal();
-      },
-      (error) => {
-        console.error('Error al actualizar el usuario:', error);
-      }
-    );
-  }
-
-  
 }
