@@ -21,6 +21,7 @@ import { FooterComponent } from './landing/footer/footer.component';
 import { LandingComponent } from './landing/landing/landing.component';
 import { StudentsModule } from './features/students/students.module';
 import { LoginComponent } from './auth/login/login.component';
+import { GroupsModule } from './features/groups/groups.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { LoginComponent } from './auth/login/login.component';
     SharedModule,
     UsersModule,
     HttpClientModule,
-    StudentsModule
+    StudentsModule,
+    GroupsModule,
   ],
   exports: [
   ],

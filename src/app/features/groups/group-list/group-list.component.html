@@ -1,40 +1,61 @@
-<!-- <app-side-nav> -->
-  <div class="container">
-    <h1>Gestión de Grupos</h1>
+<div class="catalogo-grupos">
+  <h2>Catálogo de Grupos</h2>
 
-    <!-- Formulario para agregar grupo -->
-    <section class="form-section">
-      <h2>Crear Nuevo Grupo</h2>
-      <form id="group-form">
-        <label for="group-name">Nombre del Grupo:</label>
-        <input type="text" id="group-name" name="group-name" required />
+  <app-toast [message]="toastMessage" [type]="toastType"></app-toast>
 
-        <label for="teacher">Docente a Cargo:</label>
-        <input type="text" id="teacher" name="teacher" required />
+  <button class="btn btn-primary" (click)="openCreateModal()">Agregar Grupo</button>
 
-        <label for="director">Director Asignado:</label>
-        <input type="text" id="director" name="director" required />
+  <table *ngIf="groups.length > 0" class="group-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Grado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groups">
+        <td>{{ group.nombre_grupo }}</td>
+        <td>{{ group.grado }}</td>
+        <td>
+          <button class="btn btn-secondary" (click)="editGroup(group)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteGroup(group.id_grupo!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-        <button type="submit">Agregar Grupo</button>
-      </form>
-    </section>
+  <div *ngIf="groups.length === 0" class="empty-msg">No hay grupos disponibles.</div>
+</div>
 
-    <!-- Listado de grupos -->
-    <section class="list-section">
-      <h2>Listado de Grupos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Docente</th>
-            <th>Director</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody id="group-list">
-          <!-- Aquí se generarán dinámicamente los grupos -->
-        </tbody>
-      </table>
-    </section>
+<!-- Modal Crear -->
+<div *ngIf="isCreateModalOpen" class="modal">
+  <div class="modal-content">
+    <h3>Crear Grupo</h3>
+    <form (ngSubmit)="createGroup()" #createForm="ngForm">
+      <input [(ngModel)]="newGroup.nombre_grupo" name="nombre" placeholder="Nombre del Grupo" required />
+      <input [(ngModel)]="newGroup.grado" name="grado" placeholder="Grado" required />
+
+      <div class="modal-actions">
+        <button type="submit" [disabled]="!createForm.valid">Crear</button>
+        <button type="button" (click)="closeCreateModal()">Cancelar</button>
+      </div>
+    </form>
   </div>
-<!-- </app-side-nav> -->
+</div>
+
+<!-- Modal Editar -->
+<div *ngIf="isEditModalOpen" class="modal">
+  <div class="modal-content">
+    <h3>Editar Grupo</h3>
+    <form (ngSubmit)="updateGroup()" #editForm="ngForm">
+      <input [(ngModel)]="selectedGroup.nombre_grupo" name="editNombre" placeholder="Nombre del Grupo" required />
+      <input [(ngModel)]="selectedGroup.grado" name="editGrado" placeholder="Grado" required />
+
+      <div class="modal-actions">
+        <button type="submit" [disabled]="!editForm.valid">Actualizar</button>
+        <button type="button" (click)="closeEditModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
