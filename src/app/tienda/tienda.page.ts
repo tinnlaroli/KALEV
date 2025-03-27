@@ -7,103 +7,195 @@ import { AlertController } from '@ionic/angular'; // Importa AlertController de 
   styleUrls: ['./tienda.page.scss'], // Ruta del archivo de estilos SCSS para esta página
   standalone: false // Esta opción se puede usar si se requiere usar la página en un módulo específico
 })
+
 export class TiendaPage implements OnInit {
-  // Propiedad que almacena las monedas disponibles del usuario
-  monedas: number = 600; 
-
-  // Lista que almacena los artículos comprados
-  compras: any[] = []; 
-
-  // Propiedad para almacenar la mascota actual seleccionada
-  mascotaActual = { imagen: 'assets/icon/pierre.png' }; 
-
-  // Arreglo con todas las mascotas disponibles en la tienda
+  monedas: number = 600;
+  compras: any[] = [];
+  
+  // Mascotas
+  mascotaActual = { id: 4, precio: 70, imagen: 'assets/animales_base/vaca_KALEV.png' };
   mascotas = [
-    { id: 1, imagen: 'assets/icon/pierre.png' },
-    { id: 2, imagen: 'assets/icon/muricia.png' },
-    { id: 3, imagen: 'assets/icon/quetzal.png' },
-    { id: 4, imagen: 'assets/icon/gero.png' }
+    { id: 1, nombre: 'Ajolote', precio: 90, imagen: 'assets/animales_base/ajolote_KALEV.png' },
+    { id: 2, nombre: 'Lobo', precio: 50, imagen: 'assets/animales_base/lobo_KALEV.png' },
+    { id: 3, nombre: 'Quetzal', precio: 50, imagen: 'assets/animales_base/quetzal_KALEV.png' },
+    { id: 4, nombre: 'Vaca', precio: 70, imagen: 'assets/animales_base/vaca_KALEV.png' },
+    { id: 5, nombre: 'Vaca Marina', precio: 40, imagen: 'assets/animales_base/vaca-marina_KALEV.png' }
   ];
+  mascotasCompradas: any[] = [];
 
-  // Arreglo que almacena todos los artículos disponibles en la tienda
-  tienda = [
-    { id: 1, nombre: 'Gorro Rojo', precio: 50, imagen: 'assets/ropa/gorro-rojo.png' },
-    { id: 2, nombre: 'Gafas Cool', precio: 75, imagen: 'assets/ropa/gafas.png' },
-    { id: 3, nombre: 'Camiseta Azul', precio: 60, imagen: 'assets/ropa/camisa-azul.png' },
-    { id: 4, nombre: 'Falda', precio: 140, imagen: 'assets/ropa/falda.png' },
-    { id: 5, nombre: 'Huipil', precio: 250, imagen: 'assets/ropa/huipil.png' },
-    { id: 6, nombre: 'Traje', precio: 150, imagen: 'assets/ropa/traje.png' },
-    { id: 7, nombre: 'Vestido Jarocho', precio: 300, imagen: 'assets/ropa/vestido-jarocho.png' },
-    { id: 8, nombre: 'Poncho', precio: 350, imagen: 'assets/ropa/poncho.png' },
-    { id: 9, nombre: 'Manchas azules', precio: 100, imagen: 'assets/manchas/manchas-azules.png' },
-    { id: 10, nombre: 'Manchas rosas', precio: 60, imagen: 'assets/manchas/manchas-rosas.png' },
-    { id: 11, nombre: 'Manchas cafés', precio: 90, imagen: 'assets/manchas/manchas-cafe.png' },
-    { id: 12, nombre: 'Manchas moradas', precio: 120, imagen: 'assets/manchas/manchas-moradas.png' }
+  // Accesorios Cabeza
+
+  accesoriosCabeza = [
+    { id: 1, nombre: 'Audifonos', precio: 50, imagen: 'assets/accesorios/cabeza/audifonos-accesorio_KALEV.png' },
+    { id: 2, nombre: 'Gorro', precio: 75, imagen: 'assets/accesorios/cabeza/gorro-accesorio_KALEV.png' },
+    { id: 3, nombre: 'Sombrero', precio: 60, imagen: 'assets/accesorios/cabeza/sombrero-accesorio_KALEV.png' }
   ];
+  accesorioCabezaActual = this.accesoriosCabeza[0];
+  accesoriosCabezaCompradas: any[] = [];
 
-  // Inyección del AlertController para mostrar alertas
+  // Accesorios Ojos
+
+  accesoriosOjos = [
+    { id: 1, nombre: 'Gafas Amarillas', precio: 50, imagen: 'assets/accesorios/ojos/gafas-3D.png' },
+    { id: 2, nombre: 'Gafas Azules', precio: 75, imagen: 'assets/accesorios/ojos/gafas-corazon.png' },
+    { id: 3, nombre: 'Parche', precio: 60, imagen: 'assets/accesorios/ojos/parche.png' }
+  ];
+  accesorioOjosActual = this.accesoriosOjos[0];
+
+  accesoriosOjosComprados: any[] = [];
+
   constructor(private alertCtrl: AlertController) {}
 
-  // Función para realizar la compra de un artículo
-  async comprar(item: any) {
-    // Verifica si el artículo ya fue comprado anteriormente
-    if (this.compras.some(c => c.id === item.id)) {
-      const alert = await this.alertCtrl.create({
-        header: 'Ya compraste este artículo', // Título de la alerta
-        message: 'No puedes comprar el mismo artículo dos veces.', // Mensaje de la alerta
-        buttons: ['OK'] // Botón para cerrar la alerta
-      });
-      await alert.present(); // Muestra la alerta
-      return; // Sale de la función si ya fue comprado
-    }
+  // Navegación mascotas
+  siguienteMascota() {
+    const indiceActual = this.mascotas.findIndex(m => m.id === this.mascotaActual.id);
+    const nuevoIndice = (indiceActual + 1) % this.mascotas.length;
+    this.mascotaActual = this.mascotas[nuevoIndice];
+  }
+  
+  anteriorMascota() {
+    const indiceActual = this.mascotas.findIndex(m => m.id === this.mascotaActual.id);
+    const nuevoIndice = (indiceActual - 1 + this.mascotas.length) % this.mascotas.length;
+    this.mascotaActual = this.mascotas[nuevoIndice];
+  }
 
-    // Verifica si el usuario tiene suficientes monedas para la compra
-    if (this.monedas >= item.precio) {
-      let saldoAnterior = this.monedas; // Guarda el saldo antes de la compra
-      this.monedas -= item.precio; // Descuenta el precio del artículo de las monedas
-      let saldoActual = this.monedas; // Guarda el saldo después de la compra
-      this.compras.push({
-        ...item, // Copia los detalles del artículo
-        fecha: new Date().toLocaleString(), // Guarda la fecha de la compra
-        saldoAnterior, // Incluye el saldo anterior
-        saldoActual // Incluye el saldo actual
-      });
+  // Navegación accesorios cabeza
+  siguienteAccesorioCabeza() {
+    const indiceActual = this.accesoriosCabeza.findIndex(a => a.id === this.accesorioCabezaActual.id);
+    const nuevoIndice = (indiceActual + 1) % this.accesoriosCabeza.length;
+    this.accesorioCabezaActual = this.accesoriosCabeza[nuevoIndice];
+  }
+  
+  anteriorAccesorioCabeza() {
+    const indiceActual = this.accesoriosCabeza.findIndex(a => a.id === this.accesorioCabezaActual.id);
+    const nuevoIndice = (indiceActual - 1 + this.accesoriosCabeza.length) % this.accesoriosCabeza.length;
+    this.accesorioCabezaActual = this.accesoriosCabeza[nuevoIndice];
+  }
 
-      const alert = await this.alertCtrl.create({
-        header: '¡Compra exitosa!', // Título de la alerta de compra exitosa
-        message: 
-          `Has comprado: ${item.nombre}\n` + // Nombre del artículo comprado
-          `Fecha: ${new Date().toLocaleString()}\n` + // Fecha de compra
-          `Saldo anterior: ${saldoAnterior} monedas\n` + // Saldo antes de la compra
-          `Costo del producto: ${item.precio} monedas\n` + // Precio del artículo
-          `Saldo actual: ${saldoActual} monedas`, // Saldo después de la compra
-        buttons: ['OK'] // Botón para cerrar la alerta
-      });
-      await alert.present(); // Muestra la alerta de compra exitosa
+  // Navegación accesorios ojos
+  siguienteAccesorioOjos() {
+    const indiceActual = this.accesoriosOjos.findIndex(a => a.id === this.accesorioOjosActual.id);
+    const nuevoIndice = (indiceActual + 1) % this.accesoriosOjos.length;
+    this.accesorioOjosActual = this.accesoriosOjos[nuevoIndice];
+  }
+  
+  anteriorAccesorioOjos() {
+    const indiceActual = this.accesoriosOjos.findIndex(a => a.id === this.accesorioOjosActual.id);
+    const nuevoIndice = (indiceActual - 1 + this.accesoriosOjos.length) % this.accesoriosOjos.length;
+    this.accesorioOjosActual = this.accesoriosOjos[nuevoIndice];
+  }
+
+  // Comprar funciones
+  async guardarMascota() {
+    if (this.monedas >= this.mascotaActual.precio) {
+      if (!this.mascotasCompradas.some(m => m.id === this.mascotaActual.id)) {
+        this.monedas -= this.mascotaActual.precio;
+        this.mascotasCompradas.push({...this.mascotaActual});
+        this.mascotas = this.mascotas.filter(m => m.id !== this.mascotaActual.id);
+        
+        if (this.mascotas.length > 0) {
+          this.mascotaActual = this.mascotas[0];
+        } else {
+          this.mascotaActual = { id: 0, precio: 9, imagen: '' };
+        }
+
+        const alert = await this.alertCtrl.create({
+          header: 'Mascota comprada!',
+          message: 'Felicidades por tu compra',
+          buttons: ['OK']
+        });
+        await alert.present();
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Ya comprada',
+          message: 'Ya tienes esta mascota',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
     } else {
-      // Si no tiene suficientes monedas, muestra un mensaje de error
       const alert = await this.alertCtrl.create({
-        header: 'Monedas insuficientes', // Título de la alerta de error
-        message: 'No tienes suficientes monedas para esta compra.', // Mensaje de la alerta
-        buttons: ['OK'] // Botón para cerrar la alerta
+        header: 'Monedas insuficientes',
+        message: 'No tienes suficientes monedas para esta mascota',
+        buttons: ['OK']
       });
-      await alert.present(); // Muestra la alerta de error
+      await alert.present();
     }
   }
 
-  // Función para verificar si un artículo ya fue comprado
-  fueComprado(item: any): boolean {
-    return this.compras.some(c => c.id === item.id); // Retorna true si el artículo está en la lista de compras
+  async guardarAccCabeza() {
+    if (this.monedas >= this.accesorioCabezaActual.precio) {
+      if (!this.accesoriosCabezaCompradas.some(a => a.id === this.accesorioCabezaActual.id)) {
+        this.monedas -= this.accesorioCabezaActual.precio;
+        this.accesoriosCabezaCompradas.push({...this.accesorioCabezaActual});
+        this.accesoriosCabeza = this.accesoriosCabeza.filter(a => a.id !== this.accesorioCabezaActual.id);
+        
+        if (this.accesoriosCabeza.length > 0) {
+          this.accesorioCabezaActual = this.accesoriosCabeza[0];
+        } else {
+          this.accesorioCabezaActual = { id: 0, nombre: 'No hay más accesorios', precio: 0, imagen: '' };
+        }
+
+        const alert = await this.alertCtrl.create({
+          header: 'Accesorio comprado!',
+          message: `Has comprado: ${this.accesorioCabezaActual.nombre}`,
+          buttons: ['OK']
+        });
+        await alert.present();
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Ya comprado',
+          message: 'Ya tienes este accesorio',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
+    } else {
+      const alert = await this.alertCtrl.create({
+        header: 'Monedas insuficientes',
+        message: 'No tienes suficientes monedas para este accesorio',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 
-  // Función para cambiar la mascota seleccionada
-  cambiarMascota() {
-    // Encuentra el índice de la mascota actual en el arreglo de mascotas
-    const indiceActual = this.mascotas.findIndex(m => m.imagen === this.mascotaActual.imagen);
-    // Cambia la mascota a la siguiente en la lista (y vuelve al inicio si es la última)
-    this.mascotaActual = this.mascotas[(indiceActual + 1) % this.mascotas.length];
+  async guardarAccOjos() {
+    if (this.monedas >= this.accesorioOjosActual.precio) {
+      if (!this.accesoriosOjosComprados.some(a => a.id === this.accesorioOjosActual.id)) {
+        this.monedas -= this.accesorioOjosActual.precio;
+        this.accesoriosOjosComprados.push({...this.accesorioOjosActual});
+        this.accesoriosOjos = this.accesoriosOjos.filter(a => a.id !== this.accesorioOjosActual.id);
+        
+        if (this.accesoriosOjos.length > 0) {
+          this.accesorioOjosActual = this.accesoriosOjos[0];
+        } else {
+          this.accesorioOjosActual = { id: 0, nombre: 'No hay más accesorios', precio: 0, imagen: '' };
+        }
+
+        const alert = await this.alertCtrl.create({
+          header: 'Accesorio comprado!',
+          message: `Has comprado: ${this.accesorioOjosActual.nombre}`,
+          buttons: ['OK']
+        });
+        await alert.present();
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Ya comprado',
+          message: 'Ya tienes este accesorio',
+          buttons: ['OK']
+        });
+        await alert.present();
+      }
+    } else {
+      const alert = await this.alertCtrl.create({
+        header: 'Monedas insuficientes',
+        message: 'No tienes suficientes monedas para este accesorio',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 
-  // Método de inicialización del componente
   ngOnInit() {}
 }

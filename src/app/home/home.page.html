@@ -1,44 +1,26 @@
-<!-- Encabezado de la página -->
 <ion-header>
-  <!-- Barra de herramientas con color primario -->
   <ion-toolbar color="primary">
-    <!-- Título que aparece en la barra de herramientas -->
     <ion-title>INICIO</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<!-- Contenido principal de la página -->
-<ion-content>
-  <!-- Contenedor para organizar el contenido -->
-  <div class="content-wrapper">
-
-    <!-- Lista de actividades -->
-    <ion-list class="activity-list">
-      <!-- Recorre el arreglo 'activities' y genera un ítem por cada actividad -->
-        <!-- Resalta la tarjeta al pasar el ratón sobre ella -->
-         <!-- Elimina el resalte cuando el ratón deja de estar sobre la tarjeta -->
-      <ion-item *ngFor="let activity of activities" class="activity-card" (mouseover)="highlightCard($event)" (mouseleave)="removeHighlight($event)">
-        <!-- Thumbnail para mostrar el ícono de la actividad, con clase 'rounded-thumbnail' para redondear los bordes -->
-        <ion-thumbnail slot="start" class="rounded-thumbnail">
-          <!-- Imagen de la actividad, su fuente se establece con el valor de 'activity.icon' -->
-          <img [src]="activity.icon" alt="Icono de actividad" />
-        </ion-thumbnail>
-        <!-- Etiquetas de texto con la información de la actividad -->
-        <ion-label>
-          <!-- Nombre de la actividad -->
-          <h2>{{ activity.name }}</h2>
-          <!-- Tipo de la actividad -->
-          <p><strong>Tipo:</strong> {{ activity.type }}</p>
-          <!-- Fecha de inicio de la actividad -->
-          <p><strong>Inicio:</strong> {{ activity.startDate }}</p>
-          <!-- Fecha de finalización de la actividad -->
-          <p><strong>Fin:</strong> {{ activity.endDate }}</p>
-          <!-- Tipo de aprendizaje relacionado con la actividad -->
-          <p><strong>Aprendizaje:</strong> {{ activity.learningType}}</p>
-          <!-- Nombre del maestro encargado de la actividad -->
-          <p><strong>Maestro:</strong> {{ activity.teacher }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+<ion-content class="game-path-container">
+  <div class="path-container">
+    <div *ngFor="let level of levels; let i = index" class="level-container">
+      <div
+        class="level"
+        [ngClass]="{ 'left': i % 2 === 0, 'right': i % 2 !== 0 }"
+      >
+        <button
+          class="level-circle"
+          [disabled]="!level.unlocked"
+          (click)="playLevel(level)"
+          [style.background]="level.color"
+        >
+          <span *ngIf="level.unlocked">Nivel {{ i + 1 }}</span>
+          <ion-icon *ngIf="!level.unlocked" name="lock-closed-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </ion-content>

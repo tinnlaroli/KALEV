@@ -1,0 +1,35 @@
+.game-path-container {
+    .path-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .level-container {
+      margin: 10px 0;
+  
+      .level {
+        display: flex;
+        justify-content: center;
+  
+        &.left {
+          transform: translateX(-50px);
+        }
+  
+        &.right {
+          transform: translateX(50px);
+        }
+  
+        .level-circle {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  

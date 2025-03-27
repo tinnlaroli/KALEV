@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LevelModalComponent } from '../level-modal/level-modal.component';
+import { CongratulationsModalComponent } from '../congratulations-modal/congratulations-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -7,66 +10,59 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class HomePage implements OnInit {
-  // Arreglo que contiene las actividades del curso, con información sobre cada una.
-  activities = [
-    {
-      name: 'Álgebra Básica',  // Nombre del curso.
-      type: 'Matemáticas',  // Tipo de asignatura.
-      startDate: '2025-02-01',  // Fecha de inicio del curso.
-      endDate: '2025-02-15',  // Fecha de fin del curso.
-      learningType: 'Kinestésico-Visual',  // Estilo de aprendizaje asociado al curso.
-      teacher: 'Profa. Francisco Juárez Pérez',  // Nombre del profesor.
-      icon: 'assets/icon/math.png',  // Ruta al ícono que representa el curso.
-    },
-    {
-      name: 'Geografía Mundial',
-      type: 'Geografía',
-      startDate: '2025-02-02',
-      endDate: '2025-02-20',
-      learningType: 'Auditivo',
-      teacher: 'Prof. Sergio López López',
-      icon: 'assets/icon/geography.png',
-    },
-    {
-      name: 'Ciencias Naturales',
-      type: 'Ciencias',
-      startDate: '2025-02-03',
-      endDate: '2025-02-18',
-      learningType: 'Lectura-Escritura',
-      teacher: 'Profa. Karina Martínez Aldama',
-      icon: 'assets/icon/science.png',
-    },
-    {
-      name: 'Redacción y Ortografía',
-      type: 'Español',
-      startDate: '2025-02-04',
-      endDate: '2025-02-22',
-      learningType: 'Visual',
-      teacher: 'Prof. Amelia Rivera Rivas',
-      icon: 'assets/icon/spanish.png',
-    },
+  levels = [
+    { id: 1, unlocked: true, color: '#FFD700' },
+    { id: 2, unlocked: false, color: '#FF4500' },
+    { id: 3, unlocked: false, color: '#1E90FF' },
+    { id: 4, unlocked: false, color: '#32CD32' },
+    { id: 5, unlocked: false, color: '#9400D3' },
+    { id: 6, unlocked: false, color: '#FF1493' },
+    { id: 7, unlocked: false, color: '#00BFFF' },
+    { id: 8, unlocked: false, color: '#FF8C00' },
+    { id: 9, unlocked: false, color: '#FFD700' },
+    { id: 10, unlocked: false, color: '#FF4500' },
   ];
 
-  // Constructor del componente (vacío en este caso, pero se puede utilizar para inyectar dependencias).
-  constructor() { }
+  constructor(private modalController: ModalController) {}
 
-  // El ciclo de vida ngOnInit se ejecuta cuando se inicializa el componente.
-  ngOnInit() {
-    // Este método puede utilizarse para inicializar datos o realizar tareas después de que el componente haya sido cargado.
+  ngOnInit() {}
+
+  async showLevelModal(level: any) {
+    const modal = await this.modalController.create({
+      component: LevelModalComponent,
+      componentProps: { level },
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    if (data?.nextLevel) {
+      this.unlockNextLevel(level.id);
+      this.showCongratulationsModal(level);
+    }
   }
 
-  // Función para resaltar la tarjeta (curso) al pasar el ratón sobre ella.
-  highlightCard(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement;  // Obtiene el elemento HTML sobre el que se hace hover.
-    target.style.transform = 'scale(1.1)';  // Aumenta el tamaño del elemento (efecto de escala).
-    target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.3)';  // Añade una sombra para dar el efecto de profundidad.
+  async showCongratulationsModal(level: any) {
+    const modal = await this.modalController.create({
+      component: CongratulationsModalComponent,
+      componentProps: { level },
+    });
+    await modal.present();
   }
 
-  // Función para eliminar el resalte de la tarjeta (cuando el ratón sale de encima de la tarjeta).
-  removeHighlight(event: MouseEvent) {
-    const target = event.currentTarget as HTMLElement;  // Obtiene el elemento HTML sobre el que se hace hover.
-    target.style.transform = 'scale(1)';  // Restaura el tamaño original del elemento.
-    target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';  // Restaura la sombra a un valor más tenue.
+  unlockNextLevel(currentLevelId: number) {
+    const nextLevel = this.levels.find((level) => level.id === currentLevelId + 1);
+    if (nextLevel) {
+      nextLevel.unlocked = true;
+      console.log('Siguiente nivel desbloqueado:', nextLevel.id);
+    }
   }
 
+  playLevel(level: any) {
+    if (level.unlocked) {
+      this.showLevelModal(level);
+    } else {
+      console.log('Nivel bloqueado');
+    }
+  }
 }

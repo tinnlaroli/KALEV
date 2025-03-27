@@ -7,6 +7,12 @@
     --color-accent: #1E90FF; /* Azul brillante */
   }
   
+  ion-header {
+    --background: var(--ion-color-primary); /* Fondo azul */
+    --color: #ffffff; /* Texto blanco */
+    --border-color: transparent; /* Elimina el borde inferior */
+  }
+  
   html, body, ion-app {
     height: 100vh; /* Pantalla completa */
     width: 100%; /* Ancho completo */

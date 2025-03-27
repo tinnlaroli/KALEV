@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
         datasets: [  // Conjunto de datos que se van a graficar
           {
             label: 'Desempeño',  // Nombre del conjunto de datos que aparecerá en la leyenda
-            data: [80, 70, 60, 90, 75],  // Los valores de desempeño para cada una de las categorías (Kinestésico, Auditivo, etc.)
+            data: [80, 60, 82, 90, 75],  // Los valores de desempeño para cada una de las categorías (Kinestésico, Auditivo, etc.)
             borderColor: 'blue',  // Color del borde del gráfico (líneas del gráfico)
             backgroundColor: 'rgba(0, 0, 255, 0.2)',  // Color de fondo del área del gráfico (con transparencia)
           },

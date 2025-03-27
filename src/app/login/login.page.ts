@@ -42,7 +42,9 @@ export class LoginPage implements OnInit {
   }
 
   // Función que valida si los campos de correo y código están completos y son válidos.
+ 
   validarCampos(): boolean {
+    
     if (!this.email.trim() || !this.codigo.trim()) { // Verifica que los campos no estén vacíos.
       this.mostrarAlerta('Error', 'Todos los campos son obligatorios.'); // Muestra alerta si falta algún campo.
       return false; // Si algún campo es vacío, retorna false.

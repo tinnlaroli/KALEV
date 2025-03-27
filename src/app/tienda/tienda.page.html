@@ -13,45 +13,70 @@
 
 <!-- Contenido -->
 <ion-content fullscreen>
-  <!-- Contenedor de la mascota -->
-  <ion-row class="mascota-container">
-    <ion-col size="12" class="mascota-col">
-      <img [src]="mascotaActual.imagen" class="mascota-img" />
-      <ion-button expand="full" color="secondary" (click)="cambiarMascota()" class="boton-cambiar">
-        Cambiar Mascota
-      </ion-button>
-    </ion-col>
-  </ion-row>
+ <!-- Sección Mascotas -->
+<ion-row class="mascota-container" style="align-items: center; justify-content: center; text-align: center;">
+  <ion-button color="secondary" (click)="anteriorMascota()" class="boton-anterior-mascota" style="margin-right: 10px;">
+    Anterior
+  </ion-button>
+  
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img [src]="mascotaActual.imagen" class="mascota-img" style="width: 150px; height: 150px;" />
+    <p> {{mascotaActual.precio}} monedas</p>
+  </div>
+  
+  <ion-button color="secondary" (click)="siguienteMascota()" class="boton-siguiente-mascota" style="margin-left: 10px;">
+    Siguiente
+  </ion-button>
+</ion-row>
 
-  <!-- Artículos de la tienda -->
-  <ion-row>
-    <ion-col size="6" *ngFor="let item of tienda">
-      <ion-card class="item-card">
-        <img [src]="item.imagen" class="item-img" />
-        <ion-card-header>
-          <ion-card-title class="item-title">{{ item.nombre }}</ion-card-title>
-          <ion-card-subtitle class="item-precio">{{ item.precio }} Monedas</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-button expand="full" color="primary" (click)="comprar(item)" class="boton-comprar"
-            [disabled]="fueComprado(item)">
-            {{ fueComprado(item) ? 'Comprado' : 'Comprar' }}
-          </ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+<ion-row class="guardar-mascota-container" style="margin-top: 20px; justify-content: center;">
+  <ion-button color="success" (click)="guardarMascota()">
+    Comprar mascota
+  </ion-button>
+</ion-row>
 
-  <!-- Lista de compras -->
-  <ion-row class="compras-container">
-    <ion-col size="12">
-      <h2>Mis Compras</h2>
-      <ion-list>
-        <ion-item *ngFor="let compra of compras">
-          <img [src]="compra.imagen" class="compra-img" />
-          <ion-label>{{ compra.nombre }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
+<!-- Sección Accesorios Cabeza -->
+<ion-row class="accesorio-container" style="align-items: center; justify-content: center; text-align: center; margin-top: 30px;">
+  <ion-button color="secondary" (click)="anteriorAccesorioCabeza()" style="margin-right: 10px;">
+    Anterior
+  </ion-button>
+  
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img [src]="accesorioCabezaActual.imagen" style="width: 100px; height: 100px;" />
+    <p>{{accesorioCabezaActual.nombre}} - {{accesorioCabezaActual.precio}} monedas</p>
+  </div>
+  
+  <ion-button color="secondary" (click)="siguienteAccesorioCabeza()" style="margin-left: 10px;">
+    Siguiente
+  </ion-button>
+</ion-row>
+
+<ion-row style="margin-top: 20px; justify-content: center;">
+  <ion-button color="success" (click)="guardarAccCabeza()">
+    Comprar accesorio
+  </ion-button>
+</ion-row>
+
+<!-- Sección Accesorios Ojos -->
+<ion-row class="accesorio-container" style="align-items: center; justify-content: center; text-align: center; margin-top: 30px;">
+  <ion-button color="secondary" (click)="anteriorAccesorioOjos()" style="margin-right: 10px;">
+    Anterior
+  </ion-button>
+  
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img [src]="accesorioOjosActual.imagen" style="width: 100px; height: 100px;" />
+    <p>{{accesorioOjosActual.nombre}} - {{accesorioOjosActual.precio}} monedas</p>
+  </div>
+  
+  <ion-button color="secondary" (click)="siguienteAccesorioOjos()" style="margin-left: 10px;">
+    Siguiente
+  </ion-button>
+</ion-row>
+
+<ion-row style="margin-top: 20px; justify-content: center;">
+  <ion-button color="success" (click)="guardarAccOjos()">
+    Comprar accesorio
+  </ion-button>
+</ion-row>
+
 </ion-content>
