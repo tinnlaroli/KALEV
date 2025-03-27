@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 
+interface User {
+  id_usuario?: number;
+  nombre_usuario: string;
+  ap_paterno: string;
+  ap_materno: string;
+  correo: string;
+  telefono: string;
+  contrasenia: string;
+  id_rol: number;
+}
+
 @Component({
   standalone: false,
   selector: 'app-user-list',
@@ -8,201 +19,172 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  users: any[] = [];
-  selectedUser: any = { id: null, name: '', email: '', password: '' };
-  newUser = {
-    nombre_usuario: '',
-    ap_paterno: '',
-    ap_materno: '',
-    correo: '',
-    telefono: '',
-    contrasenia: '',
-    id_rol: 3, // Rol por defecto de tutor(permisos)
-  };
+  users: User[] = [];
+  selectedUser: User = this.getEmptyUser();
+  newUser: User = this.getEmptyUser(3); // Rol por defecto: tutor
 
   isCreateModalOpen = false;
   isEditModalOpen = false;
 
-  rol_id = Number(localStorage.getItem('rol_id'));
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'warning' = 'success';
+
+  readonly rol_id = Number(localStorage.getItem('rol_id'));
 
   constructor(private userService: UserService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getUsers();
   }
 
-  getUsers() {
-    if (!this.rol_id) return;
-
-    if (this.rol_id === 4) {
-      // Superadmin: ver todos los usuarios de todos los roles
-      const roles = [1, 2, 3, 4]; // Si quieres incluir otros superadmins, agrega 4
-      this.users = []; // Asegúrate de limpiar antes
-
-      roles.forEach((roleId) => {
-        this.userService.getUsersByRole(roleId).subscribe({
-          next: (res) => {
-            if (res.data) {
-              this.users = [...this.users, ...res.data];
-              console.log(`Usuarios con rol ${roleId}:`, res.data);
-            }
-          },
-          error: (err) =>
-            console.error(`Error al obtener usuarios con rol ${roleId}:`, err),
-        });
-      });
-    } else if (this.rol_id === 2) {
-      // Director solo ve docentes y tutores
-      const roles = [1, 3];
-      this.users = [];
-
-      roles.forEach((roleId) => {
-        this.userService.getUsersByRole(roleId).subscribe({
-          next: (res) => {
-            if (res.data) {
-              this.users = [...this.users, ...res.data];
-            }
-          },
-          error: (err) =>
-            console.error(`Error al obtener usuarios con rol ${roleId}:`, err),
-        });
-      });
-    } else {
-      // Docente o tutor: solo ve su propio tipo
-      this.userService.getUsersByRole(this.rol_id).subscribe({
-        next: (res) => {
-          this.users = res.data;
-        },
-        error: (err) => console.error('Error al obtener usuarios:', err),
-      });
-    }
-  }
-
-  createUser() {
-    if (this.rol_id === 2 && ![1, 3].includes(this.newUser.id_rol)) {
-      alert('No tienes permiso para crear usuarios con ese rol');
-      return;
-    }
-
-    
-    if (
-      !this.newUser.nombre_usuario ||
-      !this.newUser.correo ||
-      !this.newUser.contrasenia ||
-      !this.newUser.id_rol ||
-      !this.newUser.ap_paterno ||
-      !this.newUser.ap_materno ||
-      !this.newUser.telefono
-    ) {
-      alert('Faltan datos');
-      return;
-    }
-    this.userService.createUser(this.newUser).subscribe({
-      next: () => {
-        alert('Usuario creado');
-        this.getUsers();
-        this.closeCreateModal();
-        this.newUser = {
-          nombre_usuario: '',
-          ap_paterno: '',
-          ap_materno: '',
-          correo: '',
-          telefono: '',
-          contrasenia: '',
-          id_rol: 1,
-        };
-      },
-      error: (err) => console.error('Error al crear usuario:', err),
-    });
-  }
-
-  editUser(id: number) {
-    this.userService.getUserById(id).subscribe({
-      next: (data) => {
-        console.log('Datos del usuario:', data.data);
-        this.selectedUser = {
-          id_usuario: data.data.id_usuario,
-          nombre_usuario: data.data.nombre_usuario,
-          ap_paterno: data.data.ap_paterno,
-          ap_materno: data.data.ap_materno,
-          correo: data.data.correo,
-          telefono: data.data.telefono,
-          contrasenia: data.data.contrasenia,
-          id_rol: 1,
-        };
-        this.isEditModalOpen = true;
-      },
-      error: (err) =>
-        console.error('Error al obtener los datos del usuario', err),
-    });
-  }
-
-  updateUser() {
-    const id = this.selectedUser.id_usuario;
-
-    if (!id) {
-      alert('ID de usuario no válido');
-      return;
-    }
-
-    if (
-      !this.selectedUser.nombre_usuario ||
-      !this.selectedUser.ap_paterno ||
-      !this.selectedUser.ap_materno ||
-      !this.selectedUser.correo ||
-      !this.selectedUser.telefono ||
-      !this.selectedUser.contrasenia
-    ) {
-      alert('Faltan datos para actualizar');
-      return;
-    }
-
-    const updateData = {
-      nombre_usuario: this.selectedUser.nombre_usuario,
-      ap_paterno: this.selectedUser.ap_paterno,
-      ap_materno: this.selectedUser.ap_materno,
-      correo: this.selectedUser.correo,
-      telefono: this.selectedUser.telefono,
-      contrasenia: this.selectedUser.contrasenia,
-      id_rol: this.selectedUser.id_rol,
-    };
-
-    this.userService.updateUser(id, updateData).subscribe({
-      next: () => {
-        alert('Usuario actualizado');
-        this.getUsers();
-        this.closeEditModal();
-      },
-      error: (err) => console.error('Error al actualizar usuario:', err),
-    });
-  }
-
-  deleteUser(id: number) {
-    if (!confirm('¿Eliminar este usuario?')) return;
-    this.userService.deleteUser(id).subscribe({
-      next: () => this.getUsers(),
-      error: (err) => console.error('Error al eliminar usuario:', err),
-    });
-  }
-
-  openCreateModal() {
-    this.isCreateModalOpen = true;
-  }
-
-  closeCreateModal() {
-    this.isCreateModalOpen = false;
-  }
-
-  closeEditModal() {
-    this.selectedUser = {
-      id_usuario: null,
+  private getEmptyUser(defaultRol = 1): User {
+    return {
       nombre_usuario: '',
       ap_paterno: '',
       ap_materno: '',
       correo: '',
       telefono: '',
       contrasenia: '',
+      id_rol: defaultRol,
     };
+  }
+
+  showToast(message: string, type: 'success' | 'error' | 'warning' = 'success'): void {
+    this.toastMessage = message;
+    this.toastType = type;
+    setTimeout(() => (this.toastMessage = ''), 3000);
+  }
+
+  getUsers(): void {
+    if (!this.rol_id) return;
+
+    let allowedRoles: number[] = [];
+
+    switch (this.rol_id) {
+      case 4:
+        allowedRoles = [1, 2, 3, 4];
+        break;
+      case 2:
+        allowedRoles = [1, 3];
+        break;
+      case 1:
+        allowedRoles = [3];
+        break;
+      default:
+        this.users = [];
+        return;
+    }
+
+    this.users = [];
+    allowedRoles.forEach((roleId) => {
+      this.userService.getUsersByRole(roleId).subscribe({
+        next: (res) => {
+          if (res.data) {
+            this.users = [...this.users, ...res.data];
+          }
+        },
+        error: () =>
+          this.showToast(`Error al obtener usuarios con rol ${roleId}`, 'error'),
+      });
+    });
+  }
+
+  createUser(): void {
+    if (!this.canCreateUser(this.newUser.id_rol)) {
+      this.showToast('No puedes crear ese tipo de usuario', 'warning');
+      return;
+    }
+
+    if (this.hasEmptyFields(this.newUser)) {
+      this.showToast('Faltan datos', 'warning');
+      return;
+    }
+
+    this.userService.createUser(this.newUser).subscribe({
+      next: () => {
+        this.showToast('Usuario creado exitosamente', 'success');
+        this.getUsers();
+        this.closeCreateModal();
+        this.newUser = this.getEmptyUser(3);
+      },
+      error: () => this.showToast('Error al crear usuario', 'error'),
+    });
+  }
+
+  editUser(id: number): void {
+    this.userService.getUserById(id).subscribe({
+      next: ({ data }) => {
+        this.selectedUser = { ...data };
+        this.isEditModalOpen = true;
+      },
+      error: () => this.showToast('Error al obtener datos del usuario', 'error'),
+    });
+  }
+
+  updateUser(): void {
+    const { id_usuario } = this.selectedUser;
+
+    if (!id_usuario) {
+      this.showToast('ID de usuario inválido', 'error');
+      return;
+    }
+
+    if (this.hasEmptyFields(this.selectedUser)) {
+      this.showToast('Faltan datos para actualizar', 'warning');
+      return;
+    }
+
+    this.userService.updateUser(id_usuario, this.selectedUser).subscribe({
+      next: () => {
+        this.showToast('Usuario actualizado correctamente', 'success');
+        this.getUsers();
+        this.closeEditModal();
+      },
+      error: () => this.showToast('Error al actualizar usuario', 'error'),
+    });
+  }
+
+  deleteUser(id: number): void {
+    const confirmed = confirm('¿Eliminar este usuario?');
+    if (!confirmed) return;
+
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.showToast('Usuario eliminado', 'success');
+        this.getUsers();
+      },
+      error: () => this.showToast('Error al eliminar usuario', 'error'),
+    });
+  }
+
+  openCreateModal(): void {
+    this.isCreateModalOpen = true;
+  }
+
+  closeCreateModal(): void {
+    this.isCreateModalOpen = false;
+    this.newUser = this.getEmptyUser(3);
+  }
+
+  closeEditModal(): void {
+    this.selectedUser = this.getEmptyUser();
     this.isEditModalOpen = false;
+  }
+
+  private canCreateUser(idRol: number): boolean {
+    if (this.rol_id === 2) return [1, 3].includes(idRol);
+    if (this.rol_id === 1) return idRol === 3;
+    return false;
+  }
+
+  private hasEmptyFields(user: User): boolean {
+    return (
+      !user.nombre_usuario ||
+      !user.ap_paterno ||
+      !user.ap_materno ||
+      !user.correo ||
+      !user.telefono ||
+      !user.contrasenia
+    );
   }
 }
