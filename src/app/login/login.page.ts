@@ -1,79 +1,74 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { ApiService } from '../services/api.service';
 
 @Component({
-  selector: 'app-login', // Define el selector de este componente, que es usado para insertarlo en el HTML.
-  templateUrl: './login.page.html', // Archivo HTML que contiene la plantilla de la página de login.
-  styleUrls: ['./login.page.scss'], // Archivo CSS para estilos específicos de esta página.
-  standalone: false // Este componente no es autónomo y dependerá de módulos importados.
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+  standalone: false
 })
-export class LoginPage implements OnInit {
-  email: string = ''; // Propiedad para almacenar el correo electrónico ingresado por el usuario.
-  codigo: string = ''; // Propiedad para almacenar el código de clase ingresado por el usuario.
-  cargando: boolean = false; // Propiedad para controlar si se está mostrando la animación de carga.
+export class LoginPage {
+  email: string = '';
+  codigo: string = '';
+  cargando: boolean = false;
+  emailInvalid: boolean = false;
+  codigoInvalid: boolean = false;
+  errorGeneral: string = '';
 
-  // Constructor que inyecta las dependencias necesarias para el componente.
   constructor(
-    private router: Router, // Inyecta el Router para redirigir a otras páginas.
-    private alertController: AlertController, // Inyecta el controlador de alertas.
-    private loadingController: LoadingController // Inyecta el controlador de cargadores (loading).
+    private router: Router,
+    private alertController: AlertController,
+    private loadingController: LoadingController,
+    private apiService: ApiService
   ) {}
 
-  // Función asíncrona que gestiona el inicio de sesión.
   async iniciarSesion() {
-    // Valida si los campos están correctos antes de proceder.
-    if (!this.validarCampos()) return;
+    // Validación inicial
+    this.validarEmail();
+    this.validarCodigo();
+    
+    if (this.emailInvalid || this.codigoInvalid) {
+      this.errorGeneral = 'Por favor complete todos los campos correctamente';
+      return;
+    }
 
-    // Muestra la animación de carga.
     this.cargando = true;
+    this.errorGeneral = '';
+    
     const loading = await this.loadingController.create({
-      message: 'Verificando...', // Mensaje que se muestra durante la carga.
-      spinner: 'crescent' // Tipo de animación (spinner).
+      message: 'Verificando credenciales...',
+      spinner: 'crescent'
     });
-
-    // Muestra el loading en pantalla.
     await loading.present();
 
-    // Redirige al usuario directamente a la página "home".
-    await loading.dismiss();
-    this.cargando = false;
-    this.router.navigate(['/home']); // Redirige a la página de inicio.
-  }
-
-  // Función que valida si los campos de correo y código están completos y son válidos.
- 
-  validarCampos(): boolean {
-    
-    if (!this.email.trim() || !this.codigo.trim()) { // Verifica que los campos no estén vacíos.
-      this.mostrarAlerta('Error', 'Todos los campos son obligatorios.'); // Muestra alerta si falta algún campo.
-      return false; // Si algún campo es vacío, retorna false.
+    try {
+      const respuesta = await this.apiService.login(this.email, this.codigo).toPromise();
+      
+      if (respuesta) {
+        await loading.dismiss();
+        this.router.navigate(['/home']);
+      } else {
+        this.errorGeneral = 'Credenciales incorrectas. Por favor intente nuevamente.';
+      }
+    } catch (error) {
+      console.error('Error en el login:', error);
+      this.errorGeneral = 'Error al conectar con el servidor. Intente más tarde.';
+    } finally {
+      this.cargando = false;
+      await loading.dismiss();
     }
-
-    if (!this.validarEmail(this.email)) { // Verifica si el correo tiene un formato válido.
-      this.mostrarAlerta('Error', 'Ingrese un correo válido.'); // Muestra alerta si el correo es inválido.
-      return false; // Si el correo no es válido, retorna false.
-    }
-
-    return true; // Si todo es válido, retorna true.
   }
 
-  // Función para validar el formato del correo electrónico usando una expresión regular.
-  validarEmail(email: string): boolean {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Expresión regular para validar el correo.
-    return regex.test(email); // Retorna true si el correo es válido según la expresión regular.
+  validarEmail() {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    this.emailInvalid = !regex.test(this.email);
+    return !this.emailInvalid;
   }
 
-  // Función para mostrar una alerta con un encabezado y un mensaje.
-  async mostrarAlerta(header: string, message: string) {
-    const alert = await this.alertController.create({
-      header, // Título de la alerta.
-      message, // Mensaje de la alerta.
-      buttons: ['OK'] // Botón para cerrar la alerta.
-    });
-    await alert.present(); // Muestra la alerta en pantalla.
+  validarCodigo() {
+    this.codigoInvalid = !this.codigo.trim();
+    return !this.codigoInvalid;
   }
-
-  // Método que se ejecuta cuando se inicializa el componente, no se usa aquí.
-  ngOnInit() {}
 }
