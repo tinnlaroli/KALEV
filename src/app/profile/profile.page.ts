@@ -1,43 +1,104 @@
-// Importación de los módulos necesarios de Angular y Chart.js
-import { Component, OnInit } from '@angular/core';  // Importación del decorador 'Component' y la interfaz 'OnInit' de Angular
-import { Chart } from 'chart.js/auto';  // Importación de la librería Chart.js para crear gráficos
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { LoadingController } from '@ionic/angular';
+import { Chart } from 'chart.js/auto';
 
-// Definición del componente 'ProfilePage' con su selector, plantilla y archivo de estilos
 @Component({
-  selector: 'app-profile',  // Nombre del selector que se usará para referirse a este componente en la plantilla HTML
-  templateUrl: './profile.page.html',  // Ruta al archivo de plantilla HTML de este componente
-  styleUrls: ['./profile.page.scss'],  // Ruta al archivo de estilos CSS/SCSS de este componente
-  standalone: false  // Indica que este componente no es autónomo y depende de un módulo (por defecto 'false')
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
+  standalone: false
 })
-// Exportación de la clase del componente 'ProfilePage'
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, AfterViewInit {
+  @ViewChild('spiderChart') spiderChartRef!: ElementRef;
+  
+  estudiante: any = null;
+  cargando: boolean = true;
+  chart: any;
 
-  // Constructor vacío (no realiza ninguna acción en este caso)
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+    private loadingController: LoadingController
+  ) {}
 
-  // Método de inicialización que se ejecuta cuando el componente es creado (no realiza ninguna acción aquí)
-  ngOnInit() {
+  async ngOnInit() {
+    await this.cargarDatosEstudiante();
   }
 
-  // Método que se ejecuta después de que la vista del componente se haya inicializado
   ngAfterViewInit() {
-    // Obtención del contexto del lienzo (canvas) para dibujar el gráfico, con el id 'spiderChart'
-    const ctx = document.getElementById('spiderChart') as HTMLCanvasElement;
+    this.createChart();
+  }
 
-    // Creación de un nuevo gráfico utilizando Chart.js
-    new Chart(ctx, {
-      type: 'radar',  // Tipo de gráfico: 'radar' (gráfico de araña)
-      data: {  // Datos que se van a mostrar en el gráfico
-        labels: ['Kinestésico', 'Auditivo', 'Lectura', 'Escritura', 'Visual'],  // Etiquetas para cada uno de los ejes del gráfico
-        datasets: [  // Conjunto de datos que se van a graficar
-          {
-            label: 'Desempeño',  // Nombre del conjunto de datos que aparecerá en la leyenda
-            data: [80, 60, 82, 90, 75],  // Los valores de desempeño para cada una de las categorías (Kinestésico, Auditivo, etc.)
-            borderColor: 'blue',  // Color del borde del gráfico (líneas del gráfico)
-            backgroundColor: 'rgba(0, 0, 255, 0.2)',  // Color de fondo del área del gráfico (con transparencia)
-          },
-        ],
-      },
+  async cargarDatosEstudiante() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando perfil...',
+      spinner: 'crescent'
     });
+    await loading.present();
+
+    try {
+      this.estudiante = await this.apiService.getDatosEstudiante().toPromise();
+      // Si necesitas actualizar el chart con datos del estudiante:
+      if (this.chart && this.estudiante?.habilidades) {
+        this.updateChartData();
+      }
+    } catch (error) {
+      console.error('Error al cargar datos:', error);
+    } finally {
+      this.cargando = false;
+      await loading.dismiss();
+    }
+  }
+
+  createChart() {
+    const ctx = this.spiderChartRef.nativeElement;
+    this.chart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Kinestésico', 'Auditivo', 'Lectura', 'Escritura', 'Visual'],
+        datasets: [{
+          label: 'Desempeño',
+          data: [80, 60, 82, 90, 75],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+        }]
+      },
+      options: {
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
+
+  updateChartData() {
+    // Ejemplo de cómo actualizar el chart con datos reales del estudiante
+    if (this.estudiante.habilidades) {
+      this.chart.data.datasets[0].data = [
+        this.estudiante.habilidades.kinestesico || 0,
+        this.estudiante.habilidades.auditivo || 0,
+        this.estudiante.habilidades.lectura || 0,
+        this.estudiante.habilidades.escritura || 0,
+        this.estudiante.habilidades.visual || 0
+      ];
+      this.chart.update();
+    }
+  }
+
+  getNombreCompleto(): string {
+    if (!this.estudiante) return 'Nombre del Estudiante';
+    return `${this.estudiante.nombre} ${this.estudiante.ap_paterno} ${this.estudiante.ap_materno}`;
   }
 }
