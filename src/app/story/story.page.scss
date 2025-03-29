@@ -1,0 +1,36 @@
+:host {
+  ion-content {
+    background: linear-gradient(135deg, var(--ion-color-blue), var(--ion-color-teal));
+    font-family: 'Nunito', sans-serif;
+    color: #000;
+    padding: 20px;
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    ion-button {
+      --background: linear-gradient(135deg, var(--ion-color-green), var(--ion-color-teal));
+      --color: #fff;
+      --border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 14px 28px;
+      margin-top: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

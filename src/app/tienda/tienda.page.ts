@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { ConfirmacionCompraComponent } from '../components/confirmacion-compra/confirmacion-compra.component';
 import { CompraExitosaComponent } from '../components/compra-exitosa/compra-exitosa.component';
-import { ApiService } from '../services/api.service';
-import { finalize } from 'rxjs/operators';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-tienda',
@@ -12,13 +11,11 @@ import { finalize } from 'rxjs/operators';
   standalone: false
 })
 export class TiendaPage implements OnInit {
-  // ========== ESTADO ==========
   monedas: number = 1000;
   cargando: boolean = false;
   nombrePersonalizado: string = '';
   mascotaAPersonalizar: any = null;
 
-  // ========== CATÁLOGO ==========
   mascotaActual = {
     id: 4,
     nombre: 'Vaca',
@@ -46,12 +43,10 @@ export class TiendaPage implements OnInit {
     { id: 11, nombre: 'Parche', precio: 60, imagen: 'assets/accesorios/ojos/parche.png' },
   ];
 
-  // ========== INVENTARIO ==========
   mascotasCompradas: any[] = [];
   accesoriosCabezaComprados: any[] = [];
   accesoriosOjosComprados: any[] = [];
 
-  // ========== SELECCIONES ==========
   mascotaSeleccionada: any = { imagen: 'assets/animales_base/vaca_KALEV.png' };
   accesorioCabezaSeleccionado: any = null;
   accesorioOjosSeleccionado: any = null;
@@ -60,44 +55,30 @@ export class TiendaPage implements OnInit {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
-    private apiService: ApiService
-  ) {}
+    private storage: Storage
+  ) {
+    this.storage.create();
+  }
 
   async ngOnInit() {
     await this.cargarDatosIniciales();
   }
 
-  // ========== MÉTODOS DE CARGA ==========
   async cargarDatosIniciales() {
     const loading = await this.mostrarLoading('Cargando datos...');
-    
     try {
-      const estudiante = await this.apiService.getSavedStudent();
-      if (!estudiante) {
-        throw new Error('No se pudo cargar la información del estudiante');
+      this.monedas = (await this.storage.get('monedas')) ?? 1000;
+      this.mascotaSeleccionada = (await this.storage.get('selected_pet')) || this.mascotaSeleccionada;
+
+      const accesorios = await this.storage.get('selected_accessories');
+      if (accesorios) {
+        this.accesorioCabezaSeleccionado = accesorios.cabeza;
+        this.accesorioOjosSeleccionado = accesorios.ojos;
       }
 
-      this.monedas = estudiante.monedas || 1000;
-
-      // Cargar mascota seleccionada
-      const mascotaGuardada = await this.apiService.getSelectedPet();
-      if (mascotaGuardada) {
-        this.mascotaSeleccionada = mascotaGuardada;
-      }
-
-      // Cargar accesorios seleccionados
-      const accesoriosGuardados = await this.apiService.getSelectedAccessories();
-      if (accesoriosGuardados) {
-        this.accesorioCabezaSeleccionado = accesoriosGuardados.cabeza;
-        this.accesorioOjosSeleccionado = accesoriosGuardados.ojos;
-      }
-
-      // Cargar mascotas compradas (inicialmente solo las de precio 0)
-      this.mascotasCompradas = this.mascotas.filter(m => m.precio === 0);
-
-      // Opcional: Cargar historial de compras del servidor
-      // await this.cargarHistorialCompras(estudiante.id_estudiante);
-
+      this.mascotasCompradas = await this.storage.get('mascotas_compradas') || this.mascotas.filter(m => m.precio === 0);
+      this.accesoriosCabezaComprados = await this.storage.get('accesorios_cabeza_comprados') || [];
+      this.accesoriosOjosComprados = await this.storage.get('accesorios_ojos_comprados') || [];
     } catch (error) {
       console.error('Error al cargar datos:', error);
       await this.mostrarAlerta('Error', 'No se pudieron cargar los datos iniciales');
@@ -106,7 +87,33 @@ export class TiendaPage implements OnInit {
     }
   }
 
-  // ========== MÉTODOS DE COMPRA ==========
+  async personalizarMascota() {
+    if (!this.nombrePersonalizado || !this.mascotaAPersonalizar) {
+      await this.mostrarAlerta('Error', 'Por favor completa todos los campos');
+      return;
+    }
+
+    if (this.nombrePersonalizado.length < 2 || this.nombrePersonalizado.length > 20) {
+      await this.mostrarAlerta('Error', 'El nombre debe tener entre 2 y 20 caracteres');
+      return;
+    }
+
+    const index = this.mascotasCompradas.findIndex(m => m.id === this.mascotaAPersonalizar.id);
+    if (index !== -1) {
+      this.mascotasCompradas[index].nombre = this.nombrePersonalizado;
+      await this.storage.set('mascotas_compradas', this.mascotasCompradas);
+
+      if (this.mascotaSeleccionada.id === this.mascotaAPersonalizar.id) {
+        this.mascotaSeleccionada = this.mascotasCompradas[index];
+        await this.storage.set('selected_pet', this.mascotaSeleccionada);
+      }
+
+      await this.mostrarAlerta('Éxito', `¡${this.nombrePersonalizado} personalizado con éxito!`);
+      this.nombrePersonalizado = '';
+      this.mascotaAPersonalizar = null;
+    }
+  }
+
   async comprarMascota() {
     if (this.monedas < this.mascotaActual.precio) {
       await this.mostrarAlerta('Error', 'No tienes suficientes monedas');
@@ -155,44 +162,28 @@ export class TiendaPage implements OnInit {
 
   async procesarCompra(item: any, tipo: string) {
     const loading = await this.mostrarLoading('Procesando compra...');
-    
+
     try {
-      const estudiante = await this.apiService.getSavedStudent();
-      if (!estudiante) {
-        throw new Error('No se encontró información del estudiante');
-      }
-
-      // Realizar la compra en el servidor
-      await this.apiService.realizarCompra({
-        id_usuario: estudiante.id_estudiante,
-        id_item: item.id,
-        cantidad: 1,
-        costo_total: item.precio
-      }).toPromise();
-
-      // Actualizar estado local
       this.monedas -= item.precio;
-      
-      // Actualizar monedas en el storage
-      estudiante.monedas = this.monedas;
-      await this.apiService.saveAuthData(localStorage.getItem('token') || '', estudiante);
+      await this.storage.set('monedas', this.monedas);
 
-      // Agregar al inventario correspondiente
       switch (tipo) {
         case 'mascota':
           this.mascotasCompradas.push({...item});
+          await this.storage.set('mascotas_compradas', this.mascotasCompradas);
           break;
         case 'accesorio-cabeza':
           this.accesoriosCabezaComprados.push({...item});
+          await this.storage.set('accesorios_cabeza_comprados', this.accesoriosCabezaComprados);
           break;
         case 'accesorio-ojos':
           this.accesoriosOjosComprados.push({...item});
+          await this.storage.set('accesorios_ojos_comprados', this.accesoriosOjosComprados);
           break;
       }
 
       await loading.dismiss();
       await this.mostrarCompraExitosa(item);
-
     } catch (error) {
       console.error('Error en la compra:', error);
       await loading.dismiss();
@@ -200,85 +191,9 @@ export class TiendaPage implements OnInit {
     }
   }
 
-  // ========== MÉTODOS DE PERSONALIZACIÓN ==========
-  async personalizarMascota() {
-    if (!this.nombrePersonalizado || !this.mascotaAPersonalizar) {
-      await this.mostrarAlerta('Error', 'Por favor completa todos los campos');
-      return;
-    }
-  
-    if (this.nombrePersonalizado.length < 2 || this.nombrePersonalizado.length > 20) {
-      await this.mostrarAlerta('Error', 'El nombre debe tener entre 2 y 20 caracteres');
-      return;
-    }
-  
-    const loading = await this.mostrarLoading('Personalizando mascota...');
-  
-    try {
-      const estudiante = await this.apiService.getSavedStudent();
-      if (!estudiante) {
-        throw new Error('No se encontró información del estudiante');
-      }
-  
-      // Crear la mascota en el servidor
-      const mascotaCreada = await this.apiService.crearMascota({
-        id_jugador: estudiante.id_estudiante,
-        nombre_animal: this.nombrePersonalizado,
-        tipo_animal: this.mascotaAPersonalizar.nombre.toLowerCase()
-      }).toPromise();
-  
-      // Verificar que mascotaCreada no sea undefined
-      if (!mascotaCreada || !mascotaCreada.id_animal) {
-        throw new Error('No se recibió una respuesta válida al crear la mascota');
-      }
-  
-      // Actualizar el estado local
-      const mascotaActualizada = {
-        ...this.mascotaAPersonalizar,
-        id: mascotaCreada.id_animal,
-        nombre: this.nombrePersonalizado,
-        nombreOriginal: this.mascotaAPersonalizar.nombre // Mantener el nombre original como referencia
-      };
-  
-      // Actualizar mascotas compradas
-      const index = this.mascotasCompradas.findIndex(m => m.id === this.mascotaAPersonalizar.id);
-      if (index !== -1) {
-        this.mascotasCompradas[index] = {...mascotaActualizada};
-      }
-  
-      // Actualizar mascota seleccionada si es la misma
-      if (this.mascotaSeleccionada.id === this.mascotaAPersonalizar.id) {
-        this.mascotaSeleccionada = {...mascotaActualizada};
-        await this.apiService.saveSelectedPet(mascotaActualizada);
-      }
-  
-      // Actualizar la lista de mascotas disponibles
-      const mascotaIndex = this.mascotas.findIndex(m => m.id === this.mascotaAPersonalizar.id);
-      if (mascotaIndex !== -1) {
-        this.mascotas[mascotaIndex] = {...mascotaActualizada};
-      }
-  
-      await loading.dismiss();
-      await this.mostrarAlerta('Éxito', `¡${this.nombrePersonalizado} personalizado con éxito!`);
-      this.resetFormularioPersonalizacion();
-  
-    } catch (error: any) {
-      await loading.dismiss();
-      console.error('Error en personalización:', error);
-      const mensaje = error.error?.message || error.message || 'Ocurrió un error al personalizar la mascota';
-      await this.mostrarAlerta('Error', mensaje);
-    }
-  }
-
-  // ========== MÉTODOS DE SELECCIÓN ==========
-  async seleccionarMascotaParaPersonalizar(mascota: any) {
-    this.mascotaAPersonalizar = mascota;
-    this.nombrePersonalizado = mascota.nombre;
-  }
-
   async usarMascota(mascota: any) {
     this.mascotaSeleccionada = mascota;
-    await this.apiService.saveSelectedPet(mascota);
+    await this.storage.set('selected_pet', mascota);
     await this.mostrarAlerta('Éxito', `Ahora usas ${mascota.nombre}`);
   }
 
@@ -303,13 +218,12 @@ export class TiendaPage implements OnInit {
   }
 
   private async guardarAccesorios() {
-    await this.apiService.saveSelectedAccessories({
+    await this.storage.set('selected_accessories', {
       cabeza: this.accesorioCabezaSeleccionado,
       ojos: this.accesorioOjosSeleccionado
     });
   }
 
-  // ========== MÉTODOS AUXILIARES ==========
   private async mostrarLoading(mensaje: string): Promise<HTMLIonLoadingElement> {
     const loading = await this.loadingCtrl.create({
       message: mensaje,
@@ -329,35 +243,36 @@ export class TiendaPage implements OnInit {
   }
 
   private async mostrarCompraExitosa(item: any) {
+    const estudiante = {
+      nombre: 'Estudiante Demo', // ⚠️ Puedes obtenerlo desde storage o un servicio real
+      correo: 'demo@kalev.com'
+    };
+  
     const modal = await this.modalCtrl.create({
       component: CompraExitosaComponent,
       componentProps: {
-        item: item,
-        monedasRestantes: this.monedas
+        itemComprado: item,
+        estudiante: estudiante
       }
     });
+
+    
     await modal.present();
   }
+  
 
-  private resetFormularioPersonalizacion() {
-    this.nombrePersonalizado = '';
-    this.mascotaAPersonalizar = null;
-  }
-
-  // ========== NAVEGACIÓN CATÁLOGO ==========
   siguienteMascota() {
     const indiceActual = this.mascotas.findIndex(m => m.id === this.mascotaActual.id);
     const nuevoIndice = (indiceActual + 1) % this.mascotas.length;
     this.mascotaActual = this.mascotas[nuevoIndice];
   }
-  
+
   anteriorMascota() {
     const indiceActual = this.mascotas.findIndex(m => m.id === this.mascotaActual.id);
     const nuevoIndice = (indiceActual - 1 + this.mascotas.length) % this.mascotas.length;
     this.mascotaActual = this.mascotas[nuevoIndice];
   }
 
-  // ========== HELPERS ==========
   mascotaComprada(id: number): boolean {
     return this.mascotasCompradas.some(m => m.id === id);
   }

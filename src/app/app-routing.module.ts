@@ -30,6 +30,18 @@ const routes: Routes = [
   {
     path: 'tienda',
     loadChildren: () => import('./tienda/tienda.module').then( m => m.TiendaPageModule)
+  },
+  {
+    path: 'score',
+    loadChildren: () => import('./score/score.module').then( m => m.ScorePageModule)
+  },
+  {
+    path: 'quiz',
+    loadChildren: () => import('./quiz/quiz.module').then( m => m.QuizPageModule)
+  },
+  {
+    path: 'story',
+    loadChildren: () => import('./story/story.module').then( m => m.StoryPageModule)
   }
 ];
 @NgModule({

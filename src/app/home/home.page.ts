@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { LevelModalComponent } from '../level-modal/level-modal.component';
 import { CongratulationsModalComponent } from '../congratulations-modal/congratulations-modal.component';
 
@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
     { id: 10, unlocked: false, color: '#FF4500' },
   ];
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, private navCtrl: NavController) {}
 
   ngOnInit() {}
 
@@ -33,14 +33,18 @@ export class HomePage implements OnInit {
       componentProps: { level },
     });
     await modal.present();
-
+  
     const { data } = await modal.onDidDismiss();
+  
+    if (data?.jugar && data?.levelId) {
+      this.navCtrl.navigateForward(`/story?level=${data.levelId}`);
 
-    if (data?.nextLevel) {
+    } else if (data?.nextLevel) {
       this.unlockNextLevel(level.id);
       this.showCongratulationsModal(level);
     }
   }
+  
 
   async showCongratulationsModal(level: any) {
     const modal = await this.modalController.create({

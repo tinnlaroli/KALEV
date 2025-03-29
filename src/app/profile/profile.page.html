@@ -1,52 +1,59 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Mi Perfil</ion-title>
+    <ion-title class="ion-text-center">Perfil del Estudiante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="isLoading" class="ion-text-center ion-padding">
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Cargando perfil...</p>
-  </div>
+  <ng-container *ngIf="!isLoading && estudiante; else cargando">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">{{ estudiante.nombre }}</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">{{ estudiante.correo }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="ion-text-center">
+        <p><strong>Grupo:</strong> {{ estudiante.nombre_grupo }}</p>
+        <p><strong>Grado:</strong> {{ estudiante.grado }}</p>
+        <p><strong>Monedas:</strong> {{ estudiante.monedas }}</p>
 
-  <ion-card *ngIf="!isLoading && estudiante">
-    <ion-card-header>
-      <ion-card-title>
-        {{ estudiante.nombre }} {{ estudiante.ap_paterno }} {{ estudiante.ap_materno }}
-      </ion-card-title>
-      <ion-card-subtitle>Estudiante - {{ estudiante.grado }}</ion-card-subtitle>
-    </ion-card-header>
+        <p *ngIf="aliasGuardado"><strong>Alias:</strong> {{ aliasGuardado }}</p>
 
-    <ion-card-content>
-      <ion-list lines="none">
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Alias del Jugador</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
         <ion-item>
-          <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-label>Correo electrónico</ion-label>
-          <ion-text>{{ estudiante.correo }}</ion-text>
+          <ion-label position="floating">Nickname</ion-label>
+          <ion-input [(ngModel)]="alias" placeholder="Ej. Súper Gamer"></ion-input>
         </ion-item>
+        <ion-button expand="block" color="primary" (click)="guardarAlias()">
+          Guardar Alias
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
 
+    
 
-        <ion-item>
-          <ion-icon name="school-outline" slot="start"></ion-icon>
-          <ion-label>Grado</ion-label>
-          
-          <ion-text>{{ estudiante.grado }}</ion-text>
-        </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Estilo de Aprendizaje</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="chart-container">
+          <canvas id="spiderChart" width="300" height="300"></canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
-        <ion-item>
-          <ion-icon name="people-outline" slot="start"></ion-icon>
-          <ion-label>Grupo</ion-label>
-          <ion-text>{{ estudiante.nombre_grupo }}</ion-text>
-        </ion-item>
-
-      
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  <div *ngIf="!isLoading && !estudiante" class="ion-text-center ion-padding">
-    <ion-icon name="warning-outline" size="large"></ion-icon>
-    <p>No se encontraron datos del estudiante</p>
-  </div>
+  <ng-template #cargando>
+    <ion-spinner name="crescent" class="ion-text-center"></ion-spinner>
+    <p class="ion-text-center">Cargando perfil...</p>
+  </ng-template>
 </ion-content>

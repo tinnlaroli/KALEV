@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -16,27 +16,26 @@ export class LoginPage {
   cargando: boolean = false;
   emailInvalid: boolean = false;
   codigoInvalid: boolean = false;
-  errorGeneral: string = '';
 
   constructor(
     private router: Router,
     private alertController: AlertController,
     private loadingController: LoadingController,
+    private toastController: ToastController,
     private apiService: ApiService
   ) {}
 
   async iniciarSesion() {
     this.validarEmail();
     this.validarCodigo();
-    
+
     if (this.emailInvalid || this.codigoInvalid) {
-      this.errorGeneral = 'Por favor complete todos los campos correctamente';
+      this.mostrarToast('Por favor completa todos los campos correctamente', 'warning');
       return;
     }
 
     this.cargando = true;
-    this.errorGeneral = '';
-    
+
     const loading = await this.loadingController.create({
       message: 'Verificando credenciales...',
       spinner: 'crescent'
@@ -44,40 +43,22 @@ export class LoginPage {
     await loading.present();
 
     try {
-      const respuesta = await this.apiService.login(this.email, this.codigo).toPromise();
-      
+      const respuesta = await this.apiService.login(this.email, this.codigo);
+
       if (respuesta?.success) {
-        await this.apiService.saveAuthData(respuesta.token, respuesta.estudiante);
         await loading.dismiss();
-        this.router.navigate(['/home']); // Cambiado a '/profile' para ir directo al perfil
+        this.mostrarToast('¡Bienvenido, ' + respuesta.estudiante.nombre + '!', 'success');
+        this.router.navigate(['/home']);
       } else {
-        this.errorGeneral = respuesta?.message || 'Credenciales incorrectas. Por favor intente nuevamente.';
+        await loading.dismiss();
+        this.mostrarToast(respuesta?.message || 'Credenciales incorrectas');
       }
-    } catch (error: unknown) {
-      this.manejarError(error);
+    } catch (error: any) {
+      await loading.dismiss();
+      this.mostrarToast(this.getMensajeError(error));
     } finally {
       this.cargando = false;
-      await loading.dismiss();
     }
-  }
-
-  private manejarError(error: unknown) {
-    if (error instanceof HttpErrorResponse) {
-      if (error.status === 400) {
-        this.errorGeneral = error.error?.message || 'Credenciales incorrectas o formato inválido';
-      } else if (error.status === 401) {
-        this.errorGeneral = 'No autorizado. Verifique sus credenciales.';
-      } else if (error.status >= 500) {
-        this.errorGeneral = 'Error en el servidor. Por favor intente más tarde.';
-      } else {
-        this.errorGeneral = 'Error al conectar con el servidor';
-      }
-    } else if (typeof error === 'string') {
-      this.errorGeneral = error;
-    } else {
-      this.errorGeneral = 'Error desconocido al iniciar sesión';
-    }
-    console.error('Error en el login:', error);
   }
 
   validarEmail() {
@@ -89,5 +70,28 @@ export class LoginPage {
   validarCodigo() {
     this.codigoInvalid = !this.codigo.trim();
     return !this.codigoInvalid;
+  }
+
+  private getMensajeError(error: any): string {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 0) return 'Error de conexión con el servidor';
+      if (error.status === 401) return 'Credenciales inválidas';
+      if (error.status === 500) return 'Error del servidor, intenta más tarde';
+      return error.error?.message || 'Ocurrió un error inesperado';
+    }
+    return typeof error === 'string' ? error : 'Error desconocido';
+  }
+
+  private async mostrarToast(
+    mensaje: string,
+    color: 'danger' | 'success' | 'warning' = 'danger'
+  ) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'top',
+      color
+    });
+    toast.present();
   }
 }

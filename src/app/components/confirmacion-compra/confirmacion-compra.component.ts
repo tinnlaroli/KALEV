@@ -34,3 +34,4 @@ export class ConfirmacionCompraComponent {
     return `¿Comprar ${this.item.nombre} por ${this.item.precio} monedas?`;
   }
 }
+

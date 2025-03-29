@@ -1,0 +1,8 @@
+<ion-content class="ion-padding">
+  <h1>¡Tu puntuación es: {{ score }}/7!</h1>
+  <p *ngIf="score === 7">¡Excelente comprensión!</p>
+  <p *ngIf="score >= 5 && score < 7">¡Muy bien! Has superado el nivel.</p>
+  <p *ngIf="score < 5">Sigue practicando para superar el nivel.</p>
+
+  <ion-button expand="block" routerLink="/home">Volver a niveles</ion-button>
+</ion-content>

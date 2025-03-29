@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Título de la página -->
     <ion-title>Tienda</ion-title>
-    <!-- Sección que muestra las monedas -->
     <ion-buttons slot="end">
       <ion-chip color="warning">
         <ion-label>💰 {{ monedas }} monedas</ion-label>
@@ -11,107 +9,82 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Contenido -->
 <ion-content fullscreen>
 
-  <!-- Sección para mostrar la selección actual -->
-<ion-row style="margin: 20px 0; justify-content: center; text-align: center; background: #f5f5f5; padding: 15px; border-radius: 10px;">
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <h3>Tu avatar actual</h3>
-    
-    <!-- Mascota -->
-    <div style="position: relative; margin-bottom: 20px;">
-      <img [src]="mascotaSeleccionada.imagen" style="width: 150px; height: 150px;" />
-      <p>{{mascotaSeleccionada.nombre || 'Mascota base'}}</p>
-      
-      <!-- Accesorio cabeza (superpuesto) -->
-      <img *ngIf="accesorioCabezaSeleccionado" 
-           [src]="accesorioCabezaSeleccionado.imagen" 
-           style="position: absolute; top: 0; left: 0; width: 150px; height: 150px;" />
-      
-      <!-- Accesorio ojos (superpuesto) -->
-      <img *ngIf="accesorioOjosSeleccionado" 
-           [src]="accesorioOjosSeleccionado.imagen" 
-           style="position: absolute; top: 0; left: 0; width: 150px; height: 150px;" />
+  <!-- Avatar actual -->
+  <ion-row class="ion-padding" style="justify-content: center; text-align: center;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3>Tu avatar actual</h3>
+
+      <div style="position: relative; margin-bottom: 20px;">
+        <img [src]="mascotaSeleccionada.imagen" style="width: 150px; height: 150px;" />
+        <p>{{ mascotaSeleccionada.nombre || 'Mascota base' }}</p>
+
+        <img *ngIf="accesorioCabezaSeleccionado"
+             [src]="accesorioCabezaSeleccionado.imagen"
+             style="position: absolute; top: 0; left: 0; width: 150px; height: 150px;" />
+
+        <img *ngIf="accesorioOjosSeleccionado"
+             [src]="accesorioOjosSeleccionado.imagen"
+             style="position: absolute; top: 0; left: 0; width: 150px; height: 150px;" />
+      </div>
+
+      <div *ngIf="accesorioCabezaSeleccionado">
+        <small>Accesorio cabeza: {{ accesorioCabezaSeleccionado.nombre }}</small>
+      </div>
+      <div *ngIf="accesorioOjosSeleccionado">
+        <small>Accesorio ojos: {{ accesorioOjosSeleccionado.nombre }}</small>
+      </div>
     </div>
-    
-    <div *ngIf="accesorioCabezaSeleccionado">
-      <small>Accesorio cabeza: {{accesorioCabezaSeleccionado.nombre}}</small>
-    </div>
-    
-    <div *ngIf="accesorioOjosSeleccionado">
-      <small>Accesorio ojos: {{accesorioOjosSeleccionado.nombre}}</small>
-    </div>
-  </div>
-</ion-row>
+  </ion-row>
 
-<!-- Formulario para personalizar mascota -->
+  <!-- Personalizar mascota -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Personalizar Mascota</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nombre para tu mascota</ion-label>
+        <ion-input [(ngModel)]="nombrePersonalizado" placeholder="Ej. Firulais" required></ion-input>
+      </ion-item>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Personalizar Mascota</ion-card-title>
-  </ion-card-header>
+      <ion-item>
+        <ion-label>Mascota a personalizar</ion-label>
+        <ion-select [(ngModel)]="mascotaAPersonalizar" interface="action-sheet" required>
+          <ion-select-option *ngFor="let mascota of mascotasCompradas" [value]="mascota">
+            {{ mascota.nombre }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-card-content>
-    <ion-item>
-      <ion-label position="floating">Nombre para tu mascota</ion-label>
-      <ion-input 
-        [(ngModel)]="nombrePersonalizado" 
-        placeholder="Ej. Firulais"
-        required>
-      </ion-input>
-    </ion-item>
+      <ion-button expand="block" (click)="personalizarMascota()" [disabled]="!nombrePersonalizado || !mascotaAPersonalizar">
+        Personalizar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-item>
-      <ion-label>Mascota a personalizar</ion-label>
-      <ion-select 
-        [(ngModel)]="mascotaAPersonalizar" 
-        interface="action-sheet"
-        required>
-        <ion-select-option 
-          *ngFor="let mascota of mascotasCompradas" 
-          [value]="mascota">
-          {{mascota.nombre}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button 
-      expand="block" 
-      (click)="personalizarMascota()"
-      [disabled]="!nombrePersonalizado || !mascotaAPersonalizar">
-      Personalizar
+  <!-- Navegación de mascotas -->
+  <ion-row class="ion-padding" style="align-items: center; justify-content: center; text-align: center;">
+    <ion-button color="secondary" (click)="anteriorMascota()" style="margin-right: 10px;">
+      &lt;
     </ion-button>
-  </ion-card-content>
-</ion-card>
 
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img [src]="mascotaActual.imagen" style="width: 150px; height: 150px;" />
+      <p>{{ mascotaActual.nombre }} - {{ mascotaActual.precio }} monedas</p>
 
-
-<!-- Sección Mascotas -->
-<ion-row class="mascota-container" style="align-items: center; justify-content: center; text-align: center;">
-  <ion-button color="secondary" (click)="anteriorMascota()" style="margin-right: 10px;">
-    <
-  </ion-button>
-  
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <img [src]="mascotaActual.imagen" style="width: 150px; height: 150px;" />
-    <p>{{mascotaActual.nombre}} - {{mascotaActual.precio}} monedas</p>
-    
-    <div *ngIf="!mascotaComprada(mascotaActual.id)">
-      <ion-button color="success" (click)="comprarMascota()">
-        Comprar
-      </ion-button>
+      <div *ngIf="!mascotaComprada(mascotaActual.id)">
+        <ion-button color="success" (click)="comprarMascota()">Comprar</ion-button>
+      </div>
+      <div *ngIf="mascotaComprada(mascotaActual.id)">
+        <ion-button color="primary" (click)="usarMascota(mascotaActual)">Usar</ion-button>
+      </div>
     </div>
-    <div *ngIf="mascotaComprada(mascotaActual.id)">
-      <ion-button color="primary" (click)="usarMascota(mascotaActual)">
-        Usar
-      </ion-button>
-    </div>
-  </div>
-  
-  <ion-button color="secondary" (click)="siguienteMascota()" style="margin-left: 10px;">
-    >
-  </ion-button>
-</ion-row>
 
-<!-- Resto del código sigue igual... -->
+    <ion-button color="secondary" (click)="siguienteMascota()" style="margin-left: 10px;">
+      &gt;
+    </ion-button>
+  </ion-row>
+
+</ion-content>

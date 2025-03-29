@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-level-modal',
@@ -10,14 +10,26 @@ import { ModalController } from '@ionic/angular';
 export class LevelModalComponent {
   @Input() level: any;
 
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController, private navCtrl: NavController) {}
+
+  startGame() {
+    this.modalController.dismiss(); // Cierra el modal
+    this.navCtrl.navigateForward(`/story?level=${this.level.id}`);
+  }
 
   close() {
     this.modalController.dismiss();
   }
 
-  play() {
-    console.log('Jugando nivel:', this.level.id);
-    this.modalController.dismiss({ nextLevel: true }); // Aquí indicamos que se desbloquee el siguiente nivel
+  
+  async play() {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  
+    // Solo cierra el modal, y deja que HomePage navegue
+    await this.modalController.dismiss({ jugar: true, levelId: this.level.id });
   }
+  
+  
 }

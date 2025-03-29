@@ -1,0 +1,11 @@
+<ion-content class="ion-padding">
+  <!-- Mostrar la pregunta actual -->
+  <h2>{{ questions[currentIndex]?.text }}</h2> 
+
+  <!-- Listar las opciones de respuesta -->
+  <ion-list>
+    <ion-item *ngFor="let option of questions[currentIndex]?.options" (click)="selectOption(option)">
+      {{ option }}
+    </ion-item>
+  </ion-list>
+</ion-content>

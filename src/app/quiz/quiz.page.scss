@@ -1,0 +1,32 @@
+ion-content {
+    background: linear-gradient(135deg, var(--ion-color-coral), var(--ion-color-yellow));
+    font-family: 'Nunito', sans-serif;
+    color: #000;
+    padding: 20px;
+  
+    h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+  
+    ion-item {
+      --background: var(--ion-color-peach);
+      --color: #000;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 14px;
+      transition: transform 0.2s ease;
+  
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+  
+    ion-list {
+      background: transparent;
+    }
+  }
+  
