@@ -1,52 +1,50 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>PERFIL</ion-title>
+    <ion-title>Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="content-wrapper">
-    <ion-card class="profile-card">
-      <ion-card-content class="center-content">
-        <ion-avatar>
-          <img [src]="estudiante?.foto || 'assets/alumno.png'" alt="Foto del estudiante">
-        </ion-avatar>
+<ion-content class="ion-padding">
+  <div *ngIf="isLoading" class="ion-text-center ion-padding">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando perfil...</p>
+  </div>
 
-        <h2 class="student-name" style="padding-top: 20px;">
-          {{ cargando ? 'Cargando...' : getNombreCompleto() }}
-        </h2>
+  <ion-card *ngIf="!isLoading && estudiante">
+    <ion-card-header>
+      <ion-card-title>
+        {{ estudiante.nombre }} {{ estudiante.ap_paterno }} {{ estudiante.ap_materno }}
+      </ion-card-title>
+      <ion-card-subtitle>Estudiante - {{ estudiante.grado }}</ion-card-subtitle>
+    </ion-card-header>
 
-        <div *ngIf="!cargando">
-          <p class="student-info" *ngIf="estudiante?.correo">
-            Correo: {{ estudiante.correo }}
-          </p>
-          <p class="student-info" *ngIf="estudiante?.grupo?.nombre_grupo">
-            Grupo: {{ estudiante.grupo.nombre_grupo }}
-          </p>
-          <p class="student-info" *ngIf="estudiante?.juego?.nombre_juego">
-            Juego: {{ estudiante.juego.nombre_juego }}
-          </p>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-label>Correo electrónico</ion-label>
+          <ion-text>{{ estudiante.correo }}</ion-text>
+        </ion-item>
 
-          <p class="no-data" *ngIf="!estudiante">
-            No se pudieron cargar los datos del estudiante
-          </p>
-        </div>
+        <ion-item>
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          <ion-label>Grupo</ion-label>
+          <ion-text>{{ estudiante.nombre_grupo }}</ion-text>
+        </ion-item>
 
-        <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
-      </ion-card-content>
-    </ion-card>
+        <ion-item>
+          <ion-icon name="school-outline" slot="start"></ion-icon>
+          <ion-label>Grado</ion-label>
+          <ion-text>{{ estudiante.grado }}</ion-text>
+        </ion-item>
 
-    <!-- Sección del gráfico -->
-    <ion-card class="chart-card">
-      <ion-card-header>
-        <ion-card-title>Mis Habilidades</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="chart-container">
-          <canvas #spiderChart></canvas>
-        </div>
-        <p class="status-update">¡Sigue mejorando tus habilidades!</p>
-      </ion-card-content>
-    </ion-card>
+        
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!isLoading && !estudiante" class="ion-text-center ion-padding">
+    <ion-icon name="warning-outline" size="large"></ion-icon>
+    <p>No se encontraron datos del estudiante</p>
   </div>
 </ion-content>

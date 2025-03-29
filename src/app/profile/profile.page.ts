@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { LoadingController } from '@ionic/angular';
-import { Chart } from 'chart.js/auto';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -9,96 +8,45 @@ import { Chart } from 'chart.js/auto';
   styleUrls: ['./profile.page.scss'],
   standalone: false
 })
-export class ProfilePage implements OnInit, AfterViewInit {
-  @ViewChild('spiderChart') spiderChartRef!: ElementRef;
-  
+export class ProfilePage implements OnInit {
   estudiante: any = null;
-  cargando: boolean = true;
-  chart: any;
+  isLoading: boolean = true;
 
   constructor(
     private apiService: ApiService,
-    private loadingController: LoadingController
+    private alertController: AlertController
   ) {}
 
   async ngOnInit() {
     await this.cargarDatosEstudiante();
   }
 
-  ngAfterViewInit() {
-    this.createChart();
+  async ionViewWillEnter() {
+    await this.cargarDatosEstudiante();
   }
 
   async cargarDatosEstudiante() {
-    const loading = await this.loadingController.create({
-      message: 'Cargando perfil...',
-      spinner: 'crescent'
-    });
-    await loading.present();
-
+    this.isLoading = true;
     try {
-      this.estudiante = await this.apiService.getDatosEstudiante().toPromise();
-      // Si necesitas actualizar el chart con datos del estudiante:
-      if (this.chart && this.estudiante?.habilidades) {
-        this.updateChartData();
+      this.estudiante = await this.apiService.getSavedStudent();
+      
+      if (!this.estudiante) {
+        await this.mostrarAlerta('No se encontraron datos del estudiante');
       }
     } catch (error) {
       console.error('Error al cargar datos:', error);
+      await this.mostrarAlerta('Error al cargar el perfil');
     } finally {
-      this.cargando = false;
-      await loading.dismiss();
+      this.isLoading = false;
     }
   }
 
-  createChart() {
-    const ctx = this.spiderChartRef.nativeElement;
-    this.chart = new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['Kinestésico', 'Auditivo', 'Lectura', 'Escritura', 'Visual'],
-        datasets: [{
-          label: 'Desempeño',
-          data: [80, 60, 82, 90, 75],
-          borderColor: 'rgba(75, 192, 192, 1)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
-        }]
-      },
-      options: {
-        scales: {
-          r: {
-            angleLines: {
-              display: true
-            },
-            suggestedMin: 0,
-            suggestedMax: 100
-          }
-        },
-        responsive: true,
-        maintainAspectRatio: false
-      }
+  private async mostrarAlerta(mensaje: string) {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: mensaje,
+      buttons: ['OK']
     });
-  }
-
-  updateChartData() {
-    // Ejemplo de cómo actualizar el chart con datos reales del estudiante
-    if (this.estudiante.habilidades) {
-      this.chart.data.datasets[0].data = [
-        this.estudiante.habilidades.kinestesico || 0,
-        this.estudiante.habilidades.auditivo || 0,
-        this.estudiante.habilidades.lectura || 0,
-        this.estudiante.habilidades.escritura || 0,
-        this.estudiante.habilidades.visual || 0
-      ];
-      this.chart.update();
-    }
-  }
-
-  getNombreCompleto(): string {
-    if (!this.estudiante) return 'Nombre del Estudiante';
-    return `${this.estudiante.nombre} ${this.estudiante.ap_paterno} ${this.estudiante.ap_materno}`;
+    await alert.present();
   }
 }
