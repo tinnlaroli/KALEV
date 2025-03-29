@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { ContentComponent } from './landingComponent/content/content.component';
 import { HeaderComponent } from './landingComponent/header/header.component';
 import { FooterComponent } from './landingComponent/footer/footer.component';
+import { PrivacidadComponent } from './pages/privacidad/privacidad.component';
+import { TerminosComponent } from './pages/terminos/terminos.component';
+
 
 @NgModule({
   declarations: [
@@ -13,6 +16,8 @@ import { FooterComponent } from './landingComponent/footer/footer.component';
     ContentComponent,
     FooterComponent,
     HeaderComponent,
+    PrivacidadComponent,
+    TerminosComponent
   ],
   imports: [
     BrowserModule,

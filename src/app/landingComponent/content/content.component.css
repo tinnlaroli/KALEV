@@ -1,6 +1,264 @@
-#inicio {
-    background-color: #ededee;
-    background-image: url('/public/assets/background.jpg');
-    background-size: cover;
-    background-position: center;
+/* ========== Animaciones ========== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 1.5s ease-in-out; }
+.fade-in-up { animation: fadeInUp 1.5s ease-in-out; }
+
+/* ========== Estilos generales ========== */
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #ededee;
+}
+h1, h3 { font-weight: bold; }
+h3:hover, h1:hover { color: #FF5147; cursor: pointer; transition: color 0.3s ease; }
+h1.display-4:hover { color: #0081A7; cursor: pointer; transition: color 0.3s ease; }
+
+/* ========== Navbar ========== */
+.navbar-nav .nav-link {
+  position: relative;
+  font-size: 1.2rem;
+  padding: 5px 15px;
+  transition: color 0.3s ease-in-out;
+}
+.navbar-nav .nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #0081A7;
+  transition: width 0.3s ease-in-out;
+  margin: auto;
+}
+.navbar-nav .nav-link:hover::after { width: 100%; }
+
+/* ========== Botones y tarjetas ========== */
+.btn-hover {
+  transition: all 0.3s ease-in-out;
+}
+.btn-hover:hover {
+  background-color: #0081A7;
+  color: #EDEDEE;
+  transform: scale(1.05);
+}
+.card-hover {
+  transition: all 0.3s ease-in-out;
+  padding: 20px;
+  background-color: #EDEDEE;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+.card-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== Flip Cards ========== */
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 60s; /* <- 60s para 1 minuto de flip */
+  transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.flip-card-front {
+  z-index: 2;
+  background-color: #ffffff;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  background-color: #f8f9fa;
+  overflow-y: auto;
+}
+
+/* ========== Imagen Flip (tamaño reducido) ========== */
+.flip-card-front img {
+  width: 100%;
+  height: 160px; /* Imagen más pequeña */
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+/* ========== Responsive Image Reduction (opcional) ========== */
+@media (max-width: 576px) {
+  .flip-card-front img {
+    height: 120px;
+  }
+}
+
+/* ========== Otros estilos de texto decorativo ========== */
+.letter-3d {
+  display: inline-block;
+  position: relative;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #ffffff,
+               2px 2px 0 #ffffff,
+               3px 3px 0 rgba(0,0,0,0.2);
+  animation: bounce 1.5s infinite ease-in-out;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px); }
+  60% { transform: translateY(-10px); }
+}
+.letter-3d:nth-child(1) { animation-delay: 0s; }
+.letter-3d:nth-child(2) { animation-delay: 0.1s; }
+.letter-3d:nth-child(3) { animation-delay: 0.2s; }
+.letter-3d:nth-child(4) { animation-delay: 0.3s; }
+.letter-3d:nth-child(5) { animation-delay: 0.4s; }
+
+/* ========== Imagen transparente (sin bordes) ========== */
+.img-transparent {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 1.2s ease forwards;
+}
+
+.delay-1s {
+  animation-delay: 1s;
+}
+
+
+.card-img-custom {
+  width: 100%;
+  height: 220px;
+  object-fit: contain; /* ← Esto evita el recorte */
+  object-position: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: #f8f9fa; /* Opcional: color de fondo si hay espacio */
+}
+
+/* Efecto de brillo en texto */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                 0 0 30px currentColor,
+                 0 0 40px currentColor;
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+}
+
+/* Estilo cuando el cursor pasa por la tarjeta */
+.card-hover:hover {
+  background-color: #ffffff; /* Fondo más claro al hacer hover */
+  transform: scale(1.05);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Aplica el brillo al título dentro de la tarjeta en hover */
+.card-hover:hover .card-title {
+  animation: glow 1.5s infinite alternate;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* ========== Hover color + brillo en título ========== */
+.card-hover {
+  transition: all 0.4s ease;
+  background-color: #EDEDEE;
+  color: #333;
+}
+
+.card-hover:hover {
+  background-color: #4EBC97 !important;
+  color: white;
+}
+
+/* Brillo en el título */
+.card-hover:hover .card-title {
+  color: #fff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
+               0 0 16px rgba(255, 255, 255, 0.6);
+  transition: all 0.4s ease-in-out;
 }

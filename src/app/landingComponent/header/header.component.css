@@ -1,0 +1,90 @@
+/*header.component.css*/
+.navbar-container {
+    background-color: #EDEDEE !important;
+    z-index: 100;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgb(0,0,0,0.1);
+    justify-content: space-between;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* pequeña separación */
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links .nav-link {
+    font-size: 1rem;
+    color: #EDEDEE;
+    background-color: #4EBC97;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-links .nav-link:hover {
+    background-color: #F59F00;
+    transform: scale(1.05);
+}
+
+.login-btn {
+    background-color: #0081A7;
+    color: #EDEDEE !important;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.login-btn:hover {
+    background-color: #FF7F50;
+    transform: scale(1.05);
+}
+
+/* Brillo para botones */
+.shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.6) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg);
+}
+
+.shine:hover::before {
+    animation: shine 0.7s ease-in-out;
+}
+
+@keyframes shine {
+    0% { left: -75%; }
+    100% { left: 125%; }
+}
+
