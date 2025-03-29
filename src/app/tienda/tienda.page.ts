@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core'; // Importa los decoradores Component y OnInit desde Angular
-import { AlertController } from '@ionic/angular'; // Importa AlertController de Ionic para mostrar alertas
+import { Component, OnInit } from '@angular/core';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ConfirmacionCompraComponent } from '../components/confirmacion-compra/confirmacion-compra.component';
+import { CompraExitosaComponent } from '../components/compra-exitosa/compra-exitosa.component';
+import { Share } from '@capacitor/share';
+import { jsPDF } from 'jspdf';
 
 @Component({
-  selector: 'app-tienda', // Define el nombre del selector que se usará en el HTML
-  templateUrl: './tienda.page.html', // Ruta del archivo HTML de esta página
-  styleUrls: ['./tienda.page.scss'], // Ruta del archivo de estilos SCSS para esta página
-  standalone: false // Esta opción se puede usar si se requiere usar la página en un módulo específico
+  selector: 'app-tienda',
+  templateUrl: './tienda.page.html',
+  styleUrls: ['./tienda.page.scss'],
+  standalone: false
 })
-
-
 export class TiendaPage implements OnInit {
   monedas: number = 200;
   
@@ -23,7 +25,6 @@ export class TiendaPage implements OnInit {
 
   mascotasCompradas: any[] = [];
 
-
   accesoriosCabeza = [
     { id: 6, nombre: 'Audifonos', precio: 50, imagen: 'assets/accesorios/cabeza/audifonos-accesorio_KALEV.png' },
     { id: 7, nombre: 'Gorro', precio: 75, imagen: 'assets/accesorios/cabeza/gorro-accesorio_KALEV.png' },
@@ -32,7 +33,6 @@ export class TiendaPage implements OnInit {
   accesorioCabezaActual = this.accesoriosCabeza[0];
   accesoriosCabezaCompradas: any[] = [];
 
-  // Accesorios Ojos
   accesoriosOjos = [
     { id: 9, nombre: 'Gafas Amarillas', precio: 50, imagen: 'assets/accesorios/ojos/gafas-3D.png' },
     { id: 10, nombre: 'Gafas Azules', precio: 75, imagen: 'assets/accesorios/ojos/gafas-corazon.png' },
@@ -41,9 +41,18 @@ export class TiendaPage implements OnInit {
   accesorioOjosActual = this.accesoriosOjos[0];
   accesoriosOjosComprados: any[] = [];
 
-  constructor(private alertCtrl: AlertController) {}
+  mascotaSeleccionada: any = { imagen: 'assets/animales_base/vaca_KALEV.png' };
+  accesorioCabezaSeleccionado: any = null;
+  accesorioOjosSeleccionado: any = null;
 
+  constructor(
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController
+  ) {}
 
+  ngOnInit() {}
+
+  // Métodos de navegación
   siguienteMascota() {
     const indiceActual = this.mascotas.findIndex(m => m.id === this.mascotaActual.id);
     const nuevoIndice = (indiceActual + 1) % this.mascotas.length;
@@ -80,7 +89,7 @@ export class TiendaPage implements OnInit {
     this.accesorioOjosActual = this.accesoriosOjos[nuevoIndice];
   }
 
-
+  // Métodos de verificación de compra
   mascotaComprada(id: number): boolean {
     return this.mascotasCompradas.some(m => m.id === id);
   }
@@ -93,77 +102,68 @@ export class TiendaPage implements OnInit {
     return this.accesoriosOjosComprados.some(a => a.id === id);
   }
 
-
+  // Métodos de compra
   async comprarMascota() {
-    if (this.monedas >= this.mascotaActual.precio) {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmacionCompraComponent,
+      componentProps: {
+        item: this.mascotaActual,
+        monedasDisponibles: this.monedas
+      }
+    });
+    
+    await modal.present();
+    
+    const { data } = await modal.onWillDismiss();
+    
+    if (data?.confirmado) {
       this.monedas -= this.mascotaActual.precio;
       this.mascotasCompradas.push({...this.mascotaActual});
-      
-      const alert = await this.alertCtrl.create({
-        header: '¡Compra exitosa!',
-        message: `Has comprado: ${this.mascotaActual.nombre}`,
-        buttons: ['OK']
-      });
-      await alert.present();
-    } else {
-      const alert = await this.alertCtrl.create({
-        header: 'Monedas insuficientes',
-        message: 'No tienes suficientes monedas para esta mascota',
-        buttons: ['OK']
-      });
-      await alert.present();
+      await this.mostrarSplashCompra(this.mascotaActual);
     }
   }
 
   async comprarAccesorioCabeza() {
-    if (this.monedas >= this.accesorioCabezaActual.precio) {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmacionCompraComponent,
+      componentProps: {
+        item: this.accesorioCabezaActual,
+        monedasDisponibles: this.monedas
+      }
+    });
+    
+    await modal.present();
+    
+    const { data } = await modal.onWillDismiss();
+    
+    if (data?.confirmado) {
       this.monedas -= this.accesorioCabezaActual.precio;
       this.accesoriosCabezaCompradas.push({...this.accesorioCabezaActual});
-      
-      const alert = await this.alertCtrl.create({
-        header: '¡Compra exitosa!',
-        message: `Has comprado: ${this.accesorioCabezaActual.nombre}`,
-        buttons: ['OK']
-      });
-      await alert.present();
-    } else {
-      const alert = await this.alertCtrl.create({
-        header: 'Monedas insuficientes',
-        message: 'No tienes suficientes monedas para este accesorio',
-        buttons: ['OK']
-      });
-      await alert.present();
+      await this.mostrarSplashCompra(this.accesorioCabezaActual);
     }
   }
 
   async comprarAccesorioOjos() {
-    if (this.monedas >= this.accesorioOjosActual.precio) {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmacionCompraComponent,
+      componentProps: {
+        item: this.accesorioOjosActual,
+        monedasDisponibles: this.monedas
+      }
+    });
+    
+    await modal.present();
+    
+    const { data } = await modal.onWillDismiss();
+    
+    if (data?.confirmado) {
       this.monedas -= this.accesorioOjosActual.precio;
       this.accesoriosOjosComprados.push({...this.accesorioOjosActual});
-      
-      const alert = await this.alertCtrl.create({
-        header: '¡Compra exitosa!',
-        message: `Has comprado: ${this.accesorioOjosActual.nombre}`,
-        buttons: ['OK']
-      });
-      await alert.present();
-    } else {
-      const alert = await this.alertCtrl.create({
-        header: 'Monedas insuficientes',
-        message: 'No tienes suficientes monedas para este accesorio',
-        buttons: ['OK']
-      });
-      await alert.present();
+      await this.mostrarSplashCompra(this.accesorioOjosActual);
     }
   }
 
-  // Propiedades para los items seleccionados
-  mascotaSeleccionada: any = { imagen: 'assets/animales_base/vaca_KALEV.png' };
-  accesorioCabezaSeleccionado: any = null;
-  accesorioOjosSeleccionado: any = null;
-
-  // ... (código anterior)
-
+  // Métodos para usar items
   usarMascota(mascota: any) {
     this.mascotaSeleccionada = mascota;
     this.mostrarAlerta('Mascota seleccionada', mascota.nombre);
@@ -179,6 +179,7 @@ export class TiendaPage implements OnInit {
     this.mostrarAlerta('Accesorio seleccionado', accesorio.nombre);
   }
 
+  // Métodos auxiliares
   private async mostrarAlerta(titulo: string, mensaje: string) {
     const alert = await this.alertCtrl.create({
       header: titulo,
@@ -187,8 +188,77 @@ export class TiendaPage implements OnInit {
     });
     await alert.present();
   }
-  
 
-  ngOnInit() {}
+  private async mostrarSplashCompra(item: any) {
+    const modal = await this.modalCtrl.create({
+      component: CompraExitosaComponent,
+      componentProps: {
+        item: item,
+        monedasRestantes: this.monedas
+      },
+      cssClass: 'compra-exitosa-modal'
+    });
+    
+    await modal.present();
+    
+    const { data } = await modal.onWillDismiss();
+    if (data?.compartir) {
+      await this.compartirComprobante(item);
+    }
+  }
+
+  private async compartirComprobante(item: any) {
+    try {
+      const pdfData = await this.generarComprobantePDF(item);
+      
+      await Share.share({
+        title: `Compra de ${item.nombre}`,
+        text: `Acabo de comprar ${item.nombre} en la tienda Kalev`,
+        url: pdfData,
+        dialogTitle: 'Compartir comprobante'
+      });
+    } catch (error) {
+      console.error('Error al compartir:', error);
+      this.mostrarAlerta('Error', 'No se pudo compartir el comprobante');
+    }
+  }
+
+  private async generarComprobantePDF(item: any): Promise<string> {
+    return new Promise((resolve) => {
+      const doc = new jsPDF();
+      
+      // Encabezado
+      doc.setFillColor(63, 81, 181);
+      doc.rect(0, 0, 210, 30, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(20);
+      doc.text('Kalev Tienda', 105, 20, { align: 'center' });
+      
+      // Contenido
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(16);
+      doc.text('Comprobante de Compra', 105, 45, { align: 'center' });
+      
+      doc.setFontSize(12);
+      doc.text(`Item: ${item.nombre}`, 20, 65);
+      doc.text(`Precio: ${item.precio} monedas`, 20, 75);
+      doc.text(`Monedas restantes: ${this.monedas}`, 20, 85);
+      doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 20, 95);
+      
+      // Imagen (opcional)
+      if (item.imagen) {
+        const img = new Image();
+        img.src = item.imagen;
+        img.onload = () => {
+          doc.addImage(img, 'PNG', 20, 105, 50, 50);
+          resolve(doc.output('datauristring'));
+        };
+        img.onerror = () => {
+          resolve(doc.output('datauristring'));
+        };
+      } else {
+        resolve(doc.output('datauristring'));
+      }
+    });
+  }
 }
-
