@@ -231,7 +231,7 @@ h1.display-4:hover { color: #0081A7; cursor: pointer; transition: color 0.3s eas
 
 /* Estilo cuando el cursor pasa por la tarjeta */
 .card-hover:hover {
-  background-color: #ffffff; /* Fondo más claro al hacer hover */
+  background-color: #ff5733; /* Fondo más claro al hacer hover */
   transform: scale(1.05);
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
 }
@@ -243,22 +243,278 @@ h1.display-4:hover { color: #0081A7; cursor: pointer; transition: color 0.3s eas
   transition: all 0.3s ease;
 }
 
-/* ========== Hover color + brillo en título ========== */
-.card-hover {
+/* Fondo por tipo de estilo */
+.estilo-kinestesico { background-color: #ff5733 !important; color: #fff; }
+.estilo-auditivo    { background-color: #ffd333 !important; color: #333; }
+.estilo-visual      { background-color: #0081A7 !important; color: #fff; }
+.estilo-lector      { background-color: #4EBC97 !important; color: #fff; }
+
+/* Texto más pequeño */
+#aprendizaje .card {
+  font-size: 0.9rem;
+  padding: 15px;
+}
+
+#aprendizaje .card-title {
+  font-size: 1.2rem;
+}
+
+#aprendizaje li {
+  font-size: 0.85rem;
+}
+
+.card-img-custom {
+  height: 160px;
+  object-fit: cover;
+}
+
+/* Hover con brillo y escala */
+.card-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover:hover .card-title {
+  animation: glow 1.5s infinite alternate;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Efecto de brillo */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                 0 0 30px currentColor,
+                 0 0 40px currentColor;
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+}
+
+
+
+/* Colores base por estilo */
+.estilo-kinestesico { background-color: #FF5147 !important; color: #fff; }
+.estilo-auditivo    { background-color: #ffd333 !important; color: #333; }
+.estilo-visual      { background-color: #0081A7 !important; color: #fff; }
+.estilo-lector      { background-color: #4EBC97 !important; color: #fff; }
+
+/* Tamaño reducido de letras y tarjetas */
+#aprendizaje .card {
+  font-size: 0.9rem;
+  padding: 15px;
   transition: all 0.4s ease;
-  background-color: #EDEDEE;
-  color: #333;
+  border-radius: 10px;
+}
+
+#aprendizaje .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Lista más compacta */
+#aprendizaje li {
+  font-size: 0.85rem;
+}
+
+/* Imagen más pequeña */
+.card-img-custom {
+  height: 160px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Hover animado + glow en título */
+.card-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover:hover .card-title {
+  animation: glow 1.5s infinite alternate;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Brillo en el texto */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                 0 0 30px currentColor,
+                 0 0 40px currentColor;
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3),
+                 0 0 10px currentColor,
+                 0 0 20px currentColor;
+  }
+}
+
+/* Tarjetas más pequeñas y compactas */
+#aprendizaje .card {
+  font-size: 0.8rem;
+  padding: 12px;
+  border-radius: 10px;
+  height: auto;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Imagen más pequeña dentro del contenido */
+.card-img-custom {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 10px auto;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 5px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título y texto más pequeños */
+#aprendizaje .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#aprendizaje .card-text {
+  text-align: center;
+}
+
+#aprendizaje li {
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+/* Hover con glow en título */
+.card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-hover:hover .card-title {
+  animation: glow 1.2s infinite alternate;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+                 0 0 10px currentColor;
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4),
+                 0 0 20px currentColor;
+  }
+}
+
+/*********/
+/* Tarjetas más pequeñas y proporcionadas */
+#aprendizaje .card {
+  font-size: 1.0rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  height: auto;
+  min-height: 150px;
+  max-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+/* Imagen más grande pero contenida */
+.card-img-custom {
+  width: 20%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 1px;
+  margin-bottom: 1px;
+  background-color: #fff;
+  padding: 5px;
+}
+
+/* Título más pequeño y centrado */
+#aprendizaje .card-title {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Texto centrado general */
+#aprendizaje .card-text {
+  text-align: center;
+}
+
+/* Lista más compacta */
+#aprendizaje li {
+  font-size: 0.8rem;
+  margin-bottom: .1px;
+  text-align: left;
+  padding-left: 5px;
+}
+
+/* Hover con brillo y color específico por estilo */
+.card-hover {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-hover:hover {
-  background-color: #4EBC97 !important;
-  color: white;
+  transform: scale(1.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
 
-/* Brillo en el título */
-.card-hover:hover .card-title {
-  color: #fff !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
-               0 0 16px rgba(255, 255, 255, 0.6);
-  transition: all 0.4s ease-in-out;
+.card-hover.kinestesico:hover .card-title {
+  color: #ff7f50;
 }
+
+.card-hover.auditivo:hover .card-title {
+  color: #f59F00;
+}
+
+.card-hover.visual:hover .card-title {
+  color: #0085D9;
+}
+
+.card-hover.lector-escritor:hover .card-title {
+  color: #005F6B;
+}
+
+.card-hover:hover .card-title {
+  animation: glow 1.2s infinite alternate;
+  transform: scale(1.05);
+}
+/* Efecto de glow suave */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+                 0 0 10px currentColor;
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4),
+                 0 0 20px currentColor;
+  }
+}
+
