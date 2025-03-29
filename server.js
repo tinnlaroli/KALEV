@@ -4,10 +4,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Carpeta correcta de archivos Angular
+// Apunta correctamente al directorio "browser"
 app.use(express.static(path.join(__dirname, 'dist/kalev-web/browser')));
 
-// Para manejar rutas con Angular
+// Para rutas de Angular
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/kalev-web/browser/index.html'));
 });
