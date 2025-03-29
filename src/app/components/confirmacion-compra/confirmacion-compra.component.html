@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmar compra</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="confirmacion-container">
+    <ion-text color="primary">
+      <h2>{{ textoConfirmacion }}</h2>
+    </ion-text>
+
+    <ion-item>
+      <ion-label>Monedas actuales:</ion-label>
+      <ion-note slot="end">{{ monedasDisponibles }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Monedas restantes:</ion-label>
+      <ion-note slot="end" [color]="monedasRestantes < 0 ? 'danger' : 'success'">
+        {{ monedasRestantes }}
+      </ion-note>
+    </ion-item>
+
+    <ion-button 
+      expand="block" 
+      color="primary" 
+      (click)="confirmar()"
+      [disabled]="monedasRestantes < 0">
+      Confirmar compra
+    </ion-button>
+  </div>
+</ion-content>

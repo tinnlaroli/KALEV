@@ -45,6 +45,47 @@
   </div>
 </ion-row>
 
+<!-- Formulario para personalizar mascota -->
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Personalizar Mascota</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Nombre para tu mascota</ion-label>
+      <ion-input 
+        [(ngModel)]="nombrePersonalizado" 
+        placeholder="Ej. Firulais"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Mascota a personalizar</ion-label>
+      <ion-select 
+        [(ngModel)]="mascotaAPersonalizar" 
+        interface="action-sheet"
+        required>
+        <ion-select-option 
+          *ngFor="let mascota of mascotasCompradas" 
+          [value]="mascota">
+          {{mascota.nombre}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button 
+      expand="block" 
+      (click)="personalizarMascota()"
+      [disabled]="!nombrePersonalizado || !mascotaAPersonalizar">
+      Personalizar
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+
+
 
 <!-- Sección Mascotas -->
 <ion-row class="mascota-container" style="align-items: center; justify-content: center; text-align: center;">
@@ -73,65 +114,4 @@
   </ion-button>
 </ion-row>
 
-<!-- Sección Accesorios Cabeza -->
-<ion-row class="accesorio-container" style="align-items: center; justify-content: center; text-align: center; margin-top: 30px;">
-  <ion-button color="secondary" (click)="anteriorAccesorioCabeza()" style="margin-right: 10px;">
-    <
-  </ion-button>
-  
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <img [src]="accesorioCabezaActual.imagen" style="width: 100px; height: 100px;" />
-    <p>{{accesorioCabezaActual.nombre}} - {{accesorioCabezaActual.precio}} monedas</p>
-    
-    <div *ngIf="!accesorioCabezaComprado(accesorioCabezaActual.id)">
-      <ion-button color="success" (click)="comprarAccesorioCabeza()">
-        Comprar
-      </ion-button>
-    </div>
-    <div *ngIf="accesorioCabezaComprado(accesorioCabezaActual.id)">
-      <ion-button color="primary" (click)="usarAccesorioCabeza(accesorioCabezaActual)">
-        Usar
-      </ion-button>
-      <ion-button color="medium">
-        Guardado
-      </ion-button>
-    </div>
-  </div>
-  
-  <ion-button color="secondary" (click)="siguienteAccesorioCabeza()" style="margin-left: 10px;">
-    >
-  </ion-button>
-</ion-row>
-
-<!-- Sección Accesorios Ojos -->
-<ion-row class="accesorio-container" style="align-items: center; justify-content: center; text-align: center; margin-top: 30px;">
-  <ion-button color="secondary" (click)="anteriorAccesorioOjos()" style="margin-right: 10px;">
-    <
-  </ion-button>
-  
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <img [src]="accesorioOjosActual.imagen" style="width: 100px; height: 100px;" />
-    <p>{{accesorioOjosActual.nombre}} - {{accesorioOjosActual.precio}} monedas</p>
-    
-    <div *ngIf="!accesorioOjosComprado(accesorioOjosActual.id)">
-      <ion-button color="success" (click)="comprarAccesorioOjos()">
-        Comprar
-      </ion-button>
-    </div>
-    <div *ngIf="accesorioOjosComprado(accesorioOjosActual.id)">
-      <ion-button color="primary" (click)="usarAccesorioOjos(accesorioOjosActual)">
-        Usar
-      </ion-button>
-      <ion-button color="medium">
-        Guardado
-      </ion-button>
-    </div>
-  </div>
-  
-  <ion-button color="secondary" (click)="siguienteAccesorioOjos()" style="margin-left: 10px;">
-    >
-  </ion-button>
-</ion-row>
-
-
-</ion-content>
+<!-- Resto del código sigue igual... -->

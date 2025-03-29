@@ -26,19 +26,21 @@
           <ion-text>{{ estudiante.correo }}</ion-text>
         </ion-item>
 
+
+        <ion-item>
+          <ion-icon name="school-outline" slot="start"></ion-icon>
+          <ion-label>Grado</ion-label>
+          
+          <ion-text>{{ estudiante.grado }}</ion-text>
+        </ion-item>
+
         <ion-item>
           <ion-icon name="people-outline" slot="start"></ion-icon>
           <ion-label>Grupo</ion-label>
           <ion-text>{{ estudiante.nombre_grupo }}</ion-text>
         </ion-item>
 
-        <ion-item>
-          <ion-icon name="school-outline" slot="start"></ion-icon>
-          <ion-label>Grado</ion-label>
-          <ion-text>{{ estudiante.grado }}</ion-text>
-        </ion-item>
-
-        
+      
       </ion-list>
     </ion-card-content>
   </ion-card>
