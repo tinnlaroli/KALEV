@@ -5,57 +5,49 @@
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
-
   <ion-card class="custom-card" color="light">
     <ion-card-header>
       <ion-card-title class="custom-title" style="font-weight: bold;">Bienvenido a</ion-card-title>
-      <ion-img src="assets/ic_logo.png" alt="Kalev" style="max-width: 200px; margin: 0 auto;"></ion-img>
+      <ion-img src="assets/ic_logo.png" alt="Kalev"></ion-img>
     </ion-card-header>
 
     <ion-card-content>
       <form (ngSubmit)="iniciarSesion()">
-
         <ion-text class="input-title" style="margin-top: 16px;">Correo Electrónico</ion-text>
-        <ion-item class="custom-item" lines="none" [class.ion-invalid]="emailInvalid">
-          <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+        <ion-item class="custom-item" [class.ion-invalid]="emailInvalid">
           <ion-input 
-            type="email"
-            placeholder="email@domain.com"
-            [(ngModel)]="email"
-            name="email"
+            type="email" 
+            placeholder="email@domain.com" 
+            [(ngModel)]="email" 
+            name="email" 
             required
             (ionBlur)="validarEmail()">
           </ion-input>
-          <ion-note slot="error" *ngIf="emailInvalid">Correo inválido</ion-note>
         </ion-item>
 
-        <ion-text class="input-title" style="margin-top: 16px;">Código</ion-text>
-        <ion-item class="custom-item" lines="none" [class.ion-invalid]="codigoInvalid">
-          <ion-icon slot="start" name="key-outline" aria-hidden="true"></ion-icon>
+        <ion-text class="input-title" style="margin-top: 16px;">Código del Juego</ion-text>
+        <ion-item class="custom-item" [class.ion-invalid]="codigoInvalid">
           <ion-input 
-            type="text"
-            placeholder="Código"
-            [(ngModel)]="codigo"
-            name="code"
+            type="text" 
+            placeholder="Código" 
+            [(ngModel)]="codigo" 
+            name="code" 
             required
             (ionBlur)="validarCodigo()">
           </ion-input>
-          <ion-note slot="error" *ngIf="codigoInvalid">Código requerido</ion-note>
         </ion-item>
 
         <ion-button 
-          expand="full"
-          type="submit"
-          color="danger"
-          shape="round"
+          expand="full" 
+          type="submit" 
+          color="danger" 
+          shape="round" 
           style="margin-top: 30px;"
-          [disabled]="cargando || emailInvalid || codigoInvalid">
-          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          [disabled]="cargando">
           <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
           <span *ngIf="!cargando">Iniciar Sesión</span>
         </ion-button>
 
-        <!-- Mensaje de error general -->
         <ion-text color="danger" *ngIf="errorGeneral">
           <p style="margin-top: 15px;">{{errorGeneral}}</p>
         </ion-text>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,6 @@ export class LoginPage {
   ) {}
 
   async iniciarSesion() {
-    // Validación inicial
     this.validarEmail();
     this.validarCodigo();
     
@@ -46,19 +46,38 @@ export class LoginPage {
     try {
       const respuesta = await this.apiService.login(this.email, this.codigo).toPromise();
       
-      if (respuesta) {
+      if (respuesta?.success) {
+        await this.apiService.saveAuthData(respuesta.token, respuesta.estudiante);
         await loading.dismiss();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home']); // Cambiado a '/profile' para ir directo al perfil
       } else {
-        this.errorGeneral = 'Credenciales incorrectas. Por favor intente nuevamente.';
+        this.errorGeneral = respuesta?.message || 'Credenciales incorrectas. Por favor intente nuevamente.';
       }
-    } catch (error) {
-      console.error('Error en el login:', error);
-      this.errorGeneral = 'Error al conectar con el servidor. Intente más tarde.';
+    } catch (error: unknown) {
+      this.manejarError(error);
     } finally {
       this.cargando = false;
       await loading.dismiss();
     }
+  }
+
+  private manejarError(error: unknown) {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 400) {
+        this.errorGeneral = error.error?.message || 'Credenciales incorrectas o formato inválido';
+      } else if (error.status === 401) {
+        this.errorGeneral = 'No autorizado. Verifique sus credenciales.';
+      } else if (error.status >= 500) {
+        this.errorGeneral = 'Error en el servidor. Por favor intente más tarde.';
+      } else {
+        this.errorGeneral = 'Error al conectar con el servidor';
+      }
+    } else if (typeof error === 'string') {
+      this.errorGeneral = error;
+    } else {
+      this.errorGeneral = 'Error desconocido al iniciar sesión';
+    }
+    console.error('Error en el login:', error);
   }
 
   validarEmail() {
