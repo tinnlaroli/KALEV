@@ -44,37 +44,37 @@ const routes: Routes = [
     path: 'students',
     component: StudentListComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1] } // Solo Docente
+    data: { roles: [4, 1] } // Solo Docente
   },
   {
     path: 'students/:id',
     component: StudentProfileComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1] }
+    data: { roles: [4, 1] }
   },
   {
     path: 'activities',
     component: ActivityListComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1] } // Solo Docente
+    data: { roles: [4, 1] } 
   },
   {
     path: 'activities/create',
     component: ActivityCreateComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1] }
+    data: { roles: [4, 1] }
   },
   {
     path: 'reports',
     component: ReportListComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1, 2] } // Docente y Director
+    data: { roles: [4, 1, 2] } // Docente y Director
   },
   {
     path: 'reports/create',
     component: ReportCreateComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: [1, 2] }
+    data: { roles: [4, 1, 2] }
   },
   {
     path: 'users',

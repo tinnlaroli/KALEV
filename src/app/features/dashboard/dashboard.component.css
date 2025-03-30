@@ -1,167 +1,345 @@
-/* Estilo para el logo - aumenta su tamaño */
-.logo {
-  width: 500px;
-  height: auto;
-  margin: auto;
-  display: block;
-  animation: logoAnimation 2s ease-in-out;
+/* Variables de colores */
+:root {
+  --color-primario: #4361ee;
+  --color-secundario: #3f37c9;
+  --color-accent: #4895ef;
+  --color-texto: #2b2d42;
+  --color-texto-claro: #f8f9fa;
+  --color-fondo: #f8f9fa;
+  --color-sombra: rgba(0, 0, 0, 0.1);
+  --color-borde: rgba(0, 0, 0, 0.1);
 }
 
-@keyframes logoAnimation {
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Estilos del contenedor principal */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
 .main-content {
-  padding: 20px;
-  text-align: center;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Estilo del header */
+/* Header con efecto de olas */
 .dashboard-header {
-  background-color: var(--color-texto-oscuro);
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
   color: var(--color-texto-claro);
-  padding: 20px;
-  margin: auto 15%;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 2rem 1rem 4rem;
+  text-align: center;
+  margin-bottom: -2rem;
+  z-index: 1;
+  overflow: hidden;
 }
 
-/* Estilo para los cards */
+.wave-background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f8f9fa" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  animation: logoEntrance 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.welcome-text {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Tarjetas principales */
 .dashboard-cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 30px;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Animación para los cards */
 .dashboard-card {
-  background-color: var(--color-primario-tint);
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 280px;
   text-align: center;
-  opacity: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   transform: translateY(50px);
-  animation: cardAnimation 0.5s forwards;
-  width: 250px;  /* Ajusta el tamaño de los cards */
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes cardAnimation {
+.dashboard-card.animated {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.dashboard-card:hover::before {
+  animation: shine 1.5s ease;
+}
+
+.card-icon svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+  fill: var(--color-primario);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .card-icon svg {
+  transform: scale(1.1) rotate(5deg);
+  fill: var(--color-accent);
+}
+
+.dashboard-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-texto);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover h2 {
+  color: var(--color-primario);
+}
+
+.dashboard-card p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover p {
+  color: #444;
+}
+
+/* Botones con efecto glow */
+.glow-on-hover {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primario), var(--color-accent));
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+  z-index: 1;
+}
+
+.glow-on-hover span {
+  position: relative;
+  z-index: 2;
+}
+
+.glow-on-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primario));
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.glow-on-hover:hover::before {
+  opacity: 1;
+}
+
+.glow-on-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+/* Widget de gráfico */
+.dashboard-widget {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.dashboard-widget.animated {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.widget-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.widget-header h3 {
+  font-size: 1.8rem;
+  color: var(--color-texto);
+  margin-bottom: 0.5rem;
+}
+
+.widget-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.glass-chart-container {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.see-more-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  transition: all 0.3s ease;
+}
+
+.see-more-btn:hover {
+  background: var(--color-secundario);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.see-more-btn:hover svg {
+  transform: translateX(5px);
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* Animaciones */
+@keyframes logoEntrance {
   0% {
-    transform: translateY(50px);
+    transform: translateY(-20px) scale(0.9);
     opacity: 0;
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
 
-/* Configuración de animación escalonada para los cards */
-.dashboard-card:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.dashboard-card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dashboard-card:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.dashboard-card:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-/* Estilos para los botones */
-button {
-  background-color: var(--color-amarillo);
-  color: var(--color-fondo-dark);
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  margin-top: 10px;
-}
-
-button:hover {
-  background-color: var(--color-naranja);
-  transform: scale(1.1);
-}
-
-/* Estilo para títulos */
-h1, h2, h3 {
-  color: var(--color-secundario);
-}
-
-/* Estilo de los gráficos y widgets */
-.dashboard-widget {
-  background-color: var(--color-coral);
-  border-radius: 8px;
-  padding: 20px;
-  margin: 250px;
-  text-align: center;
-  margin-top: 30px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  animation: widgetAnimation 0.6s ease-in-out;
-
-}
-
-@keyframes widgetAnimation {
+@keyframes fadeIn {
   0% {
-    transform: scale(0.9);
     opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    left: -100%;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
   }
   100% {
     transform: scale(1);
-    opacity: 1;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
   }
 }
 
-.dashboard-widget h3 {
-  color: var(--color-texto-claro);
-  font-size: 20px;
-}
-
-.dashboard-widget p {
-  color: var(--color-texto-claro);
-  font-size: 16px;
-}
-
-.dashboard-widget button {
-  background-color: var(--color-secundario);
-  color: var(--color-fondo-dark);
-  padding: 12px 25px;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-/* Estilo de los íconos */
-.icon {
-  font-size: 40px;
-  color: var(--color-texto-claro);
-  margin-bottom: 10px;
-}
-
-/* Responder a pantallas pequeñas */
+/* Responsive design */
 @media (max-width: 768px) {
   .dashboard-cards {
     flex-direction: column;
     align-items: center;
+    padding: 1rem;
   }
 
   .dashboard-card {
@@ -169,12 +347,31 @@ h1, h2, h3 {
     max-width: 350px;
   }
 
-  .dashboard-widget {
-    width: 100%;
-    max-width: 350px;
+  .welcome-text {
+    font-size: 1.5rem;
   }
 
+  .dashboard-widget {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
   .logo {
-    width: 250px;
+    width: 140px;
+  }
+
+  .welcome-text {
+    font-size: 1.3rem;
+  }
+
+  .dashboard-card {
+    padding: 1.5rem;
+  }
+
+  .card-icon svg {
+    width: 50px;
+    height: 50px;
   }
 }

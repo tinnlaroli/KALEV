@@ -1,24 +1,135 @@
-<div class="student-profile-container" *ngIf="student; else loading">
-  <h1>👤 Perfil del Estudiante</h1>
-
-  <div class="profile-grid">
-    <div class="profile-section">
-      <h3>🧍 Datos Personales</h3>
-      <p><strong>Nombre:</strong> {{ student.nombre }} {{ student.ap_paterno }} {{ student.ap_materno }}</p>
-      <p><strong>Correo:</strong> {{ student.correo }}</p>
-      <p><strong>Teléfono:</strong> {{ student.telefono || 'No registrado' }}</p>
-      <p><strong>Fecha de nacimiento:</strong> {{ student.fecha_nacimiento | date }}</p>
+<app-side-nav>
+  <div class="student-profile-container">
+    <!-- Toast de error -->
+    <div *ngIf="errorMessage" class="error-toast">
+      <svg viewBox="0 0 24 24" class="toast-icon">
+        <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+      </svg>
+      {{ errorMessage }}
+      <button (click)="reloadData()" class="toast-retry-btn">
+        Reintentar
+      </button>
     </div>
 
-    <div class="profile-section">
-      <h3>🏫 Información Escolar</h3>
-      <p><strong>ID Estudiante:</strong> {{ student.id_estudiante }}</p>
-      <p><strong>Grupo:</strong> {{ student.id_grupo || 'Sin grupo asignado' }}</p>
-      <p><strong>Fecha de registro:</strong> {{ student.fecha_registro | date:'longDate' }}</p>
+    <!-- Estado de carga -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Cargando información del estudiante...</p>
+    </div>
+
+    <!-- Perfil del estudiante -->
+    <div *ngIf="!isLoading && student" class="profile-content">
+      <div class="profile-header">
+        <h1>
+          <svg viewBox="0 0 24 24" class="profile-icon">
+            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+          </svg>
+          Perfil del Estudiante
+        </h1>
+        <div class="student-id">ID: {{ student.id_estudiante }}</div>
+      </div>
+
+      <div class="profile-grid">
+        <!-- Sección Datos Personales -->
+        <div class="profile-section personal-data">
+          <div class="section-header">
+            <h2>Datos Personales</h2>
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,13.6 14.1,15.3 12,15.3C9.9,15.3 8.2,13.6 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M7,18V16H17V18H7Z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <label>Nombre completo:</label>
+            <p>{{ student.nombre }} {{ student.ap_paterno }} {{ student.ap_materno || '' }}</p>
+          </div>
+          
+          <div class="info-item">
+            <label>Fecha de nacimiento:</label>
+            <p>{{ formatDate(student.fecha_nacimiento) }} ({{ calculateAge(student.fecha_nacimiento) }})</p>
+          </div>
+          
+          <div class="info-item">
+            <label>Correo electrónico:</label>
+            <p>{{ student.correo }}</p>
+          </div>
+          
+          <div class="info-item">
+            <label>Teléfono:</label>
+            <p>{{ student.telefono || 'No registrado' }}</p>
+          </div>
+          
+          <div *ngIf="student.direccion" class="info-item">
+            <label>Dirección:</label>
+            <p>{{ student.direccion }}</p>
+          </div>
+        </div>
+
+        <!-- Sección Información Académica -->
+        <div class="profile-section academic-data">
+          <div class="section-header">
+            <h2>Información Académica</h2>
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <label>Grupo asignado:</label>
+            <p>{{ student.grupo_nombre || 'Sin grupo asignado' }}</p>
+          </div>
+          
+          <div class="info-item">
+            <label>Fecha de registro:</label>
+            <p>{{ formatDate(student.fecha_registro) }}</p>
+          </div>
+          
+          <div *ngIf="student.tutor_nombre" class="info-item">
+            <label>Tutor asignado:</label>
+            <p>{{ student.tutor_nombre }}</p>
+          </div>
+          
+          <div *ngIf="student.tutor_telefono" class="info-item">
+            <label>Contacto del tutor:</label>
+            <p>{{ student.tutor_telefono }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de acciones -->
+      <div class="action-buttons">
+        <button class="btn-edit" [routerLink]="['/students/edit', student.id_estudiante]">
+          <svg viewBox="0 0 24 24">
+            <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"/>
+          </svg>
+          Editar Perfil
+        </button>
+        
+        <button class="btn-back" routerLink="/students">
+          <svg viewBox="0 0 24 24">
+            <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+          </svg>
+          Volver a la lista
+        </button>
+      </div>
+    </div>
+
+    <!-- Estado vacío -->
+    <div *ngIf="!isLoading && !student && !errorMessage" class="empty-state">
+      <svg viewBox="0 0 24 24" class="empty-icon">
+        <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+      </svg>
+      <h3>No se encontró información del estudiante</h3>
+      <button class="btn-back" routerLink="/students">
+        <svg viewBox="0 0 24 24">
+          <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/>
+        </svg>
+        Volver a la lista
+      </button>
     </div>
   </div>
-</div>
-
-<ng-template #loading>
-  <p>Cargando información del estudiante...</p>
-</ng-template>
+</app-side-nav>

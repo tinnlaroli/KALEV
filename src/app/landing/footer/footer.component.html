@@ -1,28 +1,137 @@
+
 <section class="bg-dark text-light py-4" style="background-color: #ededee;">
-  <div class="container">
+    <div class="container">
       <div class="row align-items-center">
-
-          <div class="col-md-6 text-center">
-              <img src="assets/pleca_de_logos.png" class="img-fluid rounded shadow">
-          </div>
-
-          <div class="col-md-6">
-              <h5>Contacto</h5>
-              <p>Av. Universidad No.350, Carretera Federal Cuitláhuac-La Tinaja, Localidad Dos Caminos C.P. 94910
-                  Cuitláhuac, Veracruz.</p>
-              <p>Tel. 01 (278) 73 22050</p>
-              <p>Email: contacto.gmail.com</p>
-              <p>Horario: Lunes a Viernes, 9:00 AM - 6:00 PM</p>
-          </div>
-
+        <div class="col-md-6 text-center">
+          <img src="assets/pleca_de_logos.png" class="img-fluid rounded shadow" />
+        </div>
+        <div class="col-md-6">
+          <h5>Contacto</h5>
+          <p>Av. Universidad No.350, Carretera Federal Cuitláhuac-La Tinaja, Localidad Dos Caminos C.P. 94910 Cuitláhuac, Veracruz.</p>
+          <p>Tel. 01 (278) 73 22050</p>
+          <p>Email: contacto.gmail.com</p>
+          <p>Horario: Lunes a Viernes, 9:00 AM - 6:00 PM</p>
+        </div>
       </div>
-
+  
+      <!-- Enlaces con funcionalidad -->
       <div class="row mt-4">
-          <div class="col text-center">
-              <a class="text-light me-3">Términos de Servicio</a>
-              <a class="text-light me-3">Política de Privacidad</a>
-          </div>
+        <div class="col text-center">
+          <a class="text-light me-3 text-decoration-underline"
+             data-bs-toggle="collapse" href="#terminosCollapse" role="button"
+             aria-expanded="false" aria-controls="terminosCollapse">
+            Términos de Servicio
+          </a>
+          <a class="text-light text-decoration-underline"
+             data-bs-toggle="collapse" href="#privacidadCollapse" role="button"
+             aria-expanded="false" aria-controls="privacidadCollapse">
+            Política de Privacidad
+          </a>
+        </div>
       </div>
-
+    </div>
+  </section>
+  
+  <!-- Contenido de los colapsables -->
+  <div class="container my-4">
+  
+    <!-- Términos de Servicio -->
+    <div class="collapse" id="terminosCollapse">
+      <div class="card card-body bg-light text-dark border rounded p-4 shadow-sm">
+        <h4>Términos y Condiciones</h4>
+        <p><em>Última actualización: 29 de marzo de 2025</em></p>
+        <p>Bienvenido a KALEV. Estos Términos de Servicio (“Términos”) rigen el acceso y uso de nuestra plataforma, incluyendo nuestra aplicación móvil y panel web, diseñados para apoyar el aprendizaje infantil mediante herramientas educativas y juegos personalizados.</p>
+        <p>Al usar KALEV, aceptas estos Términos. Si no estás de acuerdo, no deberías usar nuestros servicios.</p>
+        <h5>1. Descripción del servicio</h5>
+        <p>KALEV es una plataforma educativa dirigida a menores de edad bajo la supervisión de adultos (padres, tutores o instituciones educativas). Ofrecemos actividades, juegos interactivos y funcionalidades de seguimiento del progreso académico y cognitivo.</p>
+        <h5>2. Elegibilidad</h5>
+        <p>El uso de KALEV por parte de menores de 13 años está permitido solo bajo supervisión de un adulto responsable, conforme a la <em>Children's Online Privacy Protection Act (COPPA)</em>. En el caso de usuarios residentes en la Unión Europea, se aplican las disposiciones del <strong>Reglamento General de Protección de Datos (GDPR)</strong>.</p>
+        <h5>3. Cuentas y acceso</h5>
+        <ul>
+          <li>Los padres, tutores, docentes o directores crean cuentas para sí mismos y para los menores bajo su cargo.</li>
+          <li>El usuario se compromete a proporcionar información veraz y a mantener la confidencialidad de sus credenciales.</li>
+        </ul>
+        <h5>4. Contenido</h5>
+        <p>KALEV proporciona contenido educativo, multimedia y lúdico. Está prohibido subir o compartir contenido ofensivo, inadecuado o ilegal.</p>
+        <h5>5. Licencia limitada</h5>
+        <p>Otorgamos una licencia limitada, no exclusiva y revocable para usar KALEV únicamente con fines educativos y personales.</p>
+        <h5>6. Prohibiciones</h5>
+        <ul>
+          <li>Usar KALEV con fines comerciales sin autorización.</li>
+          <li>Intentar acceder sin permiso a servidores, bases de datos u otros sistemas.</li>
+          <li>Recolectar información de menores sin consentimiento.</li>
+        </ul>
+        <h5>7. Suspensión de servicios</h5>
+        <p>Podemos suspender o terminar el acceso a KALEV en caso de incumplimiento de los presentes términos.</p>
+        <h5>8. Limitación de responsabilidad</h5>
+        <p>KALEV no se hace responsable por pérdidas indirectas, interrupciones de servicio o errores de contenido, salvo lo dispuesto por ley aplicable.</p>
+        <h5>9. Modificaciones</h5>
+        <p>Nos reservamos el derecho de modificar estos Términos. Las versiones actualizadas estarán disponibles en la app y el sitio web.</p>
+        <h5>10. Contacto</h5>
+        <p>Para preguntas sobre estos términos, escríbenos a: <a href="mailto:legal@kalev.app">legal "&#64;" kalev.app</a></p>
+      </div>
+    </div>
+  
+    <!-- Política de Privacidad -->
+    <div class="collapse" id="privacidadCollapse">
+      <div class="card card-body bg-light text-dark border rounded p-4 shadow-sm mt-4">
+        <h4>Política de Privacidad</h4>
+        <p><em>Última actualización: 29 de marzo de 2025</em></p>
+        <p>La privacidad de nuestros usuarios, en especial la de los menores, es fundamental para nosotros. Esta Política de Privacidad describe cómo recopilamos, usamos, protegemos y compartimos tus datos.</p>
+        <h5>1. ¿Qué información recopilamos?</h5>
+        <strong>A. Información personal:</strong>
+        <ul>
+          <li><em>Menores:</em> Nombre, edad, progreso académico, estilo de aprendizaje, actividades completadas (nunca se solicita dirección, número de teléfono, fotos personales ni ubicación precisa).</li>
+          <li><em>Adultos:</em> Nombre, correo electrónico, rol (docente, tutor, director).</li>
+        </ul>
+        <strong>B. Información técnica:</strong>
+        <ul>
+          <li>Dirección IP, tipo de dispositivo, sistema operativo, fecha y hora de acceso.</li>
+        </ul>
+        <strong>C. Datos generados por el usuario:</strong>
+        <ul>
+          <li>Resultados de juegos, respuestas a actividades, elecciones dentro de la app.</li>
+        </ul>
+        <h5>2. ¿Cómo usamos los datos?</h5>
+        <ul>
+          <li>Para personalizar el contenido y adaptar los juegos.</li>
+          <li>Para generar reportes para docentes o tutores.</li>
+          <li>Para fines estadísticos, educativos y de mejora del sistema.</li>
+        </ul>
+        <h5>3. Base legal para el tratamiento (GDPR)</h5>
+        <ul>
+          <li>Consentimiento explícito del padre/tutor.</li>
+          <li>Ejecución de una relación educativa contractual.</li>
+          <li>Interés legítimo en mejorar nuestros servicios.</li>
+        </ul>
+        <h5>4. ¿Compartimos datos con terceros?</h5>
+        <p><strong>No vendemos ni alquilamos datos personales.</strong> Solo compartimos datos:</p>
+        <ul>
+          <li>Con instituciones educativas autorizadas.</li>
+          <li>Con proveedores tecnológicos que cumplen con estándares de seguridad y privacidad.</li>
+          <li>Por obligación legal (por ejemplo, a autoridades regulatorias).</li>
+        </ul>
+        <h5>5. Almacenamiento y seguridad</h5>
+        <ul>
+          <li>Todos los datos se almacenan en servidores seguros (como Railway y bases de datos en la nube cifradas).</li>
+          <li>Usamos protocolos HTTPS, cifrado en tránsito y autenticación por token (JWT).</li>
+          <li>Conservamos los datos únicamente mientras sean necesarios para el propósito educativo.</li>
+        </ul>
+        <h5>6. Derechos bajo GDPR y COPPA</h5>
+        <strong>Para usuarios de la UE (GDPR):</strong>
+        <ul>
+          <li>Derecho de acceso, rectificación, eliminación, oposición y portabilidad.</li>
+          <li><a href="mailto:privacidad&#64;kalev.app">privacidad&#64;kalev.app</a></li>
+        </ul>
+        <strong>Para usuarios de EE. UU. (COPPA):</strong>
+        <ul>
+          <li>Los padres pueden revisar, eliminar y controlar el uso de la información personal de sus hijos.</li>
+        </ul>
+        <h5>7. Eliminación de cuenta y datos</h5>
+        <li><a href="mailto:soporte&#64;kalev.app">soporte&#64;kalev.app</a></li>
+        <h5>8. Cambios en esta política</h5>
+        <p>Cualquier cambio en esta política será notificado con anticipación. La versión actualizada estará disponible en nuestra app y sitio web.</p>
+      </div>
+    </div>
+  
   </div>
-</section>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  standalone : false,
+  standalone: false,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -35,7 +35,7 @@ export class LoginComponent {
         this.authService.setToken(token);
         this.authService.setUser(usuario);
       
-        // 👇 Guardamos rol y usuario en localStorage
+        // Guardamos rol y usuario en localStorage
         localStorage.setItem('rol_id', usuario.id_rol.toString());
         localStorage.setItem('user_id', usuario.id_usuario.toString());
   
@@ -46,5 +46,4 @@ export class LoginComponent {
       }
     });
   }
-  
 }

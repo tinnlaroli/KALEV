@@ -1,30 +1,81 @@
-<div class="student-list-container">
-  <h1>Lista de Estudiantes</h1>
+<app-side-nav>
+  <div class="student-list-container">
+    <!-- Toast Notification -->
+    <div *ngIf="toastVisible" class="toast {{toastType}}">
+      {{toastMessage}}
+    </div>
 
-  <div *ngIf="students.length > 0; else noData">
-    <table class="student-table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Correo</th>
-          <th>Grupo</th>
-          <th>Ver Perfil</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let s of students">
-          <td>{{ s.nombre }} {{ s.apellido_paterno }}</td>
-          <td>{{ s.correo }}</td>
-          <td>{{ s.grupo_nombre || 'Sin grupo' }}</td>
-          <td>
-            <button [routerLink]="['/students', s.id_estudiante]">Ver</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="header-section">
+      <h1>Lista de Estudiantes</h1>
+      
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" class="search-icon">
+          <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+        </svg>
+        <input [(ngModel)]="searchTerm" placeholder="Buscar estudiantes..." class="search-input">
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Cargando estudiantes...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-container">
+      <svg viewBox="0 0 24 24" class="error-icon">
+        <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"/>
+      </svg>
+      <p>{{ errorMessage }}</p>
+      <button (click)="loadStudents()" class="retry-btn">
+        <svg viewBox="0 0 24 24" class="btn-icon">
+          <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+        </svg>
+        Reintentar
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage">
+      <div *ngIf="filteredStudents.length > 0; else noData" class="table-responsive">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th>Nombre Completo</th>
+              <th>Correo Electrónico</th>
+              <th>Grupo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of filteredStudents">
+              <td>{{ getFullName(student) }}</td>
+              <td>{{ student.correo }}</td>
+              <td>{{ student.grupo_nombre || 'Sin grupo asignado' }}</td>
+              <td class="actions">
+                <button [routerLink]="['/students', student.id_estudiante]" class="view-btn">
+                  <svg viewBox="0 0 24 24" class="action-icon">
+                    <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                  </svg>
+                  Ver Perfil
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <p>Mostrando {{ filteredStudents.length }} de {{ students.length }} estudiantes</p>
+        </div>
+      </div>
+
+      <ng-template #noData>
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" class="empty-icon">
+            <path d="M12,3C16.97,3 21,7.03 21,12C21,16.97 16.97,21 12,21C7.03,21 3,16.97 3,12C3,7.03 7.03,3 12,3M12,5C8.14,5 5,8.14 5,12C5,15.86 8.14,19 12,19C15.86,19 19,15.86 19,12C19,8.14 15.86,5 12,5M11,7H13V9H11V7M11,11H13V17H11V11Z"/>
+          </svg>
+          <h3>No se encontraron estudiantes</h3>
+          <p *ngIf="searchTerm">No hay resultados para "{{ searchTerm }}"</p>
+          <p *ngIf="!searchTerm">No hay estudiantes registrados en el sistema</p>
+        </div>
+      </ng-template>
+    </div>
   </div>
-
-  <ng-template #noData>
-    <p>No hay estudiantes registrados.</p>
-  </ng-template>
-</div>
+</app-side-nav>

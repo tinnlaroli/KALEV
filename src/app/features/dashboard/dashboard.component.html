@@ -1,42 +1,89 @@
 <app-side-nav>
   <div class="main-content">
+    <!-- Header con efecto de olas -->
     <div class="dashboard-header">
+      <div class="wave-background"></div>
       <img src="/assets/kalev.png" alt="Logo" class="logo" />
+      <h1 class="welcome-text">Bienvenido al Panel de Control</h1>
     </div>
 
-    <!-- Sección del Dashboard -->
+    <!-- Tarjetas principales con animaciones -->
     <div class="dashboard-cards">
-      <div class="dashboard-card">
+      <div class="dashboard-card card-1">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+            <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z"/>
+          </svg>
+        </div>
         <h2>Grupos</h2>
         <p>Vista general de los grupos asignados</p>
-        <button routerLink="/groups">Ver Grupos</button>
+        <button routerLink="/groups" class="glow-on-hover">
+          <span>Ver Grupos</span>
+        </button>
       </div>
 
-      <div class="dashboard-card">
+      <div class="dashboard-card card-2">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+            <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z"/>
+          </svg>
+        </div>
         <h2>Alumnos</h2>
         <p>Resumen del rendimiento y actividades</p>
-        <button routerLink="/students">Ver Alumnos</button>
+        <button routerLink="/students" class="glow-on-hover">
+          <span>Ver Alumnos</span>
+        </button>
       </div>
 
-      <div class="dashboard-card">
+      <div class="dashboard-card card-3">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+            <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z"/>
+          </svg>
+        </div>
         <h2>Actividades</h2>
         <p>Planeación personalizada y análisis</p>
-        <button routerLink="/activities">Ver Actividades</button>
+        <button routerLink="/activities" class="glow-on-hover">
+          <span>Ver Actividades</span>
+        </button>
       </div>
 
-      <div class="dashboard-card">
+      <div class="dashboard-card card-4">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+            <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z"/>
+          </svg>
+        </div>
         <h2>Reportes</h2>
         <p>Acceso rápido a documentos generados</p>
-        <button routerLink="/reports">Ver Reportes</button>
+        <button routerLink="/reports" class="glow-on-hover">
+          <span>Ver IOT</span>
+        </button>
       </div>
     </div>
 
-    <div class="dashboard-widget">
-      <h3>Estadísticas de Grupos</h3>
-      <p>Gráfica de rendimiento de los grupos asignados</p>
-
-      <!-- Canvas para la gráfica de radar -->
-      <canvas id="radarChart" width="400" height="400"></canvas>
+    <!-- Widget de gráfico con efecto flotante -->
+    <div class="dashboard-widget floating-widget">
+      <div class="widget-header">
+        <h3>Estadísticas de Grupos</h3>
+        <p>Rendimiento general de los grupos asignados</p>
+      </div>
+      
+      <!-- Contenedor del gráfico con efecto de vidrio -->
+      <div class="glass-chart-container">
+        <canvas id="radarChart" width="400" height="400"></canvas>
+      </div>
+      
+      <button class="see-more-btn pulse-animation">
+        <span>Ver Detalles</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.58Z"/>
+        </svg>
+      </button>
     </div>
   </div>
 </app-side-nav>

@@ -1,51 +1,97 @@
-.activities-container {
-  max-width: 800px;
-  margin: auto;
-  background: var(--color-fondo-suave);
+.container {
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-h2, h3 {
-  color: var(--color-secundario);
-}
-
-.activity-form label {
-  display: block;
-  margin-top: 10px;
-}
-
-.activity-form input, .activity-form select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid var(--color-primario-shade);
-  border-radius: 4px;
+h2 {
+  color: #005f6b; /* Usando el color primario de la paleta */
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 button {
-  background-color: var(--color-primario);
-  color: var(--color-texto-claro);
-  padding: 10px 15px;
+  background-color: #4ebc97; /* Color de la paleta */
+  color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px 20px;
   cursor: pointer;
-  margin-top: 15px;
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 button:hover {
-  background-color: var(--color-primario-shade);
+  background-color: #005f6b; /* Cambio al color primario */
 }
 
-.activity-list table {
+.activity-table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.activity-table th, .activity-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.activity-table th {
+  background-color: #ffd333; /* Color amarillo de la paleta */
+  color: white;
+}
+
+.activity-table tr:hover {
+  background-color: #f59f00; /* Color naranja para hover */
+}
+
+.empty-msg {
+  color: #ff5147; /* Rojo de la paleta */
+  font-size: 18px;
   margin-top: 20px;
 }
 
-.activity-list th, .activity-list td {
-  border: 1px solid var(--color-primario);
-  padding: 10px;
-  text-align: left;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: #4ebc97; /* Color verde */
+  color: white;
+}
+
+.modal-actions button[type="button"] {
+  background-color: #ff5147; /* Color rojo */
+  color: white;
+}
+
+.error-message {
+  color: #ff5147; /* Rojo para mensajes de error */
+  font-size: 16px;
 }

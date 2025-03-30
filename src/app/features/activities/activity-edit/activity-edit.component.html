@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Crear Actividad</h2>
+  <h2>Editar Actividad</h2>
   <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
     <div>
       <label for="nombre_actividad">Nombre de la actividad:</label>
@@ -18,7 +18,7 @@
       <input type="date" id="fecha_fin" formControlName="fecha_fin" />
     </div>
     <div>
-      <button type="submit" [disabled]="activityForm.invalid">Crear Actividad</button>
+      <button type="submit" [disabled]="activityForm.invalid">Actualizar Actividad</button>
     </div>
   </form>
 </div>

@@ -1,0 +1,87 @@
+
+/* Estilos generales */
+.contact-section {
+    background-color: #3C3C3B;
+    color: #4EBC97;
+    padding: 40px 0;
+}
+
+/* Animación de la imagen */
+.animate-image {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: fadeInLeft 1s ease-out forwards;
+}
+
+/* Animación del texto */
+.animate-text {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: fadeInRight 1s ease-out forwards;
+}
+
+/* Animación para los enlaces */
+.footer-link {
+    color: #EDEDEE;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+    color: #00B5D9;
+    transform: scale(1.1);
+}
+
+/* Keyframes para las animaciones */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toggle-link {
+    cursor: pointer;
+    margin: 0 1rem;
+  }
+  
+  .toggle-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  
+  .toggle-section.show {
+    display: block;
+  }
+  
+  .custom-card {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 2rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    color: #212529;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

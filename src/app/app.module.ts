@@ -13,7 +13,6 @@ import { HttpClient, HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common
 import { TokenInterceptor } from './services/token.interceptor';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './landing/header/header.component';
 import { ContentComponent } from './landing/content/content.component';
@@ -22,6 +21,8 @@ import { LandingComponent } from './landing/landing/landing.component';
 import { StudentsModule } from './features/students/students.module';
 import { LoginComponent } from './auth/login/login.component';
 import { GroupsModule } from './features/groups/groups.module';
+import { ActivitiesModule } from './features/activities/activities.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { GroupsModule } from './features/groups/groups.module';
     HttpClientModule,
     StudentsModule,
     GroupsModule,
+    ActivitiesModule, 
   ],
   exports: [
   ],

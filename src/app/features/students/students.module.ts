@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { RouterModule } from '@angular/router';
-
+import { SharedModule } from '../../shared/shared.module'; 
+import { FormsModule } from '@angular/forms'; // Añade esta línea
 @NgModule({
   declarations: [
     StudentListComponent,
@@ -11,7 +12,9 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SharedModule,
+    FormsModule 
   ]
 })
 export class StudentsModule { }

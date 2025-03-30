@@ -8,27 +8,27 @@
     <ul class="nav-list">
       <!-- Todos los usuarios logueados pueden ver el Dashboard -->
       <li>
-        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
       </li>
 
       <!-- Grupos: Superusuario y Director -->
-      <li *ngIf="authService.hasRole([4, 2, 1])">
+      <li *ngIf="authService.hasRole([4, 2])">
         <a routerLink="/groups" routerLinkActive="active">Grupos</a>
       </li>
 
       <!-- Alumnos: solo Docente -->
-      <li *ngIf="authService.hasRole([4, 2, 1])">
+      <li *ngIf="authService.hasRole([4, 1])">
         <a routerLink="/students" routerLinkActive="active">Alumnos</a>
       </li>
 
       <!-- Actividades: solo Docente -->
-      <li *ngIf="authService.hasRole([4, 2, 1])">
+      <li *ngIf="authService.hasRole([4, 1])">
         <a routerLink="/activities" routerLinkActive="active">Actividades</a>
       </li>
 
       <!-- Reportes: Docente y Director -->
-      <li *ngIf="authService.hasRole([4, 2, 1])">
-        <a routerLink="/reports" routerLinkActive="active">Reportes</a>
+      <li *ngIf="authService.hasRole([4, 1, 2])">
+        <a routerLink="/reports" routerLinkActive="active">Control IOT</a>
       </li>
 
       <!-- Usuarios -->
